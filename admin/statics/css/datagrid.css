@@ -1,0 +1,67 @@
+﻿@charset "utf-8";
+body {
+	margin: 0px 5px 0px 0px;
+}
+.ntcplist {
+	text-align: left;
+	border-right-width: 0px;
+	width:100%;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	font-size: 12px;
+	border-left-width: 0px
+}
+.ntcplist .datalist {
+	text-align: center;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12px;
+	border-top: #ccc 2px solid;
+	border-bottom: #eae9e1 1px solid; 
+	border-left: #eae9e1 1px solid; 
+	border-right: #eae9e1 1px solid
+}
+.ntcplist .datalist .thead td {
+	background: #f2f2f2;
+	border-top: #ccc 2px solid;
+	border-bottom: #eae9e1 1px solid;
+	border-left: #eae9e1 1px solid;
+	border-right: #eae9e1 1px solid;
+	font-weight:bold;
+	height:30px;
+	padding-left:5px;
+}
+.ntcplist .datalist .tlist td {
+    border-bottom: #eae9e1 1px solid;
+	border-left: #eae9e1 1px solid;
+	border-top: #eae9e1 1px solid;
+	border-right: #eae9e1 1px solid;
+	height:27px;
+	padding-left:5px;
+}
+.ntcplist .datalist .tlist td a{
+    color: #1317fc;
+}
+.pages {
+	height:20px;
+	text-align:right;
+	float:right;
+}
+.pages a {
+	display:block;
+	float:left;
+	margin:0 3px;
+	padding:0 3px;
+	background:#FFEDC3;
+	text-align:center;
+	text-decoration:none;
+	color:#413F42;
+}
+.pages a:hover, .pages a.current {
+	background:#CC3300;
+	color:#fff;
+}
+.pages a.more, .pages a.more:hover, .pages a.first, .pages a.first:hover, .pages a.end, .pages a.end:hover {
+	background:none;
+	color:#413F42;
+}

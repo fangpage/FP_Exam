@@ -1,0 +1,351 @@
+.btn-primary.btn-group-first {
+    margin-right: 4px;
+}
+
+/* 1 hour for this hack */
+/* another hour for this hack */
+.text-item-wrap .text-wrap {
+    zoom: 0;
+    height: 30px;
+    overflow: hidden;
+}
+
+.textarea-item-wrap .text-wrap {
+    height: auto;
+}
+
+.text-item-wrap .read-only {
+    float: left;
+}
+
+.text-item-wrap .text-wrap input {
+    margin-top: -1px;
+}
+
+.header .header-shadow-repeat-l {
+    margin-left: -719px;
+}
+
+.user-report-wrap > .span12 > .text-small {
+    margin-top: 3px;
+}
+
+.dialog-wrap .dialog .dialog-hd {
+    position: relative;
+}
+
+.dialog-wrap .dialog .dialog-hd .close {
+    position: absolute;
+    float: none;
+    top: 5px;
+    right: 10px;
+}
+
+.fir-wrap.btn-primary {
+    font-size: 0px;
+}
+
+.csk-table-wrap .csk-table .name-col .toggle .sprite {
+    position: relative;
+    top: 0px;
+    margin-right: 5px;
+}
+
+.csk-table-wrap .csk-table .level-col .level-icon {
+    margin-top: -14px;
+}
+
+.csk-table-wrap .csk-table .sprite-level-progress-bg {
+    margin-top: 8px;
+}
+
+.csk-panel-wrap .exam-nav {
+    width: 100%;
+}
+
+.csk-panel-wrap .text {
+    zoom: 1;
+}
+
+.csk-panel-wrap table .name-col {
+    width: 380px;
+}
+
+.csk-panel-wrap .subject .expand-holder {
+    top: -10px;
+}
+
+.csk-panel-wrap .sprite-expand,
+.csk-panel-wrap .sprite-expand-holder {
+    left: -24px;
+}
+
+.footer .links .i-14 {
+    position: relative;
+    top: -1px;
+}
+
+.popover-wrap {
+    overflow: hidden;
+}
+
+.exercise-wrap .sidebar-wrap {
+    margin-left: -160px;
+}
+
+.exercise-wrap .sidebar-wrap .sidebar .nav li.last {
+    margin-bottom: -10px;
+}
+.essay-paper-wrap .exercise-wrap .sidebar-wrap .sidebar .nav li.last {
+    top: -6px;
+    margin-bottom: -14px;
+}
+
+.pinned-tip-wrap .exit {
+    top: -9px;
+}
+
+.btn-paper {
+    position: relative;
+}
+
+.popover-wrap {
+    overflow: visible;
+}
+.popover-wrap .popover {
+    zoom: 1;
+}
+
+.bank-panel .bank-item .bank {
+    top: 0px;
+}
+
+.site-map-nav-wrap .box .box-bd {
+    zoom: 1;
+}
+
+.site-map-nav-wrap .box .box-bd h1 {
+    padding-top: 3px;
+}
+
+.header .course-nav {
+    margin-left: 30px;
+}
+
+.shenlun-main img,
+.xingce-main img,
+.intro-main img {
+    left: auto;
+    margin-left: 0;
+    right: 50%;
+    margin-right: -100%;
+}
+
+.box-wrap {
+    zoom: 1;
+}
+
+.hot-paper-wrap .name {
+    zoom: 1;
+}
+
+.keypoint-exercise-report-wrap .report-score .score {
+    left: 20px;
+}
+
+.text-label .text-label-inner i {
+    bottom: 0px;
+    zoom: 1;
+    margin-right: 5px;
+}
+
+.question-wrap .options {
+    zoom: 1;
+}
+
+.course.nav a span {
+    bottom: 3px;
+}
+
+.header .navbar-hd .user-nav .sprite-profile-tip {
+    top: 0px;
+}
+
+.pagination {
+    padding-bottom: 20px;
+}
+
+h1 .jam-sprite-title-bullet {
+    top: -20px;
+    left: -5px;
+}
+
+.jam-list .jam h3 {
+    zoom: 1;
+}
+
+.flash-tip-wrap tr {
+    zoom: 1;
+    position: relative;
+}
+
+.flash-tip-wrap .sprite-tip-button {
+    position: relative;
+    zoom: 1;
+}
+
+.flash-tip-center-wrap {
+    position: static;
+    float: none;
+    right: inherit;
+}
+
+.flash-tip-center-wrap .flash-tip-wrap {
+    width: 100%;
+    right: auto;
+    float: none;
+}
+
+.user-report-wrap .item-row .score .unit {
+    zoom: 1;
+}
+
+.answer-text-wrap input {
+    position: relative;
+    top: -1px;
+}
+
+.blankfilling-answer {
+    padding-top: 15px;
+}
+
+.blankfilling-answer .answer-text-wrap {
+    bottom: inherit;
+    top: -5px;
+}
+
+.material-wrap .sprite-material-popup {
+    margin-right: 5px;
+    margin-bottom: 0px;
+    position: relative;
+    top: -0px;
+}
+
+.exercise-solution-wrap .note-item .sprite-edit-note {
+    bottom: 2px;
+    margin-right: 3px;
+}
+
+.quiz-panel-dialog-wrap .dialog {
+    width: 620px;
+}
+.quiz-panel-dialog-wrap .dialog-bd {
+    overflow: hidden;
+}
+.school-dialog-wrap .dialog {
+    width: 662px;
+}
+
+select {
+    line-height: 30px;
+    height: auto;
+    padding: 5px 0;
+}
+
+.quiz-range-dialog-wrap .dialog {
+    width: 742px;
+}
+
+.quiz-range-panel-wrap .quiz {
+    width: 45%;
+}
+
+.quiz-item-wrap .group {
+    width: 47%;
+}
+
+.quiz-form-wrap {
+    position: relative;
+}
+
+.init-dialog-wrap .dialog {
+    width: 782px;
+}
+
+.init-form-wrap {
+    position: relative;
+}
+
+.init-form-wrap .quiz-item-wrap {
+    padding-bottom: 15px;
+}
+
+.header-tip-wrap .popover .popover-bd .pinned-tip-wrap {
+    width: 120px;
+}
+
+.nickname-dialog-wrap .dialog {
+    width: 312px;
+}
+
+.user-score-with-distribution-chart {
+    zoom: 1;
+}
+
+.radio-item-wrap input {
+    margin-right: 20px;
+}
+
+.school-panel-wrap {
+    width: 100%;
+}
+
+.main-nav li {
+    zoom: 1;
+}
+
+.main-nav li a .fir {
+    position: relative;
+    top: 23px;
+}
+
+.note-panel-dialog-wrap .dialog {
+    width: 715px;
+}
+
+.keypoint-table .sprite-expand,
+.keypoint-table .sprite-expand-holder {
+    left: -24px;
+}
+
+.error-dialog-wrap .dialog {
+    width: 452px;
+}
+
+.training-wrap .deadline {
+    margin-top: -45px
+}
+
+.countdown-wrap {
+    zoom: 1;
+}
+
+.countdown-wrap > span{
+    float: left;
+}
+.flip-clock {
+    zoom: 1;
+}
+
+.flip-clock .number {
+    float: left;
+}
+
+.search-title {
+    padding-bottom: 5px;
+}
+
+.search-question-list-wrap .note-item .sprite-edit-note {
+    bottom: 2px;
+    margin-right: 3px;
+}

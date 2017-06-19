@@ -1,0 +1,38 @@
+﻿.deskIcon {
+	width:100%;
+	height:auto;
+	overflow:hidden;
+	position:relative;
+}
+.desktop_icon {
+	width:64px;
+	height:64px;
+	cursor:pointer;
+	text-align:center;
+	float:left;
+	margin-right:5px;
+}
+.desktop_icon span {
+	display:block;
+}
+.desktop_icon .icon {
+	width:64px;
+	height:32px;
+	margin-top: 6px;
+    margin-bottom: 2px;
+}
+.desktop_icon .icon img {
+	width:32px;
+	height:32px;
+}
+.desktop_icon .text {
+	display:inline-block;
+	width:auto;
+	height:22px;
+	line-height:22px;
+	text-align:center;
+}
+.desktop_icon_over {
+	background:url(../images/selectbg2.png) no-repeat center center;
+}
+

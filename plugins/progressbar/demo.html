@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<script type="text/javascript" src="../jquery/jquery.js"></script>
+		<script type="text/javascript" src="jquery.progressbar.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#spaceused1").progressBar();
+				$("#spaceused2").progressBar({ barImage: 'images/progressbg_yellow.gif'} );
+				$("#spaceused3").progressBar({ barImage: 'images/progressbg_orange.gif', showText: false} );
+				$("#spaceused4").progressBar(65, { showText: false, barImage: 'images/progressbg_red.gif'} );
+			});
+		</script>
+		<style>
+			* { font-family: Helvetica, Arial, Tahoma; font-size: 12px; font-color: #444; line-height: 25px; padding: 0px; margin: 0px; }
+			a { text-decoration: none; color: #3366cc; }
+			table { border-collapse: collapse; border: 0px; }
+			table td { padding: 3px; }
+			h2 { font-size: 16px; }
+			pre { border: 1px dashed #ddd; color: #444; background-color: #eee; width: 100%; }
+			
+			#container { width: 80%; margin-left: 10%; margin-top: 30px;}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div style="float: right; text-align: right; width: 300px;">download me at <a href="http://t.wits.sg">http://t.wits.sg</a></div>
+			<div style="padding-bottom: 25px;">
+				<h2>Progress Bars &amp; Controls</h2>
+				<table>
+					<tr><td>Green Bar</td><td><span class="progressBar" id="spaceused1">25%</span></td></tr>
+					<tr><td>Yellow Bar</td><td><span class="progressBar" id="spaceused2">35%</span></td></tr>
+					<tr><td>Orange Bar (No Text)</td><td><span class="progressBar" id="spaceused3">55%</span></td></tr>
+					<tr><td>Red Bar (No Text)</td><td><span class="progressBar" id="spaceused4">85%</span></td></tr>
+				</table>
+				<strong>Some controls: </strong>
+				<a href="#" onclick="$('#spaceused1').progressBar(20);">20</a> |
+				<a href="#" onclick="$('#spaceused1').progressBar(40);">40</a> |
+				<a href="#" onclick="$('#spaceused1').progressBar(60);">60</a> |
+				<a href="#" onclick="$('#spaceused1').progressBar(80);">80</a> |
+				<a href="#" onclick="$('#spaceused1').progressBar(100);">100</a>
+			</div>
+			
+			<div>
+				<h2>Usage: </h2>
+				<pre>
+	$(document).ready(function() {
+		$(".someclass").progressBar();
+		$("#spaceused1").progressBar();
+		$("#spaceused2").progressBar({ barImage: 'images/progressbg_yellow.gif'} );
+		$("#spaceused3").progressBar({ barImage: 'images/progressbg_orange.gif', showText: false} );
+		$("#spaceused4").progressBar(65, { showText: false, barImage: 'images/progressbg_red.gif'} );
+	});</pre>
+			</div>
+		</div>
+	</body>
+</html>

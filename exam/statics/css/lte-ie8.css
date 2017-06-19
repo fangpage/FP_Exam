@@ -1,0 +1,15 @@
+.popover-wrap .popover {
+    border: 7px solid #AFAFAF;
+}
+
+.dialog-wrap .dialog {
+    border: 6px solid #7D7D7D;
+}
+
+.header-tip-wrap .popover {
+    border: none;
+}
+
+.search-form .search-query {
+    line-height: 44px;
+}

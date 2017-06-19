@@ -1,0 +1,1 @@
+﻿<%@ Page Inherits="FP_Verify.Controller.verify,FP_Verify" %>

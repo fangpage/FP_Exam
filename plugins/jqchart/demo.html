@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Jquery制作曲线月份统计图_xw素材网</title>
+<style>
+.wrapper{width:500px; height:300px; padding:20px; margin:0px auto}
+</style>
+<script src="../jquery/jquery.js" type="text/javascript"></script>
+<script src="jquery.jqChart.min.js" type="text/javascript"></script>
+<!--[if IE]><script lang="javascript" type="text/javascript" src="canvas.js"></script><![endif]-->
+<script lang="javascript" type="text/javascript">
+$(document).ready(function () {
+	$('#jqchart').jqChart({
+		title: { text: '线形图示例' },
+		axes: [
+			{
+				location: 'left',//y轴位置，取值：left,right
+				minimum: 10,//y轴刻度最小值
+				maximum: 100,//y轴刻度最大值
+				interval: 10//刻度间距
+			}
+		],
+		series: [
+			//数据1开始
+			{
+				type: 'line',//图表类型，取值：column 柱形图，line 线形图
+				title:'北京',//标题
+				data: [['一月', 70], ['二月', 40], ['三月', 55], ['四月', 50], ['五月', 60], ['六月', 40]]//数据内容，格式[[x轴标题,数值1],[x轴标题,数值2],......]
+			},
+			//数据1结束
+			//数据2
+			{
+				type: 'line',
+				title:'上海',
+				data: [['一月', 40], ['二月', 50], ['三月', 95], ['四月', 55], ['五月', 25], ['六月', 45]]
+			},
+			//数据2结束
+			//数据3
+			{
+			type: 'line',
+			title:'广州',
+			data: [['一月', 30], ['二月', 60], ['三月', 55], ['四月', 70], ['五月', 45], ['六月', 80]]
+			},
+			//数据3结束			
+		]
+	});
+});
+</script>
+</head>
+<body>
+<div class="wrapper">
+<!-- 代码 开始 -->
+    <div>
+        <div id="jqchart" style="width: 500px; height: 300px;"></div>
+    </div>
+<!-- 代码 结束 -->
+</div>
+
+</body>
+</html>

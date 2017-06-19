@@ -1,0 +1,12 @@
+.sprite {
+  background: url("../images/tree1.gif") no-repeat;
+  height:16px;
+  width:16px;
+  cursor:pointer;
+}
+.sprite-selected {
+  background: url("../images/tree0.gif") no-repeat;
+  height:16px;
+  width:16px;
+  cursor:pointer;
+}

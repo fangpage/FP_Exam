@@ -1,0 +1,73 @@
+﻿@charset "utf-8";
+.fpager {
+	line-height:1.6;
+	font-family:Marmelad, "Lucida Grande", Arial, "Hiragino Sans GB", Georgia, sans-serif;
+	font-size:14px;
+	box-sizing:initial;
+	float:right;
+	padding-right:5px;
+}
+.fpager:after {
+	display:table;
+	content:" ";
+	clear:both
+}
+.fpager .fpager-pages {
+	float:left
+}
+.fpager .fpager-pages ul {
+	float:left;
+	margin:0;
+	padding:0
+}
+.fpager .fpager-pages li {
+	float:left;
+	border:1px solid #aaa;
+	border-right:none;
+	list-style:none
+}
+.fpager .fpager-pages li>a {
+	min-width:30px;
+	height:28px;
+	line-height:28px;
+	display:block;
+	background:#fff;
+	font-size:14px;
+	color:#333;
+	text-decoration:none;
+	text-align:center
+}
+.fpager .fpager-pages li>a:hover {
+	background:#eee
+}
+.fpager .fpager-pages li.active {
+	border:none
+}
+.fpager .fpager-pages li.active>a {
+	height:30px;
+	line-height:30px;
+	background:#aaa;
+	color:#fff
+}
+.fpager .fpager-pages li.disabled>a {
+	opacity:.3
+}
+.fpager .fpager-pages li.disabled>a:hover {
+	background:0 0
+}
+.fpager .fpager-pages li:first-child, .fpager .fpager-pages li:first-child>a {
+	border-radius:3px 0 0 3px
+}
+.fpager .fpager-pages li:last-child {
+	border-right:1px solid #aaa;
+	border-radius:0 3px 3px 0
+}
+.fpager .fpager-pages li:last-child>a {
+	border-radius:0 3px 3px 0
+}
+.fpager .fpager-pages li.fpager-next {
+	border-right:1px solid #aaa\9
+}
+.fpager-pages li>a {
+	line-height:36px\9
+}

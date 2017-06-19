@@ -1,0 +1,646 @@
+﻿@charset "utf-8";
+.TopicType li, .course, .tal-c, .title {
+	text-align: center
+}
+.ChooseStyle, .TopicType h3, .TopicType ul, .exam .pure-u-1-5, .exam-top {
+	border-bottom: 1px solid #cdcdcd
+}
+.elis, .submit-s .inline-list li {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color: red;
+}
+button, div, h1, h2, h3, h4, h5, h6, p, ul {
+	margin: 0 auto;
+	padding: 0
+}
+button {
+	border: 0
+}
+.table-bordered, .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
+	border: 1px solid #ddd
+}
+body {
+	background-color: #edf4fa
+}
+.table {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 5px
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+	padding: 4px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd
+}
+.fl {
+	float: left
+}
+.fr {
+	float: right;
+}
+.clf:after {
+	clear: both;
+	content: "";
+	display: block;
+	height: 0;
+	visibility: hidden
+}
+.clf {
+	zoom: 1
+}
+.bg_img {
+	background: url(../images/exam_ico.png) no-repeat
+}
+.title {
+	font-size: 30px;
+	color: #0080ff;
+	line-height: 74px
+}
+.answer_choose, .topic_show {
+	font-size: 14px;
+	line-height: 26px
+}
+.hidden {
+	display: none;
+	visibility: hidden
+}
+.exam {
+	background-color: #f4f5f7
+}
+.answer_choose, .topic_choose, .topic_show {
+	background-color: #fff
+}
+.exam .pure-u-1-5 {
+	border-right: 1px solid #cdcdcd;
+	margin-right: -1px
+}
+.topic_show {
+	border: 1px solid #cdcdcd;
+	height: 364px;
+	overflow: auto
+}
+.topic_show div, .topic_show p {
+	color: #333;
+}
+.topic_show div p {
+	padding-left: 0
+}
+.show_btn {
+	width: 73px;
+	height: 26px;
+	margin-right: 15px;
+	cursor: pointer;
+}
+.LastTopic {
+	background-position: 0 -126px
+}
+.LastTopic-gray {
+	background-position: -73px -568px;
+}
+.LastTopic:hover {
+	background-position: 0 -152px
+}
+.NextTopic {
+	background-position: 0 -178px
+}
+.NextTopic-gray {
+	background-position: -73px -594px;
+	cursor: default
+}
+.TopicType li, .btnDown, .btnSkin, .btnUp, .menu .round_btn, a.anaddrecd, button {
+	cursor: pointer
+}
+.NextTopic:hover {
+	background-position: 0 -204px
+}
+.Undetermined-gray {
+	background-position: -146px -568px
+}
+.Undetermined-gray:hover {
+	background-position: -146px -594px
+}
+.Submit {
+	background-position: 0 -564px
+}
+.Submit:hover {
+	background-position: 0 -590px
+}
+.Sword {
+	background-position: 0 -412px;
+	margin-right: 20px
+}
+.Sword:hover {
+	background-position: 0 -438px
+}
+.Mword {
+	background-position: 0 -360px
+}
+.Mword:hover {
+	background-position: 0 -386px
+}
+.Bword {
+	background-position: 0 -308px
+}
+.Bword:hover {
+	background-position: 0 -334px
+}
+.answer_choose {
+	border: 1px solid #cdcdcd;
+	padding: 10px 15px;
+	height: 230px;
+	overflow: auto
+}
+#fixDivBtm {
+	font-size: 0
+}
+.ChooseStyle {
+	background-color: #f9f9f9;
+	color: #0080ff;
+	font-size: 16px;
+	line-height: 38px;
+	padding-left: 15px
+}
+.style_btn {
+	width: 16px;
+	height: 16px;
+	margin-right: 5px
+}
+.TopicType h3 {
+	padding-left: 15px;
+	font-size: 15px;
+	line-height: 36px;
+	cursor: pointer;
+}
+.TopicType h3 button {
+	width: 14px;
+	height: 8px;
+	background-color: #fff;
+	background-position: -167px -133px;
+	display: inline-block;
+	margin: 15px 25px auto auto;
+*  margin: -20px 25px auto auto;
+	cursor: pointer;
+}
+.TopicType h3 span {
+	width: 14px;
+	height: 8px;
+	background-color: #fff;
+	background-position: -167px -133px;
+	display: inline-block;
+	margin: 15px 25px auto auto;
+*  margin: -20px 25px auto auto;
+	cursor: pointer;
+}
+.TopicType h3 .showorhidelist {
+	background-position: -167px -156px;
+	cursor: pointer;
+}
+.TopicType ul {
+	background-color: #fcfcfc;
+	padding: 5px 0 0 15px
+}
+.TopicType li {
+	list-style-type: none;
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	border: 2px solid #a6cbf8;
+	line-height: 25px;
+	margin: auto 8px 13px auto;
+	font-size: 14px;
+	font-family: Arial;
+	color: #6078a0;
+	background-color: #C0D7F8;
+	zoom: 1;
+*  display: inline
+}
+.TopicType .red_bg {
+	background: #F99393 !important;
+	border: 2px solid #EC7171 !important;
+	color: #c94444 !important;
+}
+.TopicType .green_bg {
+	background: #ADDD58;
+	border: 2px solid #91C438;
+	color: #688b29
+}
+.TopicType .border_bg {
+	border: 2px solid #fba140
+}
+.course_message {
+	max-width: 640px;
+	border: 3px solid #d0e3fb;
+	border-radius: 60px;
+	display: block;
+	text-align: left;
+	background-color: #fff;
+	padding: 25px 30px;
+	font-size: 14px
+}
+.exam-top, .menu, .menu p, a.anaddrecd {
+	text-align: center
+}
+.course_message h3 {
+	color: #0080ff;
+	font-size: 20px
+}
+.course_message table {
+	margin-left: 135px
+}
+.course_message table td {
+	padding: 5px 15px
+}
+.start_btn {
+	width: 170px;
+	height: 51px;
+	background-position: -376px -482px;
+	margin-top: 25px
+}
+.start_btn:hover {
+	background-position: -376px -534px
+}
+a.anaddrecd {
+	border: 1px solid #0078e7;
+	line-height: 14px;
+	width: 16px;
+	display: inline-block;
+	margin-left: 10px;
+	color: #0078e7;
+	background-color: #9cf
+}
+a:hover .anaddrecd {
+	background-color: #8dd093;
+	border: 1px solid #5FBB36;
+	color: #fff
+}
+.exam-top {
+	font-size: 14px
+}
+.menuContent {
+	position: absolute;
+	border: 1px solid #cdcdcd;
+	background-color: #edf4fa;
+	max-height: 215px;
+	overflow-y: auto;
+	max-width: 500px;
+	min-width: 155px;
+	top: 23px;
+	left: 117px;
+	z-index: 100
+}
+.cancel_btn {
+	background-color: #fc9200;
+	color: #fff
+}
+.easyDialog_wrapper .btn_highlight:hover {
+	background: #4787ed
+}
+.show_choose {
+	position: relative
+}
+.rejectinfo {
+	color: red;
+	display: inline-block;
+	position: absolute;
+	width: 209px;
+	left: 274px;
+	top: 6px
+}
+.work_area {
+	padding: 8px 8px 0 10px;
+}
+.user-info-b {
+	position: relative;
+	float: left;
+	width: 400px;
+	margin: 0;
+}
+.btnDown, .btnSkin, .btnUp, .examinee_photo {
+	position: absolute
+}
+.examinee_photo {
+	float: left;
+	background-position: -236px -404px;
+	border: 3px solid #288bde;
+	border-radius: 3px;
+	height: 69px;
+	left: 8px;
+	top: 5px;
+	width: 56px
+}
+.exam_message {
+	padding-top: 5px;
+	margin-left: 75px;
+	font-size: 12px;
+	height: 69px;
+	font-weight: 400;
+	line-height: 18px;
+	color: #333
+}
+.exam_message em {
+	font-style: normal
+}
+.exam_timer{
+	position: relative;
+	float: left;
+	width: 300px;
+	margin: 0;
+	font-size:22px;
+	margin-top:30px;
+}
+.menu {
+	display: block;
+	margin: 10px 0 0 10px;
+	font-weight:bold;
+	background:none;
+	position:static;
+	padding: 0px;
+	border: none;
+	float:right;
+}
+.menutop {
+	margin: 0 auto;
+	width: 200px
+}
+.menu .fl {
+	width: 90px;
+	float:right;
+}
+.menu p {
+	color: #288bde;
+	font-size: 12px;
+	line-height: 32px
+}
+.menu .round_btn {
+	display: block;
+	margin: 0 auto;
+	height: 46px;
+	width: 46px
+}
+.FirTopic_btn {
+	background-position: 0 -1px
+}
+.FirTopic_btn:hover {
+	background-position: 0 -56px
+}
+.LastTopic_btn {
+	background-position: -55px -1px
+}
+.LastTopic_btn:hover {
+	background-position: -55px -56px
+}
+.NextTopic_btn {
+	background-position: -110px -1px
+}
+.NextTopic_btn:hover {
+	background-position: -110px -56px
+}
+.EndTopic_btn {
+	background-position: -165px -1px
+}
+.EndTopic_btn:hover {
+	background-position: -165px -56px
+}
+.undetermined_btn {
+	background-position: -221px -1px
+}
+.undetermined_btn:hover {
+	background-position: -221px -56px
+}
+.upload_btn {
+	background-position: -272px 0;
+	height: 46px;
+	width: 39px
+}
+.upload_btn:hover {
+	background-position: -272px -55px
+}
+.computer_btn {
+	background-position: -318px 0;
+	height: 46px;
+	width: 33px
+}
+.btnDown, .btnSkin {
+	width: 26px;
+	height: 26px
+}
+.computer_btn:hover {
+	background-position: -318px -55px
+}
+.computer {
+	background-color: #fff;
+	max-width: 300px;
+	padding: 11px 0
+}
+.Undetermined {
+	background-position: 0 -230px
+}
+.Undetermined:hover {
+	background-position: 0 -256px
+}
+.BigWord {
+	background-position: 0 -464px;
+	width: 78px
+}
+.BigWord:hover {
+	background-position: 0 -490px
+}
+.SmallWord {
+	background-position: 0 -516px;
+	width: 78px
+}
+.jiexi {
+	background: #FFFFFF;
+	color:#3484d8;
+	border:1px #3484d8 solid;
+	width: 78px;
+	font-size: 12px;
+	line-height: 25px;
+	vertical-align: middle;
+}
+.jiexi:hover {
+	background: #3484d8;
+	color:#FFFFFF;
+	width: 78px
+}
+.SmallWord:hover {
+	background-position: 0 -542px
+}
+.btnSkin {
+	background-position: -321px -505px;
+	right: 65px
+}
+.btnSkin:hover {
+	background-position: -321px -535px
+}
+.btnUp {
+	background-position: -286px -505px;
+	height: 26px;
+	right: 35px;
+	width: 26px
+}
+.btnUp:hover {
+	background-position: -286px -535px
+}
+.btnDown {
+	background-position: -254px -505px;
+	right: 5px
+}
+.btnDown:hover {
+	background-position: -254px -535px
+}
+.show_choose {
+	clear: both;
+	padding: 5px 0
+}
+.elis {
+	overflow: hidden
+}
+.submit-s {
+	padding: 0;
+	line-height: 18px
+}
+.submit-s .anscon {
+	padding: 5px;
+	background: #fff;
+	border: 3px solid #d1e3fb;
+	max-height: 380px;
+*  height: 380px;;
+	overflow-y: auto
+}
+.submit-s .anscon dd, .submit-s .anscon dt {
+	clear: both;
+	overflow: hidden
+}
+.submit-s .anscon dt {
+	margin: 10px 5px;
+	font-size: 16px;
+	color: #000
+}
+.submit-s li {
+	margin-left: 20px
+}
+.submit-s .inline-list li {
+	float: left;
+	min-width: 150px;
+	width: 22%;
+*  width: 21%;;
+	border-bottom: 1px solid #eee;
+	overflow: hidden
+}
+.submit-s .submitBtn {
+	background-position: -374px -245px;
+	cursor: pointer;
+	width: 220px;
+	height: 48px;
+	display: block;
+	margin: 15px auto 5px
+}
+.submit-s a:hover .submitBtn {
+	background-position: -374px -196px
+}
+#dragBar {
+	height: 5px;
+	border: 1px solid #dedede;
+	cursor: n-resize;
+	background: url(/common/img/ub.png?976612389730) 0 -5px repeat-x;
+	outline: 0;
+	overflow: hidden;
+	font-size: 5px
+}
+#dragBar span {
+	height: 5px;
+	width: 15px;
+	background: url(/common/img/ub.png?976612389730);
+	display: block;
+	float: left
+}
+#dragBar em {
+	height: 5px;
+	width: 15px;
+	background: url(/common/img/ub.png?976612389730) 0 -10px;
+	display: block;
+	float: right
+}
+table.cardInfoTable {
+	width: 100%
+}
+table.cardInfoTable td {
+	padding-bottom: 10px
+}
+table.cardInfoTable td.cittitle {
+	width: 65px
+}
+.userAvatar {
+	width: 56px;
+	height: 70px;
+	border: none
+}
+.changeTheme, .dragDown, .dragUp {
+	width: 26px;
+	height: 26px
+}
+.examtime {
+	color: red
+}
+.changeTheme {
+	background-position: -321px -505px;
+	position: relative;
+	display: inline-block;
+	font-size: 12px
+}
+.changeTheme:hover {
+	background-position: -321px -535px
+}
+.dragUp {
+	background-position: -286px -505px
+}
+.dragUp:hover {
+	background-position: -286px -535px
+}
+.dragDown {
+	background-position: -254px -505px
+}
+.dragDown:hover {
+	background-position: -254px -535px
+}
+.theme-list {
+	position: absolute;
+	top: 26px;
+	left: 0;
+	width: 65px;
+	border: 1px solid #c1c1c1;
+	z-index: 10;
+	background: #fff;
+	display: none
+}
+.theme-list li {
+	text-align: left;
+	padding: 0 5px 0 0;
+	line-height: 26px;
+	margin: 2px 0;
+	cursor: pointer;
+	color: #666
+}
+.theme-list li:hover {
+	color: #fff;
+	background: #08c
+}
+.theme-list li span {
+	width: 26px;
+	height: 26px;
+	float: left;
+	margin-right: 5px;
+	background-color: #fff
+}
+.theme-list li span.theme-yellow {
+	background-position: -317px -565px
+}
+.theme-list li span.theme-blue {
+	background-position: -287px -565px
+}
+.theme-list li span.theme-white {
+	background-position: -256px -565px
+}

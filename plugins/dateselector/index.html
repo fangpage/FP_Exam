@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>日期联动选择插件</title>
+<style>
+body {
+	padding: 20px;
+	background: #ddd;
+	font: 14px/1.7 Arial;
+}
+h1, h2, h3 {
+	font: bold 36px/1;
+}
+h2 {
+	font-size: 20px;
+}
+h3 {
+	font-size: 16px;
+}
+fieldset {
+	margin: 1em 0;
+}
+fieldset legend {
+	font: bold 14px/2;
+}
+a {
+	color: #06f;
+	text-decoration: none;
+}
+a:hover {
+	color: #00f;
+}
+.wrap {
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px 40px;
+	border: 2px solid #999;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+</style>
+<script type="text/javascript" src="../jquery/jquery-1.7.2.min.js"></script> 
+<script type="text/javascript" src="dateselector.js"></script> 
+<script type="text/javascript">
+$(function () {
+	   var myDate = new Date();
+        $("#dateSelector").DateSelector({
+            ctlYearId: 'idYear',
+            ctlMonthId: 'idMonth',
+            ctlDayId: 'idDay',
+            minYear: 1900,
+            maxYear: myDate.getFullYear()
+        });
+	});
+</script>
+</head>
+<body>
+<div class="wrap">
+  <h1>日期联动选择插件</h1>
+  <h2>示例</h2>
+  <div id="dateSelector">
+    <select id="idYear" name="idYear" data="2014">
+    </select>
+    年
+    <select id="idMonth" name="idMonth" data="1">
+    </select>
+    月
+    <select id="idDay" name="idDay" data="30">
+    </select>
+    日 </div>
+  <div>
+  <a href="http://www.fangpage.com" target="_blank">方配官方网站</a></div>
+</div>
+</body>
+</html>

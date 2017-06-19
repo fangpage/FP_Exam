@@ -1,0 +1,1 @@
+<%@ Page Inherits="FP_Exam.Controller.wrong,FP_Exam" %>

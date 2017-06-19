@@ -1,0 +1,67 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>中国省市联动插件</title>
+<style>
+body {
+	padding: 20px;
+	background: #ddd;
+	font: 14px/1.7 Arial;
+}
+h1, h2, h3 {
+	font: bold 36px/1;
+}
+h2 {
+	font-size: 20px;
+}
+h3 {
+	font-size: 16px;
+}
+fieldset {
+	margin: 1em 0;
+}
+fieldset legend {
+	font: bold 14px/2;
+}
+a {
+	color: #06f;
+	text-decoration: none;
+}
+a:hover {
+	color: #00f;
+}
+.wrap {
+	width: 600px;
+	margin: 0 auto;
+	padding: 20px 40px;
+	border: 2px solid #999;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+body, td, th {
+	font-family: Arial;
+}
+</style>
+<script type="text/javascript" src="../jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="jsaddress.js"></script>
+<script type="text/javascript">
+$(function () {
+	   $.initProv("#pro", "#city", "广西壮族自治区", "南宁市");
+	});
+</script>
+</head>
+<body>
+<div class="wrap">
+  <h1>中国省市联动插件</h1>
+  <h2>示例</h2>
+  <div>
+    <select id="pro"></select>
+    <select id="city"></select>
+  </div>
+  <input onclick="alert($('#pro').val()+','+$('#city').val());" type="button" value="提交" />
+  <div><a href="http://www.fangpage.com" target="_blank">方配官方网站</a></div>
+</div>
+</body>
+</html>
