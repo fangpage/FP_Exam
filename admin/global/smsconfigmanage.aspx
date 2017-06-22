@@ -26,7 +26,6 @@ protected override void View()
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("    <script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("        $(function () {\r\n");
-	ViewBuilder.Append("            PageNav(\"短信服务器配置," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("            $(\"#btnsave\").click(function () {\r\n");
 	ViewBuilder.Append("                $(\"#action\").val(\"save\");\r\n");
 	ViewBuilder.Append("                $(\"#frmpost\").submit();\r\n");
@@ -35,6 +34,7 @@ protected override void View()
 	ViewBuilder.Append("                $(\"#action\").val(\"send\");\r\n");
 	ViewBuilder.Append("                $(\"#frmpost\").submit();\r\n");
 	ViewBuilder.Append("            })\r\n");
+	ViewBuilder.Append("            PageNav(\"短信服务器配置," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("        })\r\n");
 	ViewBuilder.Append("    </");
 	ViewBuilder.Append("script>\r\n");
@@ -95,6 +95,10 @@ protected override void View()
 	ViewBuilder.Append("                  <tr>\r\n");
 	ViewBuilder.Append("                    <td class=\"td_class\"> 账号密码： </td>\r\n");
 	ViewBuilder.Append("                    <td><input name=\"password\" type=\"password\" value=\"" + echo(smsconfig.password) + "\" id=\"password\" style=\"height:21px;width:300px;\"></td>\r\n");
+	ViewBuilder.Append("                  </tr>\r\n");
+	ViewBuilder.Append("                  <tr>\r\n");
+	ViewBuilder.Append("                    <td class=\"td_class\"> 返回结果： </td>\r\n");
+	ViewBuilder.Append("                    <td><input name=\"result\" type=\"text\" value=\"" + echo(smsconfig.result) + "\" id=\"result\" style=\"height:21px;width:300px;\"></td>\r\n");
 	ViewBuilder.Append("                  </tr>\r\n");
 	ViewBuilder.Append("                  <tr>\r\n");
 	ViewBuilder.Append("                    <td class=\"td_class\"> 测试发送： </td>\r\n");
