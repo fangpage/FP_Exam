@@ -85,11 +85,11 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("                  <tr>\r\n");
 	ViewBuilder.Append("                    <td class=\"td_class\"> 数据库大小： </td>\r\n");
-	ViewBuilder.Append("                    <td>" + echo(dbsize) + "</td>\r\n");
+	ViewBuilder.Append("                    <td>" + echo(dbsize) + "（在数据库文件很大时，可以进行收缩数据库日志操作）</td>\r\n");
 	ViewBuilder.Append("                  </tr>\r\n");
 	ViewBuilder.Append("                  <tr>\r\n");
 	ViewBuilder.Append("                    <td height=\"25\" colspan=\"2\" align=\"left\" style=\"padding-left:60px;\">\r\n");
-	ViewBuilder.Append("                    <input type=\"submit\" name=\"btnSave\" value=\"收缩优化\" id=\"btnSave\" class=\"adminsubmit_long\">\r\n");
+	ViewBuilder.Append("                    <input type=\"submit\" name=\"btnSave\" value=\"收缩数据库日志\" id=\"btnSave\" class=\"adminsubmit_long\">\r\n");
 	ViewBuilder.Append("                    </td>\r\n");
 	ViewBuilder.Append("                  </tr>\r\n");
 	ViewBuilder.Append("                </tbody>\r\n");

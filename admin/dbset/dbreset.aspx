@@ -99,14 +99,14 @@ protected override void View()
 	ViewBuilder.Append("      <table style=\"width:100%;\" cellpadding=\"2\" cellspacing=\"1\" class=\"border\">\r\n");
 	ViewBuilder.Append("        <tbody>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("            <td style=\"font-weight:bold;\" colspan=\"2\">\r\n");
-	ViewBuilder.Append("                重置系统：本操作将清空系统原有数据，请做好备份工作后再操作。\r\n");
+	ViewBuilder.Append("            <td style=\"font-weight:bold;\">\r\n");
+	ViewBuilder.Append("                重置表格：本操作将清空该表格的原有数据，请做好备份工作后再操作。多个表格请用英文逗号(,)分隔。\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("            <td style=\"width:30px;\"></td>\r\n");
 	ViewBuilder.Append("            <td height=\"25\" align=\"left\">\r\n");
-	ViewBuilder.Append("            <input type=\"button\" name=\"btnreset\" value=\"重置系统\" id=\"btnreset\" class=\"adminsubmit_short\">\r\n");
+	ViewBuilder.Append("            <input id=\"tables\" name=\"tables\" type=\"text\" value=\"\" style=\"height:21px;width:400px;\">\r\n");
+	ViewBuilder.Append("            <input type=\"button\" name=\"btnreset\" value=\"重置表格\" id=\"btnreset\" class=\"adminsubmit_short\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("        </tbody>\r\n");
