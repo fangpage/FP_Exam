@@ -7,7 +7,7 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
+	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -91,6 +91,13 @@ protected override void View()
 	ViewBuilder.Append(" checked=\"checked\" \r\n");
 	}//end if
 	ViewBuilder.Append(" type=\"checkbox\">下载附件\r\n");
+	ViewBuilder.Append("              <input id=\"issms\" name=\"issms\" value=\"1\" \r\n");
+
+	if (roleinfo.issms==1)
+	{
+	ViewBuilder.Append(" checked=\"checked\" \r\n");
+	}//end if
+	ViewBuilder.Append(" type=\"checkbox\">发送短信\r\n");
 	ViewBuilder.Append("          </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");

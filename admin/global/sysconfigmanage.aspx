@@ -7,7 +7,7 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
+	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -223,6 +223,23 @@ protected override void View()
 	ViewBuilder.Append(" checked=\"checked\" \r\n");
 	}//end if
 	ViewBuilder.Append(" value=\"1\">单点登录验证&nbsp;&nbsp;如果选择单点登录，请点击这里前往<a style=\"color:#ff0000\" href=\"ssoconfigs.aspx\">[单点登录配置]</a>\r\n");
+	ViewBuilder.Append("                    </td>\r\n");
+	ViewBuilder.Append("                  </tr>\r\n");
+	ViewBuilder.Append("                  <tr>\r\n");
+	ViewBuilder.Append("                    <td class=\"td_class\"> 系统跨域请求模式： </td>\r\n");
+	ViewBuilder.Append("                    <td height=\"25\"><input id=\"acctype0\" name=\"acctype\" type=\"radio\" \r\n");
+
+	if (sysconfiginfo.acctype==0)
+	{
+	ViewBuilder.Append(" checked=\"checked\" \r\n");
+	}//end if
+	ViewBuilder.Append(" value=\"0\">经典模式&nbsp;<input id=\"acctype1\" name=\"acctype\" type=\"radio\" \r\n");
+
+	if (sysconfiginfo.acctype==1)
+	{
+	ViewBuilder.Append(" checked=\"checked\" \r\n");
+	}//end if
+	ViewBuilder.Append(" value=\"1\">集成模式&nbsp;&nbsp;在AJAX请求时系统提供的跨域请求模式，IIS7下请改为集成模式。\r\n");
 	ViewBuilder.Append("                    </td>\r\n");
 	ViewBuilder.Append("                  </tr>\r\n");
 	ViewBuilder.Append("                  <tr>\r\n");

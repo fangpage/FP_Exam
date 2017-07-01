@@ -1,6 +1,5 @@
 ﻿方配在线考试系统安装说明
 
-
 1、本地双击运行【WMSServer.exe】服务端软件即可打开考试系统登录界面，管理员账号：admin  密码：123456。
 
 2、系统后台登录地址为http://您的域名:端口/admin/login.aspx，例如本地域名是localhost,端口号为8010，访问地址则为http://localhost:8010/admin/login.aspx 初始管理员账号：admin   密码：123456

@@ -9,7 +9,7 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
+	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -25,7 +25,7 @@ protected override void View()
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
 	ViewBuilder.Append("        $(\"#btncancle\").click(function () {\r\n");
-	ViewBuilder.Append("            PageBack(\"usermanage.aspx?" + echo(urlquery) + "\");\r\n");
+	ViewBuilder.Append("            PageBack(\"usermanage.aspx?" + echo(query) + "\");\r\n");
 	ViewBuilder.Append("        })\r\n");
 	ViewBuilder.Append("        $(\"#btn_search\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#frmpost\").submit();\r\n");

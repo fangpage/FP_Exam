@@ -7,7 +7,7 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
+	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -74,7 +74,7 @@ protected override void View()
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
 	ViewBuilder.Append("              <td><input id=\"chkdel\" name=\"chkdel\" value=\"" + echo(item.id) + "\" type=\"checkbox\"></td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.name) + "</td>\r\n");
-	ViewBuilder.Append("              <td>" + echo(item.UserInfo.realname) + "</td>\r\n");
+	ViewBuilder.Append("              <td>" + echo(item.realname) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"left\">" + echo(item.content) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.postdatetime) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.ip) + "</td>\r\n");
