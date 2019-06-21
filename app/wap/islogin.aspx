@@ -1,0 +1,1 @@
+<%@ Page Inherits="FP_Exam.Wap.WapController.islogin,FP_Exam.Wap" %>

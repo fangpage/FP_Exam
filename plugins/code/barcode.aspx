@@ -1,0 +1,1 @@
+﻿<%@ Page Inherits="FP_Code.Controller.barcode,FP_Code" %>

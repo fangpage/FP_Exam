@@ -1,0 +1,1 @@
+<%@ Page Inherits="FP_Exam.Wap.WapController.makenext,FP_Exam.Wap" %>

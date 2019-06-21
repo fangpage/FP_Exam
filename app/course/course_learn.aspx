@@ -1,0 +1,1 @@
+<%@ Page Inherits="FP_Course.Controller.course_learn,FP_Course" %>

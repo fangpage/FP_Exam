@@ -1,0 +1,990 @@
+	
+/*公共样式*/
+
+
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+
+/*register_thirdLogin.css*/
+
+.q_alert p {
+    color: #999999;
+}
+
+/*.register.login.codeview {*/
+
+
+/*margin-top: -205px*/
+
+
+/*}*/
+
+.q_alert .register.login .reg-form {
+    padding-top: 0
+}
+.q_alert .register.regemail {
+    display: none;
+    /*margin-top: -248px*/
+}
+.register.regtel {
+    display: none;
+    height: 550px;
+    margin-top: -248px
+}
+.q_alert .register.login {
+    display: none
+}
+.q_alert .register {
+    position: fixed;
+    left: 50%;
+    top: 300px;
+    width: 340px;
+    margin-left: -200px;
+    margin-top: -230px;
+    padding-bottom: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    margin-bottom: 400px;
+}
+.q_alert .register .tips {
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    margin-bottom: 0;
+    /*padding-left: 5px;*/
+    color: #ff0707;
+    font-size: 12px;
+}
+.q_alert .register .tips i {
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -85px -65px
+}
+.q_alert .register .reg-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 13px;
+    height: 13px;
+    background-image: url('../images/coopericon.png');
+    background-repeat: no-repeat;
+    background-position: -97px -4px;
+    cursor: pointer
+}
+.q_alert .register .reg-title {
+    padding: 0 20px;
+}
+.q_alert .register .h5 {
+    font-size: 16px;
+    color: #00B7EE;
+    letter-spacing: 1px;
+    line-height: 67px;
+    height: 60px;
+}
+.q_alert .register .reg-tab {
+    position: relative;
+    top: 0;
+    clear: both;
+    width: 300px;
+    margin: 0 auto;
+    font-size: 18px;
+}
+.q_alert .register .reg-tab .reg-line {
+    width: 1px;
+    height: 20px;
+    background-color: #d8d8d8;
+    position: absolute;
+    left: 50%;
+    margin-top: 20px;
+    overflow: hidden;
+}
+.q_alert .register .reg-tab ul {
+    padding: 0 50px;
+}
+.q_alert .register .reg-tab li {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+}
+.q_alert .register .reg-tab li:hover {
+    border-bottom-color: #4db565
+}
+.register .reg-tab li a {
+    color: #7f7f7f;
+    font-size: 14px;
+    font-size: 1.4rem
+}
+.q_alert .register .reg-tab li a:hover {
+    color: #7f7f7f;
+    text-decoration: none
+}
+.q_alert .register .reg-tab li.active {
+    border-bottom-color: #4db565
+}
+.q_alert .register .reg-tab li.active a {
+    color: #00B7EE;
+}
+.q_alert .register .reg-form {
+    margin: 0 20px;
+}
+.q_alert .register .reg-form li {
+    position: relative;
+    height: 20px;
+    margin-top: 26px;
+    padding: 9px 10px;
+    clear: both;
+    border: 1px solid #E5E5E5;
+    background-color: #fff;
+    border-radius: 3px;
+}
+.q_alert .register .reg-form li:first-child {
+    margin-top: 0;
+}
+.q_alert .register .reg-form li.codes {
+    width: 140px;
+}
+.register .reg-form li.codes .codeimg {
+    position: absolute;
+    top: 0;
+    right: -112px;
+    width: 95px;
+    height: 40px;
+    cursor: pointer
+}
+.register .reg-form li.codes .codeimg img {
+    width: 100%;
+}
+.q_alert .register .reg-form li .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45px;
+    height: 38px;
+    border-right: 1px solid #d8d8d8;
+    z-index: 2;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+.q_alert .register .reg-form li .iconfont {
+    position: absolute;
+    top: 6px;
+    right: -136px;
+    z-index: 2;
+    font-size: 24px;
+    cursor: pointer;
+    color: #B9B9B9;
+}
+
+/*.register .reg-form li.codes span.tips {*/
+
+
+/*left: 0;*/
+
+
+/*}*/
+
+.q_alert .register .reg-form li .icon.username {
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -205px 0
+}
+.q_alert .register .reg-form li .icon.email {
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -260px 0
+}
+.q_alert .register .reg-form li .icon.code {
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -425px 0
+}
+.q_alert .register .reg-form li input.input-ctrol {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 225px;
+    line-height: 20px;
+    border: none;
+    padding-left: 65px;
+    background-color: transparent;
+    z-index: 1;
+    border-radius: 0;
+    box-sizing: content-box;
+    font-size: 14px;
+    font-size: 1.4rem
+}
+.q_alert .register .reg-form li input.input-ctrol.active {
+    background-color: #fff
+}
+.q_alert .register .reg-form li input.input-ctrol.codenum {
+    width: 80px;
+    padding-left: 65px;
+}
+.q_alert .register .reg-form li span.tips {
+    position: absolute;
+    top: 4px;
+    left: 50px;
+    bottom: 0;
+    line-height: 30px;
+    color: #b2b2b2;
+    z-index: 0;
+}
+.q_alert .register .reg-form li.msg-code {
+    width: 140px;
+    margin-top: 26px;
+    border: none;
+    background-color: white;
+    margin-bottom: 16px;
+}
+.q_alert .register .reg-form li.msg-code .input-ctrol {
+    height: 37px;
+    left: 0;
+    width: 93px;
+    padding: 0 10px;
+    padding-left: 55px;
+    border: 1px solid #E5E5E5;
+/*    background-color: transparent;*/
+    border-radius: 3px
+}
+.q_alert .register .reg-form li.msg-code span.tips {
+    left: 50px;
+    top: 6px;
+    z-index: 0
+}
+.q_alert .register .reg-form li.msg-code .btn {
+    position: absolute;
+    top: 0;
+    right: -137px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    width: 120px;
+}
+.q_alert .register .reg-form li.reg-btn {
+    height: 40px;
+    /*    margin-top: 30px;*/
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+.q_alert .register .reg-form li.q_btn p {
+    height: 50px;
+    line-height: 50px;
+}
+.q_alert .register .reg-form li.reg-btn .btn {
+    font-size: 18px;
+    font-size: 1.8rem;
+    border: none;
+}
+.q_alert .register .reg-form li.pro {
+    position: relative;
+    height: 25px;
+    border: none;
+    background-color: transparent;
+    margin-top: 0px;
+}
+
+/*
+.q_alert .register .reg-form li.pro.r {
+    margin-top: 30px;
+}
+*/
+
+.q_alert .register .reg-form li.pro i {
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: 0 -65px;
+}
+.q_alert .register .reg-form li.pro i.active {
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -20px -65px
+}
+.q_alert .register .reg-form li.pro p {
+    margin-bottom: 0;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 12px;
+}
+.register .reg-form li.pro a {
+    font-size: 14px;
+    font-size: 1.4rem;
+    color: #00B7EE;
+}
+.q_alert .register .reg-bottom {
+    border-top: 1px solid #E5E5E5;
+}
+.q_alert .register .reg-bottom p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 23px;
+    height: 23px;
+    position: relative;
+}
+.q_alert .register .reg-bottom p .leng_sina{
+    position: absolute;
+    left:179px;
+    top:0px;
+    width: 126px;
+    height: 23px;
+    z-index: 9999;
+/*    display: none;*/
+}
+/*
+.q_alert .register .reg-bottom p wb:login-button{
+    position: absolute;
+    left:179px;
+    top:0px;
+    width: 126px;
+    height: 23px;
+    display: none;
+}
+*/
+/*
+.q_alert .register .reg-bottom p .leng_sina img{
+    width: 100%;
+    height: 100%;
+}
+*/
+.q_alert .register .reg-bottom .btn {
+    text-align: center
+}
+.forget .title {
+    margin-bottom: 50px;
+    padding: 20px 0;
+    border-bottom: 1px solid #dfe1e6
+}
+.forget .page-1 {
+    width: 535px;
+    margin: 0 auto 30px;
+    padding: 20px 0;
+    overflow: hidden
+}
+.forget .page-1 ul {
+    width: 555px;
+    overflow: hidden
+}
+.forget .page-1 li {
+    position: relative;
+    float: left;
+    width: 255px;
+    height: 97px;
+    margin-right: 20px;
+    line-height: 97px;
+    border: 1px solid #b2b2b2;
+    border-radius: 3px;
+    text-align: center
+}
+.forget .page-1 li a {
+    position: relative;
+    left: 25px;
+    font-size: 18px;
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: #666
+}
+.forget .page-1 li a:hover {
+    color: #333;
+    text-decoration: none
+}
+.forget .page-1 li .icon {
+    position: absolute;
+    top: -5px;
+    left: -35px;
+    width: 25px;
+    height: 25px
+}
+.forget .page-1 li .icon.email {
+    top: 4px;
+    width: 20px;
+    height: 13px;
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: 0 -20px
+}
+.forget .page-1 li .icon.tel {
+    left: -25px;
+    top: 0;
+    width: 14px;
+    height: 20px;
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -35px -20px
+}
+.forget .page-2 {
+    width: 655px;
+    padding: 20px 0;
+    margin-left: 210px;
+    margin-right: -210px
+}
+.forget .page-2 ul {
+    width: 360px;
+    overflow: hidden
+}
+.forget .page-2 li {
+    position: relative;
+    margin-bottom: 20px;
+    clear: both
+}
+.forget .page-2 li p.tips {
+    position: relative;
+    font-size: 12px;
+    font-size: 1.2rem;
+    color: #f00;
+    padding-left: 90px
+}
+.forget .page-2 li p.tips i.icons {
+    position: absolute;
+    top: 4px;
+    left: 70px;
+    width: 14px;
+    height: 14px;
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -85px -65px
+}
+.forget .page-2 li input {
+    width: 260px
+}
+.forget .page-2 li input[type='text'],
+.forget .page-2 li input[type='password'] {
+    height: 32px;
+    box-sizing: content-box
+}
+.forget .page-2 li input.code {
+    width: 120px
+}
+.forget .page-2 li span {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-left: 5px
+}
+.forget .page-2 li span a {
+    color: #45abdb;
+    line-height: 30px;
+    font-size: 12px;
+    font-size: 1.2rem
+}
+.forget .page-2 li span a.txt {
+    line-height: 45px
+}
+.forget .page-2 li span .btn.btn-code {
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
+    width: 130px;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    font-size: 1.2rem
+}
+.forget .page-2 li label {
+    display: block;
+    float: left;
+    width: 70px;
+    height: 50px;
+    line-height: 50px
+}
+.forget .page-2 .forget-success {
+    position: relative;
+    padding-left: 65px;
+    padding-bottom: 50px
+}
+.forget .page-2 .forget-success i.icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -125px -60px
+}
+.forget .page-2 .forget-success i.icons.wrong {
+    background-image: url('../images/index-icons.png');
+    background-repeat: no-repeat;
+    background-position: -300px -60px
+}
+.forget .page-2 .forget-success .h4 {
+    margin-bottom: 10px;
+    color: #4db565
+}
+.forget .page-2 .forget-success p {
+    color: #7f7f7f;
+    font-size: 12px;
+    font-size: 1.2rem
+}
+.forget .page-2 .btn-padding {
+    margin-left: 70px;
+    margin-right: -70px;
+    padding: 16px 0;
+    width: 280px;
+    font-size: 18px;
+    font-size: 1.8rem
+}
+.forget .page-2 .btn-currtom {
+    width: 280px;
+    padding: 16px 0;
+    text-align: center;
+    font-size: 14px;
+    font-size: 1.4rem
+}
+
+/*na add1*/
+
+.q_sprit {
+    background-image: url("../images/coopericon.png");
+    background-repeat: no-repeat;
+}
+.q_alert .reg-form .icon {
+    text-align: center;
+    background-color: #F5F5F5;
+}
+.q_alert .reg-form .icon i {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    position: relative;
+    top: 7px;
+}
+.q_alert .register .reg-form li .q_message {
+    top: 1px;
+    left: 1px;
+    height: 37px;
+}
+.q_alert .reg-form li .q_message i {
+    background-position: -51px -60px;
+}
+.q_alert .reg-form li .identify i {
+    background-position: -51px -60px;
+}
+.q_alert .reg-form li .telphone i {
+    background-position: 3px -60px;
+    top: 9px;
+}
+.q_alert .reg-form li .password i {
+    background-position: -78px -60px;
+}
+.q_alert .reg-form li .user i {
+    background-position: -25px -60px;
+    border: 0px;
+}
+.q_alert .reg-btn .btn {
+    background-color: #00B7EE;
+}
+.q_alert .register .reg-form li.pro input {
+    width: 15px;
+    height: 15px;
+    margin: 0px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.q_alert .register .reg-form li.pro strong {
+    vertical-align: middle;
+    font-style: normal;
+}
+.q_alert .register .reg-form li.r {
+    top: -9px;
+    margin-top: 26px;
+}
+.q_alert .register .reg-form li.r a {
+    color: #BBBBBB;
+}
+.q_alert .register .reg-form li.pro a {
+    vertical-align: middle;
+    font-size: 12px;
+}
+.q_alert .reg-bottom .one a {
+    color: #00B7EE;
+    margin-left: 5px;
+}
+.q_alert .reg-bottom .two i {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    margin-left: 10px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.q_alert .reg-bottom .q_1 {
+    background-position: 0 -3px;
+}
+.q_alert .reg-bottom .q_2 {
+    background-position: -31px -3px;
+}
+.q_alert .reg-bottom .q_3 {
+    background-position: -63px -3px;
+}
+.q_alert .reg-form li .q_sign {
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    left: 0;
+    top: 38px;
+    color: #FE5151;
+    font-size: 12px;
+}
+
+/*na add1 over*/
+
+.q_alert .reg-form .r p input {
+    width: 15px;
+    height: 15px;
+}
+.q_alert .reg-form .r p .forgetpwd {
+    float: right;
+}
+.q_alert .register .reg-form li.q_btn {
+    margin-top: 0;
+}
+.q_alert .register .reg-form li.q_btn1 {
+    height: auto;
+    margin-top: -12px;
+}
+.q_alert .register .reg-form li.q_btn1 a {
+    color: #00B7EE;
+}
+
+/*账号信息完善*/
+
+.perfect {
+    width: 620px;
+    padding-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #FFFFFF;
+}
+.perfect .title_cont {
+    height: 38px;
+    line-height: 38px;
+    border-bottom: 1px solid #E0E0E0;
+}
+.perfect .q_title {
+    height: 38px;
+    line-height: 38px;
+    color: #474747;
+    font-size: 18px;
+    font-weight: bold;
+}
+.q_cont {
+    padding: 30px 0;
+}
+.perfect .cont_title {
+    text-align: center;
+    height: 100%;
+    line-height: 38px;
+    font-size: 16px;
+    position: relative;
+}
+.perfect .cont_title span {
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 1px 35px 0;
+    font-size: 14px;
+    color: #616161;
+    padding: 0 10px;
+    text-align: center;
+    border-bottom: 1px solid #E0E0E0;
+    /*    height: 36px;*/
+    line-height: 37px;
+    display: inline-block;
+}
+.perfect .cont_title .active {
+    color: #00b7ee;
+    border-color: #00B7EE;
+}
+.input_box .input_item {
+    height: 35px;
+    border-bottom: 1px solid #E0E0E0;
+    line-height: 35px;
+    position: relative;
+    margin-bottom: 40px;
+}
+.input_box .mg7 {
+    margin-bottom: 7px;
+}
+.input_item>span {
+    float: left;
+    width: 90px;
+    text-align: right;
+    cursor: default;
+    color: #616161;
+}
+.input_box .q_item3>span {
+    width: 60px;
+}
+.input_box .q_item3 .input {
+    margin-left: 60px;
+}
+.input_item .input {
+    margin-left: 90px;
+    height: 34px;
+    padding: 0 0 0 10px;
+    position: relative;
+}
+.input_item .input input {
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
+    padding: 0;
+    border: none;
+    font-size: 14px;
+    color: #616161;
+}
+.input_item .input strong {
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+}
+.input_item .input .str1 {
+    color: red;
+    left: 10px;
+}
+.input_item .input .str2 {
+    color: #00B6EE;
+    right: 10px;
+    font-size: 12px;
+}
+.input_item .input .q_true {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: url("../images/true_icon.png") left top no-repeat;
+}
+.input_item i {
+    float: left;
+    height: 18px;
+    width: 16px;
+    margin-top: 9px;
+    margin-left: 3px;
+}
+.input_item .i1 {
+    background-position: -1px -94px;
+}
+.input_item .i2 {
+    background-position: -46px -94px;
+}
+.input_item .i3 {
+    background-position: -29px -94px;
+}
+.input_item p {
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    top: 36px;
+    left: 0;
+    font-size: 12px;
+    color: #bbbbbb;
+}
+.input_item .q_sign {
+    color: #FE5D5D;
+}
+.perfect .cont_bottom {
+    padding-bottom: 40px;
+    text-align: center;
+    height: 40px;
+    position: relative;
+}
+.perfect .cont_bottom span {
+    margin-top: 20px;
+    display: inline-block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    font-size: 16px;
+}
+.perfect .cont_bottom .span1 {
+    background-color: #CCCCCC;
+}
+.perfect .cont_bottom .span2 {
+    background-color: #00B7EE;
+}
+.perfect .cont_bottom .q_span {
+    display: none;
+}
+.perfect strong {
+    font-weight: normal;
+}
+.input_box .item1 {
+    width: 255px;
+}
+.input_box .item1 .free {
+    position: absolute;
+    right: -140px;
+    top: 35px;
+    width: 110px;
+    height: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #949494;
+    background-color: #E0E0E0;
+    border-radius: 2px;
+    margin-top: -35px;
+    cursor: pointer;
+}
+.q_cont .tabe {
+    width: 397px;
+    padding-left: 32px;
+    border-left: 1px solid #E0E0E0;
+    padding-bottom: 12px;
+}
+.tabe .tabe2 .input_item {
+    margin-bottom: 20px;
+}
+.tabe .q_14 {
+    font-size: 14px;
+}
+.tabe .tabe2 .input_item span {
+    color: #616161;
+}
+.tabe .tabe2 .input_item input {
+    font-size: 14px;
+}
+.q_shadow {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    overflow-y: scroll;
+    display: block;
+    z-index: 1000;
+}
+.removeScr {
+    overflow-y: hidden;
+}
+.unsettled:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #FE5151;
+    font-size: 14px;
+}
+.unsettled::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #FE5151;
+    font-size: 14px;
+}
+.unsettled input:-ms-input-placeholder {
+    color: #FE5151;
+    font-size: 14px;
+}
+.unsettled input::-webkit-input-placeholder {
+    color: #FE5151;
+    font-size: 14px;
+}
+.message_check:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #616161;
+    font-size: 14px;
+}
+.message_check::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #616161;
+    font-size: 14px;
+}
+.message_check input:-ms-input-placeholder {
+    color: #616161;
+    font-size: 14px;
+}
+.message_check input::-webkit-input-placeholder {
+    color: #616161;
+    font-size: 14px;
+}
+.q_cont .cont_img {
+    width: 160px;
+    height: 160px;
+}
+.q_cont .cont_img img {
+    width: 100%;
+    height: 100%;
+}
+.input_box .item1 .q_input {
+    padding-left: 0;
+}
+.input_box .item1 .q_sprit {
+    background-position: -63px -94px;
+}
+.input_box .item1 .sendsms {
+    background-color: #00B7EE;
+    color: #616161;
+}
+/*add*/
+.q_alert #register .reg-form li.pro{
+    height: auto;
+    padding-bottom: 0;
+}
+body .q_alert #register .reg-bottom{
+    margin-top: 15px;
+}
+.q_alert .reg-btn:hover input.btn-block{
+    opacity: 0.8;
+}
+.q_alert .register .reg-form .L-registerAgreementFlag {
+    position: relative;
+    border: none;
+    padding: 0;
+    height: auto;
+    margin: 0;
+    padding-top: 4px;
+    margin-top: 21px;
+}
+.L-registerAgreementFlag .registerAgreementFlag a:hover{
+   color:#00b7ee;
+}
+.L-registerAgreementFlag .registerAgreementFlag,.L-registerAgreementFlag .registerAgreementFlag a{
+   color:#ccc;
+   font-size:12px;
+}
+
+/* .q_alert .register .reg-form .reg-btn { */
+/*     margin-top:10px; */
+/* } */
+
+.q_alert .register .reg-form .L-registerAgreementFlag .registerAgreement{
+    padding:0;
+    font-size:12px;
+    line-height:1.7rem;
+}
+
+.q_alert .reg-bottom .one,.q_alert .reg-bottom .two{
+	font-size:12px;
+	position:relative;
+	top:10px;
+}
+
+.input-box>p {
+    position: absolute;
+    top: 40px;
+    font-size: 12px;
+    color: #f00;
+}
+.L-registerAgreementFlag .registerAgreementFlag a{
+	
+}

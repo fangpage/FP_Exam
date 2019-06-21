@@ -1,0 +1,1 @@
+﻿<%@ Page Inherits="FP_Verify.Controller.emailverify,FP_Verify" %>

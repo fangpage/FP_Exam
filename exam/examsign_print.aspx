@@ -1,0 +1,180 @@
+<%@ Page language="c#" AutoEventWireup="false" EnableViewState="false" Inherits="FP_Exam.Controller.examsign_view" %>
+<%@ Import namespace="System.Collections.Generic" %>
+<%@ Import namespace="FangPage.Common" %>
+<%@ Import namespace="FangPage.MVC" %>
+<%@ Import namespace="FP_Exam" %>
+<%@ Import namespace="FP_Exam.Model" %>
+<script runat="server">
+protected override void View()
+{
+	base.View();
+	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
+	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
+	ViewBuilder.Append("<head>\r\n");
+	ViewBuilder.Append("    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n");
+	ViewBuilder.Append("    <title>打印准考证</title>\r\n");
+	ViewBuilder.Append("	" + echo(meta) + "\r\n");
+	ViewBuilder.Append("    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=EmulateIE7\">\r\n");
+	ViewBuilder.Append("    <script type=\"text/javascript\" src=\"" + echo(plupath) + "jquery/jquery.js\"></");
+	ViewBuilder.Append("script>\r\n");
+	ViewBuilder.Append("    <style type=\"text/css\">\r\n");
+	ViewBuilder.Append("        <!--\r\n");
+	ViewBuilder.Append("        /* Font Definitions */\r\n");
+	ViewBuilder.Append("        @font-face {\r\n");
+	ViewBuilder.Append("            font-family: 宋体;\r\n");
+	ViewBuilder.Append("            panose-1: 2 1 6 0 3 1 1 1 1 1;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        @font-face {\r\n");
+	ViewBuilder.Append("            font-family: Calibri;\r\n");
+	ViewBuilder.Append("            panose-1: 2 15 5 2 2 2 4 3 2 4;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        @font-face {\r\n");
+	ViewBuilder.Append("            font-family: \"\\@宋体\";\r\n");
+	ViewBuilder.Append("            panose-1: 2 1 6 0 3 1 1 1 1 1;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        /* Style Definitions */\r\n");
+	ViewBuilder.Append("        p.MsoNormal, li.MsoNormal, div.MsoNormal {\r\n");
+	ViewBuilder.Append("            margin: 0cm;\r\n");
+	ViewBuilder.Append("            margin-bottom: .0001pt;\r\n");
+	ViewBuilder.Append("            text-align: justify;\r\n");
+	ViewBuilder.Append("            text-justify: inter-ideograph;\r\n");
+	ViewBuilder.Append("            line-height: normal;\r\n");
+	ViewBuilder.Append("            font-size: 10.5pt;\r\n");
+	ViewBuilder.Append("            font-family: Calibri;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        /* Page Definitions */\r\n");
+	ViewBuilder.Append("        @page Section1 {\r\n");
+	ViewBuilder.Append("            size: 595.3pt 841.9pt;\r\n");
+	ViewBuilder.Append("            margin: 72.0pt 90.0pt 72.0pt 90.0pt;\r\n");
+	ViewBuilder.Append("            layout-grid: 15.6pt;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        div.Section1 {\r\n");
+	ViewBuilder.Append("            page: Section1;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        -->\r\n");
+	ViewBuilder.Append("        .print {\r\n");
+	ViewBuilder.Append("            width: 750px;\r\n");
+	ViewBuilder.Append("            margin: 10px auto;\r\n");
+	ViewBuilder.Append("            overflow: hidden;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        .auto-style1 {\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        .auto-style2 {\r\n");
+	ViewBuilder.Append("            height: 1.0cm;\r\n");
+	ViewBuilder.Append("            width: 93pt;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        .auto-style3 {\r\n");
+	ViewBuilder.Append("            height: 1.0cm;\r\n");
+	ViewBuilder.Append("            width: 117pt;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        .auto-style4 {\r\n");
+	ViewBuilder.Append("            height: 1.0cm;\r\n");
+	ViewBuilder.Append("            width: 104pt;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        .page\r\n");
+	ViewBuilder.Append("        {\r\n");
+	ViewBuilder.Append("            page-break-after: always;\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("        .noprint{\r\n");
+	ViewBuilder.Append("            visibility:hidden\r\n");
+	ViewBuilder.Append("        }  \r\n");
+	ViewBuilder.Append("    </style>\r\n");
+	ViewBuilder.Append("    <script type=\"text/javascript\">\r\n");
+	ViewBuilder.Append("        function printWebPageByHideName(hideName) //打印函数  \r\n");
+	ViewBuilder.Append("        {\r\n");
+	ViewBuilder.Append("            if (!document.getElementsByName(hideName)) {\r\n");
+	ViewBuilder.Append("                alert(\"打印失败\");\r\n");
+	ViewBuilder.Append("                return;\r\n");
+	ViewBuilder.Append("            }\r\n");
+	ViewBuilder.Append("            var hideNum = document.getElementsByName(hideName).length;\r\n");
+	ViewBuilder.Append("            //alert(hideNum);  \r\n");
+	ViewBuilder.Append("            for (i = 0; i < hideNum; i++) {\r\n");
+	ViewBuilder.Append("                document.getElementsByName(hideName)[i].style.display = \"none\";//打印时隐藏  \r\n");
+	ViewBuilder.Append("            }\r\n");
+	ViewBuilder.Append("            window.print();//打印  \r\n");
+	ViewBuilder.Append("            for (i = 0; i < hideNum; i++) {\r\n");
+	ViewBuilder.Append("                document.getElementsByName(hideName)[i].style.display = \"\";//打印后再显示出来  \r\n");
+	ViewBuilder.Append("            }\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("    </");
+	ViewBuilder.Append("script>\r\n");
+	ViewBuilder.Append("</head>\r\n");
+	ViewBuilder.Append("<body style=\"\">\r\n");
+	ViewBuilder.Append("    <div class=\"print\">\r\n");
+	ViewBuilder.Append("        <br>\r\n");
+	ViewBuilder.Append("        <p class=\"MsoNormal\" align=\"center\" style=\"text-align: center\">\r\n");
+	ViewBuilder.Append("            <b><span style=\"font-size: 20pt; font-family: 宋体\">准考证</span></b>\r\n");
+	ViewBuilder.Append("        </p>\r\n");
+	ViewBuilder.Append("        <br>\r\n");
+	ViewBuilder.Append("        <br>\r\n");
+	ViewBuilder.Append("        <div align=\"center\">\r\n");
+	ViewBuilder.Append("            <table class=\"MsoNormalTable\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\" style=\"border-collapse: collapse; border: none;width:750px;\">\r\n");
+	ViewBuilder.Append("                <tbody>\r\n");
+	ViewBuilder.Append("                    <tr style=\"height: 1.0cm\">\r\n");
+	ViewBuilder.Append("                        <td style=\"width:80px;border: solid windowtext 1.0pt; padding: 0cm 5.4pt;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           考试名称\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td colspan=\"2\" style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                            " + echo(examsigninfo.examname) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"width:80px;border: solid windowtext 1.0pt; padding: 0cm 5.4pt;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           考试时间\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td colspan=\"2\" style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                            " + echo(examinfo.content) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                    </tr>\r\n");
+	ViewBuilder.Append("                    <tr style=\"height: 1.0cm\">\r\n");
+	ViewBuilder.Append("                        <td style=\"width:80px;border: solid windowtext 1.0pt;padding: 0cm 5.4pt;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           姓名\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                           " + echo(examsigninfo.signer["uname"]) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"width:40px;border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           性别\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                           " + echo(examsigninfo.signer["sex"]) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"width:70px;border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           身份证号\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                           " + echo(examsigninfo.signer["idcard"]) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                    </tr>\r\n");
+	ViewBuilder.Append("                    <tr style=\"height: 1.0cm\">\r\n");
+	ViewBuilder.Append("                        <td style=\"width:80px;border: solid windowtext 1.0pt;padding: 0cm 5.4pt;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           手机号\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td colspan=\"3\" style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                           " + echo(examsigninfo.signer["mobile"]) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"width:40px;border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;text-align:right;\">\r\n");
+	ViewBuilder.Append("                           工作单位\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                        <td style=\"border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding: 0cm 5.4pt; border-left-style: none; border-left-color: inherit; border-left-width: medium;\">\r\n");
+	ViewBuilder.Append("                           " + echo(examsigninfo.signer["company"]) + "\r\n");
+	ViewBuilder.Append("                        </td>\r\n");
+	ViewBuilder.Append("                    </tr>\r\n");
+	ViewBuilder.Append("                </tbody>\r\n");
+	ViewBuilder.Append("            </table>\r\n");
+	ViewBuilder.Append("        </div>\r\n");
+	ViewBuilder.Append("    </div>\r\n");
+	ViewBuilder.Append("</body>\r\n");
+	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
+	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
+}
+</script>

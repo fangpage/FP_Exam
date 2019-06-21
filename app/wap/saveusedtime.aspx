@@ -1,0 +1,1 @@
+<%@ Page Inherits="FP_Exam.Wap.WapController.saveusedtime,FP_Exam.Wap" %>
