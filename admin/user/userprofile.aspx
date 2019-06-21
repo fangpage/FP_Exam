@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -99,27 +98,9 @@ protected override void View()
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("          <td class=\"td_class\">性别： </td>\r\n");
 	ViewBuilder.Append("          <td>\r\n");
-	ViewBuilder.Append("              <input id=\"sex\" name=\"sex\" value=\"1\" \r\n");
-
-	if (fulluserinfo.sex==1)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"radio\"> 男 \r\n");
-	ViewBuilder.Append("              <input id=\"sex\" name=\"sex\" value=\"0\" \r\n");
-
-	if (fulluserinfo.sex==0)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"radio\">女\r\n");
-	ViewBuilder.Append("              <input id=\"sex\" name=\"sex\" value=\"-1\" \r\n");
-
-	if (fulluserinfo.sex==-1)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"radio\">保密\r\n");
+	ViewBuilder.Append("              <input id=\"sex\" name=\"sex\" value=\"男\" "+(fulluserinfo.sex=="男"?echo("checked"):echo(""))+" type=\"radio\">男 \r\n");
+	ViewBuilder.Append("              <input id=\"sex\" name=\"sex\" value=\"女\" "+(fulluserinfo.sex=="女"?echo("checked"):echo(""))+" type=\"radio\">女\r\n");
+	ViewBuilder.Append("              <input id=\"sex\" name=\"sex\" value=\"\" "+(fulluserinfo.sex==""?echo("checked"):echo(""))+" type=\"radio\">未知\r\n");
 	ViewBuilder.Append("          </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
@@ -142,6 +123,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

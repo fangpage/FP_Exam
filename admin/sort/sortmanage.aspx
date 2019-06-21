@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -62,11 +61,27 @@ protected override void View()
 
 	if (channel.id==channelid)
 	{
-	ViewBuilder.Append("                    <li class=\"active\"><a href=\"sortmanage.aspx?channelid=" + echo(channel.id) + "\">" + echo(channel.name) + "</a> </li>\r\n");
+
+	if (channel.description!="")
+	{
+	ViewBuilder.Append("<li class=\"active\"><a href=\"sortmanage.aspx?channelid=" + echo(channel.id) + "\">" + echo(channel.description) + "</a></li>\r\n");
+	}//end if
+	else
+	{
+	ViewBuilder.Append("<li class=\"active\"><a href=\"sortmanage.aspx?channelid=" + echo(channel.id) + "\">" + echo(channel.name) + "</a></li>\r\n");
+	}//end if
 	}
 	else
 	{
-	ViewBuilder.Append("                    <li class=\"normal\"><a href=\"sortmanage.aspx?channelid=" + echo(channel.id) + "\">" + echo(channel.name) + "</a> </li>\r\n");
+
+	if (channel.description!="")
+	{
+	ViewBuilder.Append("<li class=\"normal\"><a href=\"sortmanage.aspx?channelid=" + echo(channel.id) + "\">" + echo(channel.description) + "</a></li>\r\n");
+	}//end if
+	else
+	{
+	ViewBuilder.Append("<li class=\"normal\"><a href=\"sortmanage.aspx?channelid=" + echo(channel.id) + "\">" + echo(channel.name) + "</a></li>\r\n");
+	}//end if
 	}//end if
 	}//end loop
 	ViewBuilder.Append("                  </ul>\r\n");
@@ -107,6 +122,11 @@ protected override void View()
 	foreach(SortInfo sorts in sortlist)
 	{
 	loop__id++;
+
+	if (!FPArray.Contain(role.sorts,sorts.id)&&roleid!=1)
+	{
+	continue;
+	}//end if
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(sorts.id) + " </td>\r\n");
 	ViewBuilder.Append("              <td align=\"left\">├\r\n");
@@ -152,7 +172,7 @@ protected override void View()
 	ViewBuilder.Append("              <td><a onclick=\"DeleteSort(" + echo(sorts.id) + ")\" href=\"#\">删除</a></td>\r\n");
 	ViewBuilder.Append("              <td><a style=\"color: #1317fc\" href=\"sortdisplay.aspx?channelid=" + echo(channelid) + "&parentid=" + echo(sorts.parentid) + "\">排序</a></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
-	ViewBuilder.Append("            " + ShowChildSort(sorts.id,tree).ToString() + "\r\n");
+	ViewBuilder.Append("            " + echo(ShowChildSort(sorts.id,tree)) + "\r\n");
 	}//end loop
 	ViewBuilder.Append("          </tbody>\r\n");
 	ViewBuilder.Append("        </table>\r\n");
@@ -162,6 +182,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

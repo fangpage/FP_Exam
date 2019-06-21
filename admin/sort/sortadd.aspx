@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	string iconimg = adminpath+"statics/images/folder.gif";
 
@@ -99,7 +98,7 @@ protected override void View()
 	ViewBuilder.Append(" selected=\"selected\" \r\n");
 	}//end if
 	ViewBuilder.Append(">├" + echo(item.name) + "</option>\r\n");
-	ViewBuilder.Append("                  " + GetChildSort(item.id,tree).ToString() + "\r\n");
+	ViewBuilder.Append("                  " + echo(GetChildSort(item.id,tree)) + "\r\n");
 	}//end loop
 	ViewBuilder.Append("              </select>\r\n");
 	ViewBuilder.Append("          </td>\r\n");
@@ -165,7 +164,7 @@ protected override void View()
 	loop__id++;
 	ViewBuilder.Append("            <input id=\"types\" name=\"types\" value=\"" + echo(types.id) + "\" \r\n");
 
-	if (ischecked(types.id,sortinfo.types))
+	if (FPArray.Contain(sortinfo.types,types.id))
 	{
 	ViewBuilder.Append(" checked=\"checked\" \r\n");
 	}//end if
@@ -233,6 +232,9 @@ protected override void View()
 
 	if (ispost)
 	{
+
+	if (ispost)
+	{
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    layer.msg('" + echo(msg) + "', 0, 1);\r\n");
 	ViewBuilder.Append("    var bar = 0;\r\n");
@@ -257,8 +259,20 @@ protected override void View()
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
 	}//end if
+	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -63,7 +62,7 @@ protected override void View()
 	ViewBuilder.Append("    <div class=\"newslist\">\r\n");
 	ViewBuilder.Append("        <div class=\"newsicon\">\r\n");
 	ViewBuilder.Append("            <ul>\r\n");
-	ViewBuilder.Append("                <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/delete.gif) 2px 6px no-repeat\"><a id=\"submitdel\" href=\"#\">删除所选缓存</a></li>\r\n");
+	ViewBuilder.Append("                <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/delete.gif) 2px 6px no-repeat\"><a id=\"submitdel\" href=\"#\">清空所选缓存</a></li>\r\n");
 	ViewBuilder.Append("                <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/clear.gif) 2px 6px no-repeat\"><a id=\"submitclear\" href=\"#\">清空所有缓存</a></li>\r\n");
 	ViewBuilder.Append("                <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"cachemanage.aspx\">刷新</a></li>\r\n");
 	ViewBuilder.Append("                <li style=\"float:right; width:auto\"><strong>系统缓存管理</strong></li>\r\n");
@@ -107,8 +106,8 @@ protected override void View()
 	ViewBuilder.Append("                <td>\r\n");
 	ViewBuilder.Append("                    <input id=\"chkid\" name=\"chkid\" value=\"" + echo(item.id) + "\" type=\"checkbox\">\r\n");
 	ViewBuilder.Append("                </td>\r\n");
-	ViewBuilder.Append("                <td>\r\n");
-	ViewBuilder.Append("                   <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/cache.gif\">" + echo(item.name) + "\r\n");
+	ViewBuilder.Append("                <td style=\"text-align:left;\">\r\n");
+	ViewBuilder.Append("                   <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/cache.gif\" width=\"16\" height=\"16\">" + echo(item.name) + "\r\n");
 	ViewBuilder.Append("                </td>\r\n");
 	ViewBuilder.Append("                <td>\r\n");
 	ViewBuilder.Append("                   " + echo(item.key) + "\r\n");
@@ -155,6 +154,17 @@ protected override void View()
 	ViewBuilder.Append("    </form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

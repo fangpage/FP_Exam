@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\" lang=\"zh-CN\">\r\n");
@@ -186,8 +185,14 @@ protected override void View()
 	ViewBuilder.Append("  <div class=\"hbx2\">\r\n");
 	ViewBuilder.Append("    <div class=\"hbx3\"><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/top.jpg\"></div>\r\n");
 	ViewBuilder.Append("    <div class=\"hbx4\">\r\n");
-	ViewBuilder.Append("      <div class=\"fr\"></div>\r\n");
-	ViewBuilder.Append("      <span class=\"write\" style=\"font-size:14px;font-weight:bold\">" + echo(pagenav) + "</span> \r\n");
+	ViewBuilder.Append("      <div class=\"fr\">\r\n");
+
+	if (action=="wrong")
+	{
+	ViewBuilder.Append("<a href=\"test_wrong.aspx?sortid=" + echo(sortid) + "\" class=\"btnq2\">错题练习</a>\r\n");
+	}//end if
+	ViewBuilder.Append("      </div>\r\n");
+	ViewBuilder.Append("      <span class=\"write\" style=\"font-size:14px;font-weight:bold\">" + echo(pagenav) + "<span class=\"ft3\">(共" + echo(questionlist.Count) + "题)</span></span> \r\n");
 	ViewBuilder.Append("    </div>\r\n");
 	ViewBuilder.Append("  </div>\r\n");
 	ViewBuilder.Append("</div>\r\n");
@@ -195,9 +200,6 @@ protected override void View()
 	ViewBuilder.Append("<div class=\"rnav\">\r\n");
 	ViewBuilder.Append("    <div class=\"rnavhd\">答题卡</div>\r\n");
 	ViewBuilder.Append("    <div class=\"rnavct\">\r\n");
-	ViewBuilder.Append("      <div class=\"mb10\"> 答题量：" + echo(examloginfo.answers) + "/" + echo(examloginfo.questions) + "题<br>\r\n");
-	ViewBuilder.Append("        错题数：" + echo(examloginfo.wrongs) + "题<br>\r\n");
-	ViewBuilder.Append("        正确率：" + echo(examloginfo.accuracy) + "%</div>\r\n");
 	ViewBuilder.Append("      <ul class=\"rnlt1 fc\">\r\n");
 	ViewBuilder.Append("        <li><span class=\"bg1\"></span>正确题</li>\r\n");
 	ViewBuilder.Append("        <li><span class=\"bg2\"></span>错误题</li>\r\n");
@@ -213,7 +215,7 @@ protected override void View()
 	loop__id++;
 	 en = en+1;
 
-	if (item.type==5)
+	if (item.type=="TYPE_ANSWER")
 	{
 	ViewBuilder.Append("          <li><a href=\"#" + echo(en) + "\" class=\"bg4\">" + echo(en) + "</a></li>\r\n");
 	}
@@ -248,6 +250,7 @@ protected override void View()
 	ViewBuilder.Append("  <div class=\"wp2\">\r\n");
 	ViewBuilder.Append("    <div class=\"wp3\">\r\n");
 	ViewBuilder.Append("      <div class=\"wp4\">\r\n");
+	ViewBuilder.Append("        <h1 class=\"qtTitle\">" + echo(sortinfo.name) + "</h1>\r\n");
 	ViewBuilder.Append("        <form id=\"testProcessForm\" name=\"testProcessForm\" action=\"testpost.aspx\" method=\"post\">\r\n");
 	ViewBuilder.Append("            <a id=\"1\"></a>\r\n");
 	ViewBuilder.Append("            <div class=\"tit1 pd1\"></div>\r\n");
@@ -260,29 +263,23 @@ protected override void View()
 	loop__id++;
 	 topicnum = topicnum+1;
 
-	if (item.type==1)
+	if (item.type=="TYPE_RADIO")
 	{
 	ViewBuilder.Append("            <dl class=\"st tm_zt_0\">\r\n");
 	ViewBuilder.Append("              <dt class=\"nobold\"><span class=\"num\" id=\"" + echo((topicnum+1)) + "\">" + echo(topicnum) + "</span>\r\n");
 	ViewBuilder.Append("                <p>" + echo(item.title) + "</p>\r\n");
 	ViewBuilder.Append("              </dt>\r\n");
 	ViewBuilder.Append("              <dd>\r\n");
-	ViewBuilder.Append("                " + Option(item.option,item.ascount,item.optionlist).ToString() + "\r\n");
+	ViewBuilder.Append("                " + echo(Option(item.option,item.ascount)) + "\r\n");
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("              <dd class=\"dAn fc\">\r\n");
 	ViewBuilder.Append("                <span class=\"ft4 fl\">您的答案：</span>\r\n");
 	ViewBuilder.Append("                 <span class=\"fl w2 bx7\">\r\n");
-	for (int i = 0; i <= 6; i++){
+	for (int i = 0; i <= 7; i++){
 
-	if (i<=item.ascount-1)
+	if (i<item.ascount)
 	{
-	ViewBuilder.Append("                  <label><input type=\"radio\" id=\"_" + echo(topicnum) + "\" \r\n");
-
-	if (answerarr[i]==item.useranswer)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" name=\"answer_" + echo(item.id) + "\" value=\"" + echo(answerarr[i]) + "\">" + echo(answerarr[i]) + "</label>\r\n");
+	ViewBuilder.Append("<label qid=\"" + echo(item.id) + "\"><input type=\"radio\" id=\"answer_" + echo(topicnum) + "\" "+(answerarr[i]==item.useranswer?echo("checked"):echo(""))+" name=\"answer_" + echo(item.id) + "\" value=\"" + echo(answerarr[i]) + "\" disabled=\"disabled\">" + echo(answerarr[i]) + "</label>\r\n");
 	}//end if
 	}//end for
 	ViewBuilder.Append("                  </span>\r\n");
@@ -329,29 +326,23 @@ protected override void View()
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("            </dl>\r\n");
 	}
-	else if (item.type==2)
+	else if (item.type=="TYPE_MULTIPLE")
 	{
 	ViewBuilder.Append("            <dl class=\"st tm_zt_0\">\r\n");
 	ViewBuilder.Append("              <dt class=\"nobold\"><span class=\"num\" id=\"" + echo((topicnum+1)) + "\">" + echo(topicnum) + "</span>\r\n");
 	ViewBuilder.Append("                <p>" + echo(item.title) + "</p>\r\n");
 	ViewBuilder.Append("              </dt>\r\n");
 	ViewBuilder.Append("              <dd>\r\n");
-	ViewBuilder.Append("                " + Option(item.option,item.ascount,item.optionlist).ToString() + "\r\n");
+	ViewBuilder.Append("                " + echo(Option(item.option,item.ascount)) + "\r\n");
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("              <dd class=\"dAn fc\">\r\n");
 	ViewBuilder.Append("                 <span class=\"ft4 fl\">您的答案：</span>\r\n");
 	ViewBuilder.Append("                 <span class=\"fl w2 bx7\">\r\n");
-	for (int i = 0; i <= 6; i++){
+	for (int i = 0; i <= 7; i++){
 
-	if (i<=item.ascount-1)
+	if (i<item.ascount)
 	{
-	ViewBuilder.Append("                  <label><input type=\"checkbox\" id=\"_" + echo(topicnum) + "\" \r\n");
-
-	if (ischecked(answerarr[i],item.useranswer))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" name=\"answer_" + echo(item.id) + "\" value=\"" + echo(answerarr[i]) + "\">" + echo(answerarr[i]) + "</label>\r\n");
+	ViewBuilder.Append("<label qid=\"" + echo(item.id) + "\"><input type=\"checkbox\" id=\"answer_" + echo(topicnum) + "\" "+(FPArray.Contain(item.useranswer,answerarr[i])?echo("checked"):echo(""))+" name=\"answer_" + echo(item.id) + "\" value=\"" + echo(answerarr[i]) + "\" disabled=\"disabled\">" + echo(answerarr[i]) + "</label>\r\n");
 	}//end if
 	}//end for
 	ViewBuilder.Append("                  </span>\r\n");
@@ -398,7 +389,7 @@ protected override void View()
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("            </dl>\r\n");
 	}
-	else if (item.type==3)
+	else if (item.type=="TYPE_TRUE_FALSE")
 	{
 	ViewBuilder.Append("            <dl class=\"st tm_zt_0\">\r\n");
 	ViewBuilder.Append("              <dt class=\"nobold\"><span class=\"num\" id=\"" + echo((topicnum+1)) + "\">" + echo(topicnum) + "</span>\r\n");
@@ -407,24 +398,8 @@ protected override void View()
 	ViewBuilder.Append("              <dd class=\"dAn fc\">\r\n");
 	ViewBuilder.Append("                <span class=\"ft4 fl\">您的答案：</span>\r\n");
 	ViewBuilder.Append("                 <span class=\"fl w2 bx7\">\r\n");
-
-	if (item.useranswer=="Y")
-	{
-	ViewBuilder.Append("                     <label><input type=\"radio\" name=\"answer_" + echo(item.id) + "\" checked=\"checked\" value=\"Y\" disabled=\"disabled\">正确</label>\r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("                     <label><input type=\"radio\" name=\"answer_" + echo(item.id) + "\" value=\"Y\" disabled=\"disabled\">正确</label>\r\n");
-	}//end if
-
-	if (item.useranswer=="N")
-	{
-	ViewBuilder.Append("                     <label><input type=\"radio\" name=\"answer_" + echo(item.id) + "\" checked=\"checked\" value=\"N\" disabled=\"disabled\">错误</label>\r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("                     <label><input type=\"radio\" name=\"answer_" + echo(item.id) + "\" value=\"N\" disabled=\"disabled\">错误</label>\r\n");
-	}//end if
+	ViewBuilder.Append("                    <label><input type=\"radio\" id=\"answer_" + echo(topicnum) + "\" name=\"answer_" + echo(item.id) + "\" "+(item.useranswer=="Y"?echo("checked"):echo(""))+" value=\"Y\" disabled=\"disabled\">正确</label>\r\n");
+	ViewBuilder.Append("                    <label><input type=\"radio\" id=\"answer_" + echo(topicnum) + "\" name=\"answer_" + echo(item.id) + "\" "+(item.useranswer=="N"?echo("checked"):echo(""))+" value=\"N\" disabled=\"disabled\">错误</label>\r\n");
 	ViewBuilder.Append("                 </span>\r\n");
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("              <dd>\r\n");
@@ -480,11 +455,11 @@ protected override void View()
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("            </dl>\r\n");
 	}
-	else if (item.type==4)
+	else if (item.type=="TYPE_BLANK")
 	{
 	ViewBuilder.Append("            <dl class=\"st tm_zt_0\">\r\n");
 	ViewBuilder.Append("              <dt class=\"nobold\"><span class=\"num\" id=\"" + echo((topicnum+1)) + "\">" + echo(topicnum) + "</span>\r\n");
-	ViewBuilder.Append("                <p>" + FmAnswer(item.title,item.id,item.useranswer).ToString() + "</p>\r\n");
+	ViewBuilder.Append("                <p>" + echo(FmAnswer(item.title,item.id,item.useranswer)) + "</p>\r\n");
 	ViewBuilder.Append("              </dt>\r\n");
 	ViewBuilder.Append("              <dd>\r\n");
 
@@ -531,7 +506,7 @@ protected override void View()
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("            </dl>\r\n");
 	}
-	else if (item.type==5)
+	else if (item.type=="TYPE_ANSWER")
 	{
 	ViewBuilder.Append("            <dl class=\"st tm_zt_" + echo(item.id) + "\">\r\n");
 	ViewBuilder.Append("              <dt class=\"nobold\"><span class=\"num\" id=\"" + echo((topicnum+1)) + "\">" + echo(topicnum) + "</span>\r\n");
@@ -539,7 +514,7 @@ protected override void View()
 	ViewBuilder.Append("              </dt>\r\n");
 	ViewBuilder.Append("              <dd>\r\n");
 	ViewBuilder.Append("                <div class=\"ft4\">您的答案：</div>\r\n");
-	ViewBuilder.Append("                <textarea class=\"jdt\" id=\"_" + echo(topicnum) + "\" name=\"answer_" + echo(item.id) + "\">" + echo(item.useranswer) + "</textarea>\r\n");
+	ViewBuilder.Append("                <textarea class=\"jdt\" id=\"_" + echo(topicnum) + "\" name=\"answer_" + echo(item.id) + "\" readonly=\"readonly\">" + echo(item.useranswer) + "</textarea>\r\n");
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("              <dd>\r\n");
 
@@ -585,57 +560,6 @@ protected override void View()
 	ViewBuilder.Append("                </div>\r\n");
 	ViewBuilder.Append("              </dd>\r\n");
 	ViewBuilder.Append("            </dl>\r\n");
-	}
-	else if (item.type==6)
-	{
-	ViewBuilder.Append("            <dl class=\"st tm_zt_" + echo(item.id) + "\">\r\n");
-	ViewBuilder.Append("              <dt class=\"nobold\"><span class=\"num\" id=\"" + echo((topicnum+1)) + "\">" + echo(topicnum) + "</span>\r\n");
-	ViewBuilder.Append("                <p>" + echo(item.title) + "</p>\r\n");
-	ViewBuilder.Append("              </dt>\r\n");
-	ViewBuilder.Append("              <dd>\r\n");
-	ViewBuilder.Append("                <div class=\"ft4\">您的答案：</div>\r\n");
-	ViewBuilder.Append("                <textarea class=\"jdt\" id=\"_" + echo(topicnum) + "\" name=\"answer_" + echo(item.id) + "\">" + echo(item.useranswer) + "</textarea>\r\n");
-	ViewBuilder.Append("              </dd>\r\n");
-	ViewBuilder.Append("              <dd>\r\n");
-
-	if (examconfig.showanswer==1)
-	{
-
-	if (item.explain!="")
-	{
-	ViewBuilder.Append("                <div class=\"mb10\">答案解析：\r\n");
-	ViewBuilder.Append("                  " + echo(item.explain) + "\r\n");
-	ViewBuilder.Append("                </div>\r\n");
-	}//end if
-	}//end if
-	ViewBuilder.Append("                <div class=\"mb10\">\r\n");
-
-	if (item.isfav==1)
-	{
-	ViewBuilder.Append("                    <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/fav.gif\"><a id=\"fav_" + echo(item.id) + "\" href=\"javascript:AddFav(" + echo(item.id) + ",-1)\">取消收藏</a>&nbsp;&nbsp;\r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("                    <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/fav.gif\"><a id=\"fav_" + echo(item.id) + "\" href=\"javascript:AddFav(" + echo(item.id) + ",1)\">收藏本题</a>&nbsp;&nbsp;\r\n");
-	}//end if
-	ViewBuilder.Append("                <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/note.png\"><a href=\"javascript:EditNote(" + echo(item.id) + "," + echo(topicnum) + ")\">编辑笔记</a>\r\n");
-
-	if (action=="wrong")
-	{
-	ViewBuilder.Append("                    <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/wrong.png\"><a id=\"wrong_" + echo(item.id) + "\" href=\"javascript:UnWrong(" + echo(item.id) + ",-1)\">取消错题</a>\r\n");
-	}//end if
-	ViewBuilder.Append("                </div>\r\n");
-	ViewBuilder.Append("                <div id=\"shownote_" + echo(item.id) + "\" class=\"mb10\" \r\n");
-
-	if (item.note=="")
-	{
-	ViewBuilder.Append(" style=\"display:none\" \r\n");
-	}//end if
-	ViewBuilder.Append(">您的笔记：\r\n");
-	ViewBuilder.Append("                  <span id=\"note_" + echo(item.id) + "\">" + echo(item.note) + "</span>\r\n");
-	ViewBuilder.Append("                </div>\r\n");
-	ViewBuilder.Append("              </dd>\r\n");
-	ViewBuilder.Append("            </dl>\r\n");
 	}//end if
 	}//end loop
 	ViewBuilder.Append("        <div style=\"clear:both;\"></div>\r\n");
@@ -647,6 +571,17 @@ protected override void View()
 	ViewBuilder.Append("</div>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

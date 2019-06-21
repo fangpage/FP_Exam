@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -26,7 +25,7 @@ protected override void View()
 	ViewBuilder.Append("        $(\"#submitsave\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#formpost\").submit();\r\n");
 	ViewBuilder.Append("        })\r\n");
-	ViewBuilder.Append("        PageNav(\"用户部门管理,user/departmentmanage.aspx|部门排序,user/" + echo(pagename) + "?parentid=" + echo(parentid) + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"用户部门管理,user/departmentmanage.aspx?departname=" + echo(departname) + "|部门排序,user/" + echo(pagename) + "?parentid=" + echo(parentid) + "&departname=" + echo(departname) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
@@ -39,8 +38,8 @@ protected override void View()
 	ViewBuilder.Append("          <div class=\"newsicon\">\r\n");
 	ViewBuilder.Append("            <ul>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/save.gif) 2px 6px no-repeat\"><a id=\"submitsave\" href=\"#\">保存</a></li>\r\n");
-	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"departmentdisplay.aspx?parentid=" + echo(parentid) + "\">刷新</a> </li>\r\n");
-	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/return.gif) 2px 6px no-repeat\"><a href=\"departmentmanage.aspx\">返回</a> </li>\r\n");
+	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"departmentdisplay.aspx?parentid=" + echo(parentid) + "&departname=" + echo(departname) + "\">刷新</a> </li>\r\n");
+	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/return.gif) 2px 6px no-repeat\"><a href=\"departmentmanage.aspx?departname=" + echo(departname) + "\">返回</a> </li>\r\n");
 	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>用户部门排序</strong></li>\r\n");
 	ViewBuilder.Append("            </ul>\r\n");
 	ViewBuilder.Append("          </div>\r\n");
@@ -70,6 +69,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

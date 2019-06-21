@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -38,9 +37,19 @@ protected override void View()
 	ViewBuilder.Append("        $(\"#btnexport\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#action\").val(\"export\");\r\n");
 	ViewBuilder.Append("            $(\"#frmpost\").submit();\r\n");
-	ViewBuilder.Append("        })\r\n");
-	ViewBuilder.Append("        $(\"#btnreport\").click(function () {\r\n");
-	ViewBuilder.Append("            $(\"#action\").val(\"report\");\r\n");
+	ViewBuilder.Append("       })\r\n");
+	ViewBuilder.Append("      $(\"#btn_exppaper\").click(function () {\r\n");
+	ViewBuilder.Append("        if (confirm(\"您确定要批量导出考生试卷吗？\\r\\n当前导出操作可能要运行一段时间，在此期间不要进行其他操作。\")) {\r\n");
+	ViewBuilder.Append("          $(\"#action\").val(\"exppaper\");\r\n");
+	ViewBuilder.Append("          $(\"#frmpost\").submit();\r\n");
+	ViewBuilder.Append("        }\r\n");
+	ViewBuilder.Append("      })\r\n");
+	ViewBuilder.Append("      $(\"#btnreport\").click(function () {\r\n");
+	ViewBuilder.Append("          $(\"#action\").val(\"report\");\r\n");
+	ViewBuilder.Append("          $(\"#frmpost\").submit();\r\n");
+	ViewBuilder.Append("      })\r\n");
+	ViewBuilder.Append("      $(\"#btn_exopera\").click(function () {\r\n");
+	ViewBuilder.Append("            $(\"#action\").val(\"exopera\");\r\n");
 	ViewBuilder.Append("            $(\"#frmpost\").submit();\r\n");
 	ViewBuilder.Append("        })\r\n");
 	ViewBuilder.Append("        var index = layer.getFrameIndex(window.name);\r\n");
@@ -52,7 +61,7 @@ protected override void View()
 	ViewBuilder.Append("                title: '考生搜索',\r\n");
 	ViewBuilder.Append("                maxmin: false,\r\n");
 	ViewBuilder.Append("                page: { dom: '#showsearch' },\r\n");
-	ViewBuilder.Append("                area: ['400px', '200px']\r\n");
+	ViewBuilder.Append("                area: ['400px', '290px']\r\n");
 	ViewBuilder.Append("            });\r\n");
 	ViewBuilder.Append("        })\r\n");
 	ViewBuilder.Append("        $('#btnback').click(function () {\r\n");
@@ -84,7 +93,9 @@ protected override void View()
 	ViewBuilder.Append("            <ul>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/delete.gif) 2px 6px no-repeat\"><a id=\"submitdel\" href=\"#\">删除</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/xls.gif) 2px 6px no-repeat\"><a id=\"btnexport\" href=\"#\">导出成绩表</a></li>\r\n");
+	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/exppaper.gif) 2px 6px no-repeat\"><a id=\"btn_exppaper\" href=\"#\">导出考生试卷</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/question.gif) 2px 6px no-repeat\"><a id=\"btnreport\" href=\"#\">考试分析报告</a></li>\r\n");
+	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/question.gif) 2px 6px no-repeat\"><a id=\"btn_exopera\" href=\"#\">答案分析报告</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/report.png) 2px 6px no-repeat\"><a id=\"btnsearch\" href=\"#\">搜索</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"examresultmanage.aspx?examid=" + echo(examid) + "\">刷新</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/return.gif) 2px 6px no-repeat\"><a href=\"exammanage.aspx?sortid=" + echo(examinfo.sortid) + "\">返回</a></li>\r\n");
@@ -139,7 +150,7 @@ protected override void View()
 
 	if (item.status>=0)
 	{
-	ViewBuilder.Append("                  " + GetTime(item.utime).ToString() + "\r\n");
+	ViewBuilder.Append("                  " + echo(GetTime(item.utime)) + "\r\n");
 	}
 	else
 	{
@@ -173,7 +184,7 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              <td>\r\n");
-	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"javascript:DeleteExam(" + echo(item.id) + ")\">删除</a>\r\n");
+	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"javascript:DeleteExam(" + echo(item.id) + ")\">删除</a>&nbsp;|\r\n");
 
 	if (item.id==0)
 	{
@@ -183,7 +194,6 @@ protected override void View()
 	{
 	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"" + echo(webpath) + "exam/examread.aspx?resultid=" + echo(item.id) + "\" target=\"_blank\">阅卷</a>\r\n");
 	}//end if
-	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"examresultprint.aspx?resultid=" + echo(item.id) + "\" target=\"_blank\">成绩单</a>\r\n");
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	}//end loop
@@ -200,14 +210,48 @@ protected override void View()
 	ViewBuilder.Append("  <div id=\"showsearch\" style=\"display:none\">\r\n");
 	ViewBuilder.Append("  <form id=\"frmsearch\" method=\"get\" name=\"frmsearch\" action=\"\">\r\n");
 	ViewBuilder.Append("  <input type=\"hidden\" name=\"examid\" id=\"examid\" value=\"" + echo(examid) + "\">\r\n");
-	ViewBuilder.Append("  <table style=\"width:400px;height:163px;\" cellpadding=\"2\" cellspacing=\"1\" class=\"border\">\r\n");
+	ViewBuilder.Append("  <table style=\"width:400px;height:250px;\" cellpadding=\"2\" cellspacing=\"1\" class=\"border\">\r\n");
 	ViewBuilder.Append("        <tbody>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;\"> 搜索： </td>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:30px;\"> 姓名： </td>\r\n");
 	ViewBuilder.Append("            <td align=\"left\"><input name=\"keyword\" type=\"text\" value=\"" + echo(keyword) + "\" id=\"keyword\" style=\"height:21px;width:250px;\"></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("            <td height=\"80\" colspan=\"2\" align=\"center\">\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:30px;\"> 部门： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\"><input name=\"deptname\" type=\"text\" value=\"" + echo(deptname) + "\" id=\"keyword\" style=\"height:21px;width:250px;\"></td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:30px;\"> 成绩： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\">\r\n");
+	ViewBuilder.Append("              <input name=\"score_start\" type=\"text\" value=\"" + echo(score_start) + "\" id=\"score_start\" style=\"height:21px;width:100px;\">至\r\n");
+	ViewBuilder.Append("              <input name=\"score_end\" type=\"text\" value=\"" + echo(score_end) + "\" id=\"score_end\" style=\"height:21px;width:100px;\">\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:30px;\"> 时间： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\">\r\n");
+	ViewBuilder.Append("              <input name=\"startdatetime\" type=\"text\" value=\"" + echo(startdatetime) + "\" id=\"score_start\" style=\"height:21px;width:100px;\">至\r\n");
+	ViewBuilder.Append("              <input name=\"enddatetime\" type=\"text\" value=\"" + echo(enddatetime) + "\" id=\"score_end\" style=\"height:21px;width:100px;\">\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:30px;\"> 状态： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\">\r\n");
+	ViewBuilder.Append("              <input id=\"status\" name=\"status\" "+(FPArray.Contain(status,-1)?echo("checked"):echo(""))+" value=\"-1\" type=\"checkbox\">未考试\r\n");
+	ViewBuilder.Append("              <input id=\"status\" name=\"status\" "+(FPArray.Contain(status,0)?echo("checked"):echo(""))+" value=\"0\" type=\"checkbox\">未交卷\r\n");
+	ViewBuilder.Append("              <input id=\"status\" name=\"status\" "+(FPArray.Contain(status,1)?echo("checked"):echo(""))+" value=\"1\" type=\"checkbox\">已交卷\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:30px;\"> 排序： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\">\r\n");
+	ViewBuilder.Append("              <input id=\"orderby\" name=\"orderby\" "+(orderby==0?echo("checked"):echo(""))+" value=\"0\" type=\"radio\">默认\r\n");
+	ViewBuilder.Append("              <input id=\"orderby\" name=\"orderby\" "+(orderby==1?echo("checked"):echo(""))+" value=\"1\" type=\"radio\">降序\r\n");
+	ViewBuilder.Append("              <input id=\"orderby\" name=\"orderby\" "+(orderby==2?echo("checked"):echo(""))+" value=\"2\" type=\"radio\">升序\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td height=\"40\" colspan=\"2\" align=\"center\">\r\n");
 	ViewBuilder.Append("            <input type=\"button\" name=\"btnok\" value=\"确定\" id=\"btnok\" class=\"adminsubmit_short\">&nbsp;&nbsp;\r\n");
 	ViewBuilder.Append("            <input type=\"button\" name=\"btnback\" value=\"取消\" id=\"btnback\" class=\"adminsubmit_short\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
@@ -218,6 +262,17 @@ protected override void View()
 	ViewBuilder.Append("   </div>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

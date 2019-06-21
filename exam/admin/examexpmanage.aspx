@@ -9,7 +9,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -38,7 +37,7 @@ protected override void View()
 	ViewBuilder.Append("            $(\"#frmpost\").submit();\r\n");
 	ViewBuilder.Append("        })\r\n");
 	string navurl = "exammanage.aspx";
-	ViewBuilder.Append("        PageNav(\"" + GetSortNav(sortinfo,navurl).ToString() + "|添加编辑奖励," + echo(rawurl) + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"" + echo(GetSortNav(sortinfo,navurl)) + "|添加编辑奖励," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("    function DeleteItem(eid) {\r\n");
 	ViewBuilder.Append("        if (confirm(\"你确定要删除该奖励吗？删除之后将无法进行恢复\")) {\r\n");
@@ -199,6 +198,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

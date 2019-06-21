@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -87,7 +86,7 @@ protected override void View()
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/report.png) 2px 6px no-repeat\"><a id=\"btnsearch\" href=\"#\">搜索</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/return.gif) 2px 6px no-repeat\"><a target=\"_parent\" href=\"examtopicmanage.aspx?examid=" + echo(examinfo.id) + "&paper=" + echo(paper) + "\">返回</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"float:right; width:auto\">\r\n");
-	ViewBuilder.Append("                 <strong>手工选题：[" + echo(examinfo.name) + "" + GetPaper(paper).ToString() + "]</strong>\r\n");
+	ViewBuilder.Append("                 <strong>手工选题：[" + echo(examinfo.name) + "" + echo(GetPaper(paper)) + "]</strong>\r\n");
 	ViewBuilder.Append("              </li>\r\n");
 	ViewBuilder.Append("            </ul>\r\n");
 	ViewBuilder.Append("          </div>\r\n");
@@ -115,23 +114,20 @@ protected override void View()
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
 	ViewBuilder.Append("              <td align=\"left\">\r\n");
 	ViewBuilder.Append("              <strong>" + echo((pager.pagesize*(pager.pageindex-1)+loop__id)) + "、\r\n");
-	ViewBuilder.Append("                      " + TypeStr(item.type).ToString() + "：\r\n");
-	ViewBuilder.Append("                      " + FmAnswer(item.title).ToString() + "\r\n");
+	ViewBuilder.Append("                      " + echo(item.typestr) + "：\r\n");
+	ViewBuilder.Append("                      " + echo(FmAnswer(item.title)) + "\r\n");
 	ViewBuilder.Append("              </strong>\r\n");
 
-	if (item.type==1||item.type==2)
+	if (item.type=="TYPE_RADIO"||item.type=="TYPE_MULTIPLE")
 	{
 	ViewBuilder.Append("              <div style=\"height: 2px; overflow: hidden;\"></div>\r\n");
-	ViewBuilder.Append("              " + Option(item.option,item.ascount).ToString() + "\r\n");
+	ViewBuilder.Append("              " + echo(Option(item.option,item.ascount)) + "\r\n");
 	}//end if
 	ViewBuilder.Append("              <div style=\"height: 5px; overflow: hidden; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: dashed;\"></div>\r\n");
 	ViewBuilder.Append("              <div class=\"tips\">\r\n");
-
-	if (item.type!=6)
-	{
 	ViewBuilder.Append("              <div style=\"color:Red\">\r\n");
 
-	if (item.type==3)
+	if (item.type=="TYPE_TRUE_FALSE")
 	{
 
 	if (item.answer=="Y")
@@ -148,21 +144,12 @@ protected override void View()
 	ViewBuilder.Append("                 参考答案：" + echo(item.answer) + "\r\n");
 	}//end if
 	ViewBuilder.Append("              </div>\r\n");
-	}//end if
-	ViewBuilder.Append("              <span style=\"color:Red\">难易程度：" + DifficultyStr(item.difficulty).ToString() + "，考过次数：" + echo(item.exams) + "，做错次数：" + echo(item.wrongs) + "</span><br>\r\n");
-
-	if (item.explain!="")
-	{
-	ViewBuilder.Append("              <span style=\"color:Red\">答案解析：" + echo(item.explain) + "</span> \r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("              <span style=\"color:Red\">答案解析：暂无解析</span>\r\n");
-	}//end if
+	ViewBuilder.Append("              <span style=\"color:Red\">难易程度：" + echo(item.diffstr) + "，考过次数：" + echo(item.exams) + "，做错次数：" + echo(item.wrongs) + "</span><br>\r\n");
+	ViewBuilder.Append("              <span style=\"color:Red\">答案解析："+(item.explain!=""?echo(item.explain):echo("暂无解析"))+"</span> \r\n");
 	ViewBuilder.Append("              </div>\r\n");
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.sortname) + "</td>\r\n");
-	ViewBuilder.Append("              <td align=\"center\">" + echo(item.TypeString) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.typename) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\" id=\"addtopic_" + echo(item.id) + "\">\r\n");
 
 	if (IsSelected(item.id))
@@ -207,6 +194,17 @@ protected override void View()
 	ViewBuilder.Append("  </form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

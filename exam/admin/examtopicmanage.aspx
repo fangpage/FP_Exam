@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -15,21 +14,19 @@ protected override void View()
 	ViewBuilder.Append("<meta content=\"text/html; charset=utf-8\" http-equiv=\"content-type\">\r\n");
 	ViewBuilder.Append("<title>试卷题目设置</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
-	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(adminpath) + "statics/css/admin.css\">\r\n");
+	ViewBuilder.Append("<link href=\"" + echo(adminpath) + "statics/css/admin.css\" type=\"text/css\" rel=\"stylesheet\">\r\n");
 	ViewBuilder.Append("<link href=\"" + echo(adminpath) + "statics/css/datagrid.css\" rel=\"stylesheet\" type=\"text/css\">\r\n");
-	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/admin/css/exam.css\" rel=\"stylesheet\" type=\"text/css\">\r\n");
-	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(adminpath) + "statics/css/tab.css\">\r\n");
-	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(plupath) + "jquery/jquery-1.8.2.min.js\"></");
+	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/admin/css/exam.css\" type=\"text/css\" rel=\"stylesheet\">\r\n");
+	ViewBuilder.Append("<link href=\"" + echo(adminpath) + "statics/css/tab.css\" type=\"text/css\" rel=\"stylesheet\">\r\n");
+	ViewBuilder.Append("<script src=\"" + echo(plupath) + "jquery/jquery-1.8.2.min.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("<link type=\"text/css\" href=\"" + echo(plupath) + "layer/skin/layer.css\" rel=\"stylesheet\" id=\"skinlayercss\">\r\n");
-	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(plupath) + "layer/layer.js\"></");
+	ViewBuilder.Append("<link href=\"" + echo(plupath) + "layer/skin/layer.css\" type=\"text/css\" rel=\"stylesheet\">\r\n");
+	ViewBuilder.Append("<script src=\"" + echo(plupath) + "layer/layer.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(adminpath) + "statics/js/admin.js\"></");
+	ViewBuilder.Append("<script src=\"" + echo(adminpath) + "statics/js/admin.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
-	string navurl = "exammanage.aspx";
-	ViewBuilder.Append("        PageNav(\"" + GetSortNav(sortinfo,navurl).ToString() + "|" + echo(examinfo.name) + "," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("        $('#checkall').click(function () {\r\n");
 	ViewBuilder.Append("            $('input[name=chkid]').attr(\"checked\", this.checked)\r\n");
 	ViewBuilder.Append("        });\r\n");
@@ -78,6 +75,8 @@ protected override void View()
 	ViewBuilder.Append("                area: ['485px', '185px']\r\n");
 	ViewBuilder.Append("            });\r\n");
 	ViewBuilder.Append("        });\r\n");
+	string navurl = "exammanage.aspx";
+	ViewBuilder.Append("        PageNav(\"" + echo(GetSortNav(sortinfo,navurl)) + "|" + echo(examinfo.name) + "," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("    function DeleteExamTopic(examtopicid) {\r\n");
 	ViewBuilder.Append("        if (confirm(\"您确定要删除该大题吗？删除之后将无法进行恢复\")) {\r\n");
@@ -108,15 +107,7 @@ protected override void View()
 
 	if (examinfo.papers>=1)
 	{
-
-	if (paper==1)
-	{
-	ViewBuilder.Append("              <li class=\"active\"><a href=\"?examid=" + echo(examid) + "&paper=1\">A卷</a> </li>\r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("              <li class=\"normal\"><a href=\"?examid=" + echo(examid) + "&paper=1\">A卷</a> </li>\r\n");
-	}//end if
+	ViewBuilder.Append("              <li class=\""+(paper==1?echo(" "+"active"):echo(" "+"normal"))+"\"><a href=\"?examid=" + echo(examid) + "&paper=1\">A卷</a> </li>\r\n");
 	}//end if
 
 	if (examinfo.papers>=2)
@@ -230,35 +221,26 @@ protected override void View()
 	{
 	loop__id++;
 	 topicnum = topicnum+1;
-	ViewBuilder.Append("            <tr class=\"tlist child_row_" + echo(examtopic.id) + "\" \r\n");
-
-	if (examtopic.id!=examtopicid)
-	{
-	ViewBuilder.Append(" style=\"display:none;\" \r\n");
-	}//end if
-	ViewBuilder.Append(" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
+	ViewBuilder.Append("            <tr class=\"tlist child_row_" + echo(examtopic.id) + "\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\" style=\""+(examtopic.id==examtopicid?echo(""):echo("display:none"))+"\">\r\n");
 	ViewBuilder.Append("              <td width=\"40\" align=\"center\">\r\n");
 	ViewBuilder.Append("                  <input id=\"display_" + echo(item.id) + "\" name=\"display_" + echo(item.id) + "\" style=\"text-align:center;width:36px;\" value=\"" + echo(topicnum) + "\" type=\"text\">\r\n");
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              <td align=\"left\">\r\n");
 	ViewBuilder.Append("              <strong>\r\n");
-	ViewBuilder.Append("                      " + TypeStr(item.type).ToString() + "：\r\n");
-	ViewBuilder.Append("                      " + FmAnswer(item.title).ToString() + "\r\n");
+	ViewBuilder.Append("                      " + echo(item.typestr) + "：\r\n");
+	ViewBuilder.Append("                      " + echo(FmAnswer(item.title)) + "\r\n");
 	ViewBuilder.Append("              </strong>\r\n");
 
-	if (item.type==1||item.type==2)
+	if (item.type=="TYPE_RADIO"||item.type=="TYPE_MULTIPLE")
 	{
 	ViewBuilder.Append("              <div style=\"height: 2px; overflow: hidden;\"></div>\r\n");
-	ViewBuilder.Append("              " + Option(item.option,item.ascount).ToString() + "\r\n");
+	ViewBuilder.Append("              " + echo(Option(item.option,item.ascount)) + "\r\n");
 	}//end if
 	ViewBuilder.Append("              <div style=\"height: 5px; overflow: hidden; border-bottom-color: rgb(204, 204, 204); border-bottom-width: 1px; border-bottom-style: dashed;\"></div>\r\n");
 	ViewBuilder.Append("              <div class=\"tips\">\r\n");
-
-	if (item.type!=6)
-	{
 	ViewBuilder.Append("              <div style=\"color:Red\">\r\n");
 
-	if (item.type==3)
+	if (item.type=="TYPE_TRUE_FALSE")
 	{
 
 	if (item.answer=="Y")
@@ -275,17 +257,8 @@ protected override void View()
 	ViewBuilder.Append("                 参考答案：" + echo(item.answer) + "\r\n");
 	}//end if
 	ViewBuilder.Append("              </div>\r\n");
-	}//end if
-	ViewBuilder.Append("              <span style=\"color:Red\">难易程度：" + DifficultyStr(item.difficulty).ToString() + "，考过次数：" + echo(item.exams) + "，做错次数：" + echo(item.wrongs) + "</span><br>\r\n");
-
-	if (item.explain!="")
-	{
-	ViewBuilder.Append("              <span style=\"color:Red\">答案解析：" + echo(item.explain) + "</span> \r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("              <span style=\"color:Red\">答案解析：暂无解析</span>\r\n");
-	}//end if
+	ViewBuilder.Append("              <span style=\"color:Red\">难易程度：" + echo(item.diffstr) + "，考过次数：" + echo(item.exams) + "，做错次数：" + echo(item.wrongs) + "</span><br>\r\n");
+	ViewBuilder.Append("              <span style=\"color:Red\">答案解析："+(item.explain!=""?echo(item.explain):echo("暂无解析"))+"</span> \r\n");
 	ViewBuilder.Append("              </div>\r\n");
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.sortname) + "</td>\r\n");
@@ -308,6 +281,17 @@ protected override void View()
 	ViewBuilder.Append("  </form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

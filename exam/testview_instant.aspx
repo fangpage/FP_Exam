@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html>\r\n");
@@ -15,7 +14,7 @@ protected override void View()
 	ViewBuilder.Append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
 	ViewBuilder.Append("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge,chrome=1\">\r\n");
 	ViewBuilder.Append("<meta name=\"renderer\" content=\"webkit\">\r\n");
-	ViewBuilder.Append("<title>专项练习|" + echo(pagetitle) + "</title>\r\n");
+	ViewBuilder.Append("<title>自由练习|" + echo(pagetitle) + "</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
 	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/favicon.ico\" type=\"image/x-icon\" rel=\"icon\">\r\n");
 	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/favicon.ico\" type=\"image/x-icon\" rel=\"shortcut icon\">\r\n");
@@ -133,7 +132,6 @@ protected override void View()
 	ViewBuilder.Append(".ptksbtn {\r\n");
 	ViewBuilder.Append("	width: 87px;\r\n");
 	ViewBuilder.Append("	height: 81px;\r\n");
-	ViewBuilder.Append("	background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/examtype1.png) no-repeat;\r\n");
 	ViewBuilder.Append("	position: absolute;\r\n");
 	ViewBuilder.Append("	left: -7px;\r\n");
 	ViewBuilder.Append("	top: -7px\r\n");
@@ -188,8 +186,6 @@ protected override void View()
 	ViewBuilder.Append("<form name=\"frmpost\" method=\"post\" action=\"test.aspx\" id=\"frmpost\" onsubmit=\"layer.msg('系统正在组卷，请稍后...', 0, 1);\">\r\n");
 	ViewBuilder.Append("  <input type=\"hidden\" id=\"sidlist\" name=\"sidlist\" value=\"\">\r\n");
 	ViewBuilder.Append("  <div class=\"userfacemain\">\r\n");
-	ViewBuilder.Append("    <div class=\"userface\"></div>\r\n");
-	ViewBuilder.Append("    <img src=\"" + echo(webpath) + "" + echo(user.avatar) + "\" width=\"60\" height=\"60\">\r\n");
 	ViewBuilder.Append("  </div>\r\n");
 	ViewBuilder.Append("  <div id=\"container\">\r\n");
 	ViewBuilder.Append("    <div id=\"header\"></div>\r\n");
@@ -200,7 +196,7 @@ protected override void View()
 	ViewBuilder.Append("          <div class=\"ptksbtn\"></div>\r\n");
 	ViewBuilder.Append("          <table width=\"100%\" height=\"163\" align=\"center\" cellpadding=\"0\" cellspacing=\"1\">\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("              <td height=\"50\" colspan=\"2\" align=\"center\" style=\"background:#fffbe1\"><span style=\"font-size:17px;text-align: center;color:#444;font-weight:bold; font-family:'微软雅黑'\">专项练习</span></td>\r\n");
+	ViewBuilder.Append("              <td height=\"50\" colspan=\"2\" align=\"center\" style=\"background:#fffbe1\"><span style=\"font-size:17px;text-align: center;color:#444;font-weight:bold; font-family:'微软雅黑'\">自由练习</span></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("              <td height=\"30\" align=\"center\" colspan=\"2\" style=\"background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 50% 100%;\">\r\n");
@@ -210,40 +206,40 @@ protected override void View()
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("              <td width=\"120\" height=\"30\" align=\"center\" style=\"background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 0 100%; padding-left:20px;\">练习题数：</td>\r\n");
 	ViewBuilder.Append("              <td align=\"left\" style=\"background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat -270px 100%; padding-left:5px;border-left:1px solid #f4ecd2\">\r\n");
-	ViewBuilder.Append("                  <input id=\"limit\" name=\"limit\" value=\"50\" type=\"text\"></td>\r\n");
+	ViewBuilder.Append("                  <input id=\"limit\" name=\"limit\" value=\""+(examconfig.testcount>50?echo("50"):echo(examconfig.testcount))+"\" type=\"text\">最大练习题数为：" + echo(examconfig.testcount) + "题</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("              <td height=\"30\" align=\"center\" style=\" padding-left:20px;background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 0 100%;\">练习题型：</td>\r\n");
 	ViewBuilder.Append("              <td align=\"left\" style=\"padding-left:5px;background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat -270px 100%;border-left:1px solid #f4ecd2\">\r\n");
 
-	if (ischecked(1,examconfig.questiontype))
+	if (FPArray.Contain(examconfig.questiontype,"TYPE_RADIO"))
 	{
-	ViewBuilder.Append("                <input id=\"type\" name=\"type\" checked=\"checked\" value=\"1\" type=\"checkbox\">单选题\r\n");
+	ViewBuilder.Append("<label for=\"type1\"><input id=\"type1\" name=\"type\" checked=\"checked\" value=\"TYPE_RADIO\" type=\"checkbox\">单选题</label>\r\n");
 	}//end if
 
-	if (ischecked(2,examconfig.questiontype))
+	if (FPArray.Contain(examconfig.questiontype,"TYPE_MULTIPLE"))
 	{
-	ViewBuilder.Append("                <input id=\"type\" name=\"type\" checked=\"checked\" value=\"2\" type=\"checkbox\">多选题\r\n");
+	ViewBuilder.Append("<label for=\"type2\"><input id=\"type2\" name=\"type\" checked=\"checked\" value=\"TYPE_MULTIPLE\" type=\"checkbox\">多选</label>\r\n");
 	}//end if
 
-	if (ischecked(3,examconfig.questiontype))
+	if (FPArray.Contain(examconfig.questiontype,"TYPE_TRUE_FALSE"))
 	{
-	ViewBuilder.Append("                <input id=\"type\" name=\"type\" checked=\"checked\" value=\"3\" type=\"checkbox\">判断题\r\n");
+	ViewBuilder.Append("<label for=\"type3\"><input id=\"type3\" name=\"type\" checked=\"checked\" value=\"TYPE_TRUE_FALSE\" type=\"checkbox\">判断题</label>\r\n");
 	}//end if
 
-	if (ischecked(4,examconfig.questiontype))
+	if (FPArray.Contain(examconfig.questiontype,"TYPE_BLANK"))
 	{
-	ViewBuilder.Append("                <input id=\"type\" name=\"type\" checked=\"checked\" value=\"4\" type=\"checkbox\">填空题\r\n");
+	ViewBuilder.Append("<label for=\"type4\"><input id=\"type4\" name=\"type\" checked=\"checked\" value=\"TYPE_BLANK\" type=\"checkbox\">填空题</label>\r\n");
 	}//end if
 
-	if (ischecked(5,examconfig.questiontype))
+	if (FPArray.Contain(examconfig.questiontype,"TYPE_ANSWER"))
 	{
-	ViewBuilder.Append("                <input id=\"type\" name=\"type\" checked=\"checked\" value=\"5\" type=\"checkbox\">问答题\r\n");
+	ViewBuilder.Append("<label for=\"type5\"><input id=\"type5\" name=\"type\" checked=\"checked\" value=\"TYPE_ANSWER\" type=\"checkbox\">问答题</label>\r\n");
 	}//end if
 
-	if (ischecked(6,examconfig.questiontype))
+	if (FPArray.Contain(examconfig.questiontype,"TYPE_OPERATION"))
 	{
-	ViewBuilder.Append("                <input id=\"type\" name=\"type\" checked=\"checked\" value=\"6\" type=\"checkbox\">打字题\r\n");
+	ViewBuilder.Append("<label for=\"type6\"><input id=\"type6\" name=\"type\" checked=\"checked\" value=\"TYPE_OPERATION\" type=\"checkbox\">操作题</label>\r\n");
 	}//end if
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
@@ -269,6 +265,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

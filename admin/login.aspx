@@ -7,13 +7,12 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
 	ViewBuilder.Append("<head>\r\n");
 	ViewBuilder.Append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n");
-	ViewBuilder.Append("<title>" + echo(pagetitle) + "</title>\r\n");
+	ViewBuilder.Append("<title>" + echo(pagetitle) + " V" + echo(version) + ""+(isfree==1?echo(" - Powered By FangPage.COM"):echo(""))+"</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
 	ViewBuilder.Append("<meta content=\"IE=edge,chrome=1\" http-equiv=\"X-UA-Compatible\">\r\n");
 	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/favicon.ico\" type=\"image/x-icon\" rel=\"icon\">\r\n");
@@ -24,7 +23,7 @@ protected override void View()
 	ViewBuilder.Append("<script src=\"" + echo(plupath) + "layer/layer.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
 
-	if (isfree>=0)
+	if (isfree>0)
 	{
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    var _hmt = _hmt || [];\r\n");
@@ -91,7 +90,7 @@ protected override void View()
 	ViewBuilder.Append("    }\r\n");
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
-	}
+	}//end if
 	else
 	{
 	ViewBuilder.Append("<table width=\"100%\" height=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n");
@@ -137,7 +136,7 @@ protected override void View()
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("          <td height=\"120\" align=\"center\" valign=\"top\" style=\"padding: 30px 0 0 0;\">\r\n");
 	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/login_line01.gif\">\r\n");
-	ViewBuilder.Append("              &nbsp;&nbsp;Copyright © 2014-" + echo(verdate) + " <a href=\"" + echo(siteinfo.homepage) + "\" target=\"_blank\">" + echo(siteinfo.copyright) + "</a>&nbsp;版权所有，后台版本:V" + echo(version) + "\r\n");
+	ViewBuilder.Append("              &nbsp;&nbsp;Copyright © " + echo(verdate) + "-" + echo(datetime,"yyyy") + " <a href=\"" + echo(siteinfo.homepage) + "\" target=\"_blank\">" + echo(siteinfo.copyright) + "</a>&nbsp;版权所有，版本:V" + echo(version) + "\r\n");
 	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/login_line02.gif\">\r\n");
 	ViewBuilder.Append("          </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
@@ -148,6 +147,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

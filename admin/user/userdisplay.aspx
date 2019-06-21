@@ -7,13 +7,12 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
 	ViewBuilder.Append("<head>\r\n");
 	ViewBuilder.Append("<meta content=\"text/html; charset=utf-8\" http-equiv=\"content-type\">\r\n");
-	ViewBuilder.Append("<title>用户部门排序</title>\r\n");
+	ViewBuilder.Append("<title>部门用户排序</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
 	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/admin.css\">\r\n");
 	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/datagrid.css\">\r\n");
@@ -52,8 +51,10 @@ protected override void View()
 	ViewBuilder.Append("        <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("          <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
-	ViewBuilder.Append("              <td width=\"50%\"> 用户姓名 </td>\r\n");
-	ViewBuilder.Append("              <td width=\"50%\"> 排序顺序 </td>\r\n");
+	ViewBuilder.Append("              <td width=\"30%\">登录名</td>\r\n");
+	ViewBuilder.Append("              <td width=\"30%\"> 姓名 </td>\r\n");
+	ViewBuilder.Append("              <td width=\"30%\"> 所属部门 </td>\r\n");
+	ViewBuilder.Append("              <td width=\"40%\"> 排序顺序 </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 
 	loop__id=0;
@@ -61,7 +62,9 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
-	ViewBuilder.Append("              <td align=\"left\">" + echo(item.realname) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.username) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.realname) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"left\">" + echo(item.departname) + "</td>\r\n");
 	ViewBuilder.Append("              <td><input type=\"text\" style=\"width:200px;\" name=\"display_" + echo(item.id) + "\" id=\"display_" + echo(item.id) + "\" value=\"" + loop__id.ToString() + "\"></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	}//end loop
@@ -73,6 +76,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

@@ -1,6 +1,6 @@
-var getvideo, videoload = false, resultid, isvideo, outs = 0, isNeedSkip = false;
-var video = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+var resultid, isvideo, outs = 0, isNeedSkip = false;
 $(function () {
+    var pos = 0, image = [];
     $(window).scroll(function () {
         var wst = $(window).scrollTop() >= 67, hbx = $(".hbx1:eq(0)"), hbx2 = hbx.nextAll(".hbx2,.wp"), fixed = hbx.hasClass("fixed"), rnav = $(".rnav"), niceback = window.niceback || function () { };
         if (wst) {
@@ -34,21 +34,30 @@ $(function () {
     if (isexam == 1) {
         if(isvideo==1)
         {
-           if(!video)
-		   {
-              $("#getphoto_state").html("当前浏览器并不支持Html5的视频API<br/>请更换能更好的支持Html5的浏览器<br/>下载：<a href='http://www.uc.cn/ucbrowser/download/' target='_blank'>UC浏览器</a>");
-		   }
-           video.call(navigator, {
-		     video: true
-        	}, function(stream) {
-			  getvideo = document.getElementById("getphoto_video"),
-			  getvideo.src = window.URL.createObjectURL(stream),
-			  getvideo.onloadedmetadata = function() {
-			  videoload = true
-		      }
-	        }, function() {
-		    $("#getphoto_state").html("摄像头加载失败，请检查摄像头是否启用")
-	      })
+           $("#webcam").webcam({
+               width: 320,
+               height: 240,
+               mode: "callback",
+               swffile: "/plugins/webcam/jscam_canvas_only.swf",
+               onSave: function (data) {
+                   image.push(data);
+                   pos += 4 * 320;
+                   if (pos >= 4 * 320 * 240) {
+                       $.post("upload_photo.aspx", {
+                           type: "pixel",
+                           resultid: resultid,
+                           image: image.join('|')
+                       });
+                       pos = 0;
+                   }
+               },
+               onCapture: function () {
+                   webcam.save();
+               },
+               debug: function (type, string) {
+                   console.log(type + ": " + string);
+               }
+           });
         }
         
         var testCountdown = setInterval(function () {
@@ -57,22 +66,24 @@ $(function () {
 
             time = (time || parseInt(s1[0]) * 3600 + parseInt(s1[1]) * 60 + parseInt(s1[2])) - 1;
 
-            h = parseInt(time / 3600);
-            m = parseInt((time - h * 3600) / 60);
-            s = parseInt((time - h * 3600 - m * 60) % 60);
-            s2 = h.formatLen(2) + ":" + m.formatLen(2) + ":" + s.formatLen(2);
-            theTime.text(s2);
-            theTime.data("time", time);
+            if (time >= 0) {
+                h = parseInt(time / 3600);
+                m = parseInt((time - h * 3600) / 60);
+                s = parseInt((time - h * 3600 - m * 60) % 60);
+                s2 = h.formatLen(2) + ":" + m.formatLen(2) + ":" + s.formatLen(2);
+                theTime.text(s2);
+                theTime.data("time", time);
 
-            $("#utime").val(examtime - time); //赋值已用了多少时间，秒为单位
+                $("#utime").val(examtime - time); //赋值已用了多少时间，秒为单位
+            }
             
             //保存图片,前后各一分种保存一次，之后每隔10分钟保存一次
-            if(isvideo==1&&videoload&&(examtime-time==30||time%600==0||time==60))
+            if(isvideo==1&&(examtime-time==30||time%600==0||time==60))
             {
-               GetPhoto(resultid,getvideo)
+                webcam.capture();
             }
 
-            //自动保存答案,默认每隔2分钟保存一次
+            //自动保存答案,默认每隔1分钟保存一次
             if (autotime > 0 && (time % autotime == 0)) {
                 var options = {
                     url: 'examsave.aspx', //提交给哪个执行
@@ -120,16 +131,23 @@ function submitExam() {
         width: 420,
         isAutoSize: true
     });
-    rc_pop.setContent("title", "在线考试系统");
-    rc_pop.setContent("alertCon", "<div class='ft8 ta_c mb10'>考试提交</div><div class='mb20 bx1 bx1_p1 ft4'>\
-			您还有时间继续答题，确定要交卷吗？\
-		</div><div class='ta_c ft4 mb20'><a href='#' class='btnq1' onClick='submit()'>确定交卷</a><a href='' class='btnq1 ml2 goOn'>继续答题</a></div>");
+    rc_pop.setContent("title", "考试提交");
+    rc_pop.setContent("alertCon", "<div class='mb20 bx1 bx1_p1 ft4'>\
+			您还有时间继续答题，确定要交卷了吗？\
+		</div><div class='ta_c ft4 mb20'><a href='#' class='btnq1 Submit'>确定交卷</a><a href='' class='btnq1 ml2 goOn'>继续答题</a></div>");
     rc_pop.build();
     rc_pop.show();
     $("#confirmConTxt .goOn").click(function () {
         rc_pop.close();
         return false;
     });
+
+    $("#confirmConTxt .Submit").click(function () {
+        rc_pop.close();
+        submit();
+        return false;
+    });
+
     $("#dialogYES").parent().remove();
     setPosi("#dialogBox");
     return rc_pop;
@@ -143,9 +161,9 @@ function submitTest() {
         width: 420,
         isAutoSize: true
     });
-    rc_pop.setContent("title", "在线考试系统");
-    rc_pop.setContent("alertCon", "<div class='ft8 ta_c mb10'>考试提交</div><div class='mb20 bx1 bx1_p1 ft4'>\
-			您还有时间继续答题，确定要交卷吗？\
+    rc_pop.setContent("title", "考试提交");
+    rc_pop.setContent("alertCon", "<div class='mb20 bx1 bx1_p1 ft4'>\
+			您还有时间继续答题，确定要交卷了吗？\
 		</div><div class='ta_c ft4 mb20'><a href='#' class='btnq1' onClick='submittest()'>确定交卷</a><a href='#' class='btnq1 ml2 goOn'>继续答题</a></div>");
     rc_pop.build();
     rc_pop.show();
@@ -197,14 +215,17 @@ function examOut() {
 
 //提交试卷
 function submit() {
-    if(videoload&&isvideo==1)
+    layer.msg('系统正在提交试卷，提交期间请不要做任何操作...', 0, 1);
+    if(isvideo==1)
     {
-       GetPhoto(resultid,getvideo);
+        webcam.capture();
     }
+
     var form = $("#testProcessForm");
     form.attr("action", "exampost.aspx");
     form.submit();
 }
+
 //提交练习
 function submittest() {
     var form = $("#testProcessForm");
@@ -222,15 +243,16 @@ function limitTimeSubmit() {
     });
 
     rc_pop.setContent("alertCon", "<div class='ft8 ta_c mb10'>考试时间已到</div><div class='mb20 bx1 bx1_p1 ft4'>\
-					    本次考试时间已到，你可以点击 <b>确定交卷</b> 完成本次考试。<span id='subTime' class='ft2'>30</span>秒钟后，系统将自动进行本次提交。\
-				    </div><div class='ta_c ft4 mb20'><a href='#' class='btnq1' onClick='submit()'>确定交卷</a></div>");
-    //30秒钟后提交
-    var time = 30;
+					    本次考试时间已到，你可以点击 <b>确定交卷</b> 完成本次考试。<span id='subTime' class='ft2'>10</span>秒钟后，系统将自动进行本次提交。\
+				    </div><div class='ta_c ft4 mb20'><a href='#' class='btnq1 Submit2'>确定交卷</a></div>");
+    //10秒钟后提交
+    var time = 10;
     var subCountdown = setInterval(function () {
         time = time - 1;
         $("#subTime").text(time);
         if (time == 0 || time < 0) {
             window.clearInterval(subCountdown);
+            rc_pop.close();
             submit();
         }
     }, 1000);
@@ -238,6 +260,12 @@ function limitTimeSubmit() {
     rc_pop.setContent("title", "在线考试系统");
     rc_pop.build();
     rc_pop.show();
+
+    $("#confirmConTxt .Submit2").click(function () {
+        rc_pop.close();
+        submit();
+        return false;
+    });
     $("#dialogYES").parent().remove();
     $("#dialogClose").remove();
     setPosi("#dialogBox");
@@ -250,9 +278,10 @@ function ExamReadSave() {
     var options = {
         url: 'examreadpost.aspx', //提交给哪个执行
         type: 'POST',
+        dataType: 'json',
         success: function (data) {
             dialog1(false, "selfsave");
-            ele = dialog1("阅卷提交成功!", "selfsave2");
+            ele = dialog1(data.errmsg, "selfsave2");
             setTimeout(function () {
                 dialog1(false, "selfsave2"); 
                 window.location.reload();
@@ -289,6 +318,7 @@ function dialog1(s,name){
 	return ele;
 }
 
+//点击选择答案时，保存答安，对于选持题和判断题来说
 $(".dAn label").live("hover", function (event) {
     if (event.type == 'mouseover') {
         $(this).addClass("hv");
@@ -299,9 +329,53 @@ $(".dAn label").live("hover", function (event) {
     var ipt = $(this).parent().find("label input");
     ipt.parent().removeClass("sd");
     ipt.filter(":checked").parent().addClass("sd");
-    var fkid = ipt.attr("id");
-    $("#fc" + fkid).removeClass("bg3");
-    $("#fc" + fkid).addClass("bg1");
+
+    var fkid = ipt.attr("id").replace("answer_", "");
+
+    var ids = new Array();
+
+    $("input[id='answer_" + fkid + "']").each(function () {
+        if ($(this).attr('checked'))
+            ids.push($(this).val());
+    });
+
+    var userAns = $("#useranswer").val();
+
+    var topicid = $(this).attr("topicid");
+
+    var qid = $(this).attr("qid");
+
+    if (userAns != ids.join(",")) {
+        $("#useranswer").val(ids);
+
+        //保存选择题、判断题答案
+        $.ajax({
+            url: "answer_save.aspx",
+            type: "post",
+            data: {
+                "qid": qid,
+                "topicid": topicid,
+                "useranswer": $("#useranswer").val()
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.errcode == 0) {
+                    console.log("保存成功！" + $("#useranswer").val());
+                }
+                else {
+                    console.log(data.errmsg);
+                }
+            }
+        });
+    }
+
+    if (ids.length > 0) {
+        $("#q_" + fkid).removeClass("bg3");
+        $("#q_" + fkid).addClass("bg1");
+    } else {
+        $("#q_" + fkid).removeClass("bg1");
+        $("#q_" + fkid).addClass("bg3");
+    }
 });
 
 

@@ -13,7 +13,7 @@ KindEditor.plugin('image', function(K) {
 		allowImageRemote = K.undef(self.allowImageRemote, true),
 		formatUploadUrl = K.undef(self.formatUploadUrl, true),
 		allowFileManager = K.undef(self.allowFileManager, false),
-		uploadJson = K.undef(self.uploadJson, self.basePath + 'tools/uploadajax.aspx'),
+		uploadJson = K.undef(self.uploadJson, self.basePath + 'php/upload_json.php'),
 		imageTabIndex = K.undef(self.imageTabIndex, 0),
 		imgPath = self.pluginsPath + 'image/images/',
 		extraParams = K.undef(self.extraFileUploadParams, {}),

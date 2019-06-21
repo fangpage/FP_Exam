@@ -8,7 +8,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -68,85 +67,56 @@ protected override void View()
 	ViewBuilder.Append("            <td><input name=\"testcount\" type=\"text\" value=\"" + echo(examconfiginfo.testcount) + "\" id=\"testcount\" style=\"height:21px;width:200px;\">&nbsp;道，必须大于0。</td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
-	ViewBuilder.Append("            <td class=\"td_class\"> 练习时间： </td>\r\n");
-	ViewBuilder.Append("            <td><input name=\"testtime\" type=\"text\" value=\"" + echo(examconfiginfo.testtime) + "\" id=\"testtime\" style=\"height:21px;width:200px;\">&nbsp;分钟，必须大于0。</td>\r\n");
+	ViewBuilder.Append("            <td class=\"td_class\"> 考前显示考生信息： </td>\r\n");
+	ViewBuilder.Append("            <td>\r\n");
+	ViewBuilder.Append("                <input id=\"showresult\" name=\"showresult\" value=\"1\" "+(examconfiginfo.showresult==1?echo("checked"):echo(""))+" type=\"checkbox\">是/否在考前在成绩管理显示全部考生信息\r\n");
+	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 允许查看考试答案： </td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
-	ViewBuilder.Append("                <input id=\"showanswer\" name=\"showanswer\" value=\"1\" \r\n");
-
-	if (examconfiginfo.showanswer==1)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">是/否允许用户查看考试历史答案\r\n");
+	ViewBuilder.Append("                <input id=\"showanswer\" name=\"showanswer\" value=\"1\" "+(examconfiginfo.showanswer==1?echo("checked"):echo(""))+" type=\"checkbox\">是/否允许用户查看考试历史答案\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 开启关闭用户练习： </td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
-	ViewBuilder.Append("                <input id=\"teststatus\" name=\"teststatus\" value=\"1\" \r\n");
-
-	if (examconfiginfo.teststatus==1)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"radio\">开启\r\n");
-	ViewBuilder.Append("                <input id=\"teststatus\" name=\"teststatus\" value=\"0\" \r\n");
-
-	if (examconfiginfo.teststatus==0)
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"radio\">关闭\r\n");
+	ViewBuilder.Append("                <input id=\"teststatus\" name=\"teststatus\" value=\"1\" "+(examconfiginfo.teststatus==1?echo("checked"):echo(""))+" type=\"radio\">开启\r\n");
+	ViewBuilder.Append("                <input id=\"teststatus\" name=\"teststatus\" value=\"0\" "+(examconfiginfo.teststatus==0?echo("checked"):echo(""))+" type=\"radio\">关闭\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("        </tr>\r\n");
+	ViewBuilder.Append("        <tr>\r\n");
+	ViewBuilder.Append("            <td class=\"td_class\"> 开启关闭用户考试： </td>\r\n");
+	ViewBuilder.Append("            <td>\r\n");
+	ViewBuilder.Append("                <input id=\"examstatus\" name=\"examstatus\" value=\"0\" "+(examconfiginfo.examstatus==0?echo("checked"):echo(""))+" type=\"radio\">关闭\r\n");
+	ViewBuilder.Append("                <input id=\"examstatus\" name=\"examstatus\" value=\"1\" "+(examconfiginfo.examstatus==1?echo("checked"):echo(""))+" type=\"radio\">开启全部\r\n");
+	ViewBuilder.Append("                <input id=\"examstatus\" name=\"examstatus\" value=\"2\" "+(examconfiginfo.examstatus==2?echo("checked"):echo(""))+" type=\"radio\">只开模拟考试\r\n");
+	ViewBuilder.Append("                <input id=\"examstatus\" name=\"examstatus\" value=\"3\" "+(examconfiginfo.examstatus==3?echo("checked"):echo(""))+" type=\"radio\">只开正工考试\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 使用题目类型： </td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
-	ViewBuilder.Append("                <input id=\"questiontype1\" name=\"questiontype\" value=\"1\" \r\n");
-
-	if (ischecked(1,examconfiginfo.questiontype))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">单选题\r\n");
-	ViewBuilder.Append("                <input id=\"questiontype2\" name=\"questiontype\" value=\"2\" \r\n");
-
-	if (ischecked(2,examconfiginfo.questiontype))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">多选题\r\n");
-	ViewBuilder.Append("                <input id=\"questiontype3\" name=\"questiontype\" value=\"3\" \r\n");
-
-	if (ischecked(3,examconfiginfo.questiontype))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">判断题\r\n");
-	ViewBuilder.Append("                <input id=\"questiontype4\" name=\"questiontype\" value=\"4\" \r\n");
-
-	if (ischecked(4,examconfiginfo.questiontype))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">填空题\r\n");
-	ViewBuilder.Append("                <input id=\"questiontype5\" name=\"questiontype\" value=\"5\" \r\n");
-
-	if (ischecked(5,examconfiginfo.questiontype))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">问题题\r\n");
-	ViewBuilder.Append("                <input id=\"questiontype6\" name=\"questiontype\" value=\"6\" \r\n");
-
-	if (ischecked(6,examconfiginfo.questiontype))
-	{
-	ViewBuilder.Append(" checked=\"checked\" \r\n");
-	}//end if
-	ViewBuilder.Append(" type=\"checkbox\">打字题\r\n");
+	ViewBuilder.Append("                <input id=\"questiontype1\" name=\"questiontype\" value=\"TYPE_RADIO\" "+(FPArray.Contain(examconfiginfo.questiontype,"TYPE_RADIO")?echo("checked"):echo(""))+" type=\"checkbox\">单选题\r\n");
+	ViewBuilder.Append("                <input id=\"questiontype2\" name=\"questiontype\" value=\"TYPE_MULTIPLE\" "+(FPArray.Contain(examconfiginfo.questiontype,"TYPE_MULTIPLE")?echo("checked"):echo(""))+" type=\"checkbox\">多选题\r\n");
+	ViewBuilder.Append("                <input id=\"questiontype3\" name=\"questiontype\" value=\"TYPE_TRUE_FALSE\" "+(FPArray.Contain(examconfiginfo.questiontype,"TYPE_TRUE_FALSE")?echo("checked"):echo(""))+" type=\"checkbox\">判断题\r\n");
+	ViewBuilder.Append("                <input id=\"questiontype4\" name=\"questiontype\" value=\"TYPE_BLANK\" "+(FPArray.Contain(examconfiginfo.questiontype,"TYPE_BLANK")?echo("checked"):echo(""))+" type=\"checkbox\">填空题\r\n");
+	ViewBuilder.Append("                <input id=\"questiontype5\" name=\"questiontype\" value=\"TYPE_ANSWER\" "+(FPArray.Contain(examconfiginfo.questiontype,"TYPE_ANSWER")?echo("checked"):echo(""))+" type=\"checkbox\">问答题\r\n");
+	ViewBuilder.Append("                <input id=\"questiontype5\" name=\"questiontype\" value=\"TYPE_OPERATION\" "+(FPArray.Contain(examconfiginfo.questiontype,"TYPE_OPERATION")?echo("checked"):echo(""))+" type=\"checkbox\">操作题\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("        </tr>\r\n");
+	ViewBuilder.Append("        <tr>\r\n");
+	ViewBuilder.Append("            <td class=\"td_class\"> 考试报名功能： </td>\r\n");
+	ViewBuilder.Append("            <td>\r\n");
+	ViewBuilder.Append("                <input id=\"signers\" name=\"signers\" value=\"1\" "+(examconfiginfo.signers==1?echo("checked"):echo(""))+" type=\"radio\">开启\r\n");
+	ViewBuilder.Append("                <input id=\"signers\" name=\"signers\" value=\"0\" "+(examconfiginfo.signers==0?echo("checked"):echo(""))+" type=\"radio\">关闭\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("        </tr>\r\n");
+	ViewBuilder.Append("        <tr>\r\n");
+	ViewBuilder.Append("            <td class=\"td_class\"> 导出试卷类型： </td>\r\n");
+	ViewBuilder.Append("            <td>\r\n");
+	ViewBuilder.Append("                <input id=\"exporttype\" name=\"exporttype\" value=\"0\" "+(examconfiginfo.exporttype==0?echo("checked"):echo(""))+" type=\"radio\">PDF\r\n");
+	ViewBuilder.Append("                <input id=\"exporttype\" name=\"exporttype\" value=\"1\" "+(examconfiginfo.exporttype==1?echo("checked"):echo(""))+" type=\"radio\">Word\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
@@ -171,6 +141,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

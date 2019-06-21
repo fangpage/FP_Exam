@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -82,8 +81,14 @@ protected override void View()
 	ViewBuilder.Append(">" + echo(item.name) + "</option>\r\n");
 	}//end loop
 	ViewBuilder.Append("                </select>\r\n");
-	ViewBuilder.Append("                如果选择应用，那么相对地址则在该应用之下。\r\n");
+	ViewBuilder.Append("                &nbsp;如果选择应用，那么相对地址则在该应用之下。\r\n");
 	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("        </tr>\r\n");
+	ViewBuilder.Append("        <tr>\r\n");
+	ViewBuilder.Append("          <td class=\"td_class\">所属平台： </td>\r\n");
+	ViewBuilder.Append("          <td colspan=\"2\">\r\n");
+	ViewBuilder.Append("              <input style=\"width: 200px\" id=\"platform\" name=\"m_platform\" value=\"" + echo(desktopinfo.platform) + "\">&nbsp;默认为当前平台，多个平台用英文逗号分隔(,)，SYSTEM为所有平台。\r\n");
+	ViewBuilder.Append("          </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("          <td class=\"td_class\">桌面名称： </td>\r\n");
@@ -104,7 +109,7 @@ protected override void View()
 	}
 	else
 	{
-	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "common/images/desktop.gif\" width=\"32\" height=\"32\" alt=\"" + echo(desktopinfo.name) + "\">\r\n");
+	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "common/images/desktop.png\" width=\"32\" height=\"32\" alt=\"" + echo(desktopinfo.name) + "\">\r\n");
 	}//end if
 	ViewBuilder.Append("              <input type=\"hidden\" id=\"attach_icon\" name=\"attach_icon\" value=\"" + echo(desktopinfo.attach_icon) + "\"> \r\n");
 	ViewBuilder.Append("          </td>\r\n");
@@ -204,6 +209,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

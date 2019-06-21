@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -73,7 +72,7 @@ protected override void View()
 	ViewBuilder.Append("              <td> 角色名称 </td>\r\n");
 	ViewBuilder.Append("              <td> 角色标识 </td>\r\n");
 	ViewBuilder.Append("              <td> 角色描述 </td>\r\n");
-	ViewBuilder.Append("              <td width=\"60\"> 编辑 </td>\r\n");
+	ViewBuilder.Append("              <td width=\"60\"> 编辑角色 </td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\"> 菜单权限 </td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\"> 桌面权限 </td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\"> 栏目权限 </td>\r\n");
@@ -90,7 +89,7 @@ protected override void View()
 	ViewBuilder.Append("              <td align=\"center\">" + echo(roles.name) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(roles.markup) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"left\">" + echo(roles.description) + "</td>\r\n");
-	ViewBuilder.Append("              <td><a style=\"color: #1317fc\" href=\"roleadd.aspx?id=" + echo(roles.id) + "\">编辑</a></td>\r\n");
+	ViewBuilder.Append("              <td><a style=\"color: #1317fc\" href=\"roleadd.aspx?id=" + echo(roles.id) + "\">编辑角色</a></td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\"><a style=\"color: #1317fc\" href=\"rolemenus.aspx?rid=" + echo(roles.id) + "\">菜单权限</a></td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\"><a style=\"color: #1317fc\" href=\"roledesktop.aspx?rid=" + echo(roles.id) + "\">桌面权限</a></td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\"><a style=\"color: #1317fc\" href=\"rolesorts.aspx?rid=" + echo(roles.id) + "\">栏目权限</a></td>\r\n");
@@ -117,6 +116,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

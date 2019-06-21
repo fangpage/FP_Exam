@@ -8,7 +8,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -25,7 +24,7 @@ protected override void View()
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
 	string navurl = "questionmanage.aspx";
-	ViewBuilder.Append("        PageNav(\"" + GetSortNav(sortinfo,navurl).ToString() + "|移动题目," + echo(rawurl) + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"" + echo(GetSortNav(sortinfo,navurl)) + "|移动题目," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("        $(\"#btnok\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#frmpost\").submit();\r\n");
 	ViewBuilder.Append("        });\r\n");
@@ -60,7 +59,7 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("                  <option value=\"" + echo(item.id) + "\">├" + echo(item.name) + "</option>\r\n");
-	ViewBuilder.Append("                  " + GetChildSort(item.id,tree).ToString() + "\r\n");
+	ViewBuilder.Append("                  " + echo(GetChildSort(item.id,tree)) + "\r\n");
 	}//end loop
 	ViewBuilder.Append("              </select>\r\n");
 	ViewBuilder.Append("        </td>\r\n");
@@ -98,6 +97,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

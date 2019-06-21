@@ -7,13 +7,12 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
 	ViewBuilder.Append("<head>\r\n");
 	ViewBuilder.Append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n");
-	ViewBuilder.Append("<title>添加编辑类型</title>\r\n");
+	ViewBuilder.Append("<title>添加编辑分类</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
 	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/admin.css\" rel=\"stylesheet\" type=\"text/css\">\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(plupath) + "jquery/jquery.js\"></");
@@ -137,7 +136,7 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("          <td class=\"td_class\"> 类型标识： </td>\r\n");
-	ViewBuilder.Append("          <td><input id=\"markup\" name=\"markup\" type=\"text\" value=\"" + echo(typeinfo.markup) + "\" style=\"height:21px;width:200px;\"></td>\r\n");
+	ViewBuilder.Append("          <td><input id=\"markup\" name=\"markup\" type=\"text\" value=\"" + echo(typeinfo.markup) + "\" style=\"height:21px;width:200px;\">多个标识用英文逗号(,)分隔。</td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
 	ViewBuilder.Append("          <td class=\"td_class\">外部链接： </td>\r\n");
@@ -164,7 +163,7 @@ protected override void View()
 	ViewBuilder.Append("                <br>\r\n");
 	ViewBuilder.Append("                <input type=\"hidden\" id=\"img\" name=\"img\" value=\"" + echo(typeinfo.img) + "\">\r\n");
 	ViewBuilder.Append("                <input type=\"hidden\" id=\"attach_img\" name=\"attach_img\" value=\"" + echo(typeinfo.attach_img) + "\"> \r\n");
-	ViewBuilder.Append("                <input type=\"button\" id=\"image1\" value=\"选择图片\">&nbsp;&nbsp;<input type=\"button\" id=\"btn_clearimg\" value=\"清空图片\">\r\n");
+	ViewBuilder.Append("                <input type=\"button\" id=\"image1\" value=\"上传图片\">&nbsp;&nbsp;<input type=\"button\" id=\"btn_clearimg\" value=\"清空图片\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("        </tr>\r\n");
 	ViewBuilder.Append("        <tr>\r\n");
@@ -178,6 +177,9 @@ protected override void View()
 	ViewBuilder.Append("  </table>\r\n");
 	ViewBuilder.Append("</div>\r\n");
 	ViewBuilder.Append("</form>\r\n");
+
+	if (ispost)
+	{
 
 	if (ispost)
 	{
@@ -205,8 +207,20 @@ protected override void View()
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
 	}//end if
+	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

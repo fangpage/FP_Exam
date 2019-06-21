@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -75,7 +74,7 @@ protected override void View()
 	loop__id++;
 	ViewBuilder.Append("                        <input id=\"sortapps\" name=\"sortapps\" value=\"" + echo(item.id) + "\" \r\n");
 
-	if (ischecked(item.id,channelinfo.sortapps))
+	if (FPArray.Contain(channelinfo.sortapps,item.id))
 	{
 	ViewBuilder.Append(" checked=\"checked\" \r\n");
 	}//end if
@@ -107,6 +106,9 @@ protected override void View()
 
 	if (ispost)
 	{
+
+	if (ispost)
+	{
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    layer.msg('" + echo(msg) + "', 0, 1);\r\n");
 	ViewBuilder.Append("    var bar = 0;\r\n");
@@ -131,8 +133,20 @@ protected override void View()
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
 	}//end if
+	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

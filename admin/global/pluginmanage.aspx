@@ -8,7 +8,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -51,15 +50,15 @@ protected override void View()
 	ViewBuilder.Append("            $(\"#formpost\").submit();\r\n");
 	ViewBuilder.Append("        }\r\n");
 	ViewBuilder.Append("    }\r\n");
-	ViewBuilder.Append("    function PluView(plupath, pluname) {\r\n");
+	ViewBuilder.Append("    function PluView(url, pluname) {\r\n");
 	ViewBuilder.Append("        $.layer({\r\n");
 	ViewBuilder.Append("            type: 2,\r\n");
 	ViewBuilder.Append("            shade: [0],\r\n");
 	ViewBuilder.Append("            fix: false,\r\n");
 	ViewBuilder.Append("            title: pluname,\r\n");
 	ViewBuilder.Append("            maxmin: false,\r\n");
-	ViewBuilder.Append("            iframe: { src: 'pluginview.aspx?plupath=' + plupath },\r\n");
-	ViewBuilder.Append("            area: ['500px', '460px']\r\n");
+	ViewBuilder.Append("            iframe: { src: url },\r\n");
+	ViewBuilder.Append("            area: ['900px', '500px']\r\n");
 	ViewBuilder.Append("        });\r\n");
 	ViewBuilder.Append("    }\r\n");
 	ViewBuilder.Append("</");
@@ -88,6 +87,9 @@ protected override void View()
 	ViewBuilder.Append("   <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("        <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
+	ViewBuilder.Append("                <td width=\"40\">\r\n");
+	ViewBuilder.Append("                    序号\r\n");
+	ViewBuilder.Append("                </td>\r\n");
 	ViewBuilder.Append("                <td>\r\n");
 	ViewBuilder.Append("                  插件名称\r\n");
 	ViewBuilder.Append("                </td>\r\n");
@@ -106,7 +108,7 @@ protected override void View()
 	ViewBuilder.Append("                <td width=\"150\">\r\n");
 	ViewBuilder.Append("                  更新日期\r\n");
 	ViewBuilder.Append("                </td>\r\n");
-	ViewBuilder.Append("                <td width=\"160\">\r\n");
+	ViewBuilder.Append("                <td width=\"210\">\r\n");
 	ViewBuilder.Append("                  操作\r\n");
 	ViewBuilder.Append("                </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
@@ -116,6 +118,7 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
+	ViewBuilder.Append("                <td style=\"text-align:center;\">" + loop__id.ToString() + "</td>\r\n");
 	ViewBuilder.Append("                <td style=\"text-align:left;height:34px;\">\r\n");
 
 	if (plu.icon!="")
@@ -126,7 +129,15 @@ protected override void View()
 	{
 	ViewBuilder.Append("                   <img src=\"" + echo(webpath) + "common/images/plugin.png\" width=\"32\" height=\"32\" style=\"vertical-align:middle;\">\r\n");
 	}//end if
-	ViewBuilder.Append("                   <a href=\"javascript:PluView('" + echo(plu.installpath) + "','" + echo(plu.name) + "')\">" + echo(plu.name) + "</a>\r\n");
+
+	if (plu.adminurl!="")
+	{
+	ViewBuilder.Append("                   <a href=\"javascript:PluView('" + echo(webpath) + "" + echo(plu.installpath) + "/" + echo(plu.adminurl) + "','" + echo(plu.name) + "')\">" + echo(plu.name) + "</a>\r\n");
+	}
+	else
+	{
+	ViewBuilder.Append("                   <a href=\"javascript:PluView('pluginview.aspx?plupath=" + echo(plu.installpath) + "','" + echo(plu.name) + "')\">" + echo(plu.name) + "</a>\r\n");
+	}//end if
 	ViewBuilder.Append("                </td>\r\n");
 	ViewBuilder.Append("                <td>\r\n");
 	ViewBuilder.Append("                   " + echo(plu.installpath) + "\r\n");
@@ -148,6 +159,7 @@ protected override void View()
 	ViewBuilder.Append("                  <a href=\"javascript:BuildPlu('" + echo(plu.installpath) + "','" + echo(plu.name) + "')\">编译</a>\r\n");
 	ViewBuilder.Append("                  <a href=\"javascript:DownLoadPlu('" + echo(plu.installpath) + "','" + echo(plu.name) + "')\">打包</a>\r\n");
 	ViewBuilder.Append("                  <a href=\"pluginupdate.aspx?plupath=" + echo(plu.installpath) + "\">更新</a>\r\n");
+	ViewBuilder.Append("                  <a href=\"" + echo(webpath) + "plugins/" + echo(plu.installpath) + "/" + echo(plu.indexurl) + "\" target=\"_blank\">浏览</a>\r\n");
 	ViewBuilder.Append("                  <a href=\"javascript:DeletePlu('" + echo(plu.installpath) + "','" + echo(plu.name) + "')\">删除</a>\r\n");
 	ViewBuilder.Append("                </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
@@ -171,6 +183,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -49,8 +48,20 @@ protected override void View()
 	ViewBuilder.Append("                  <tr>\r\n");
 	ViewBuilder.Append("                    <td class=\"td_class\">本地Excel用户表文件： </td>\r\n");
 	ViewBuilder.Append("                    <td>\r\n");
-	ViewBuilder.Append("                       <input id=\"uploadfile\" name=\"uploadfile\" type=\"file\">\r\n");
+	ViewBuilder.Append("                       <input id=\"uploadfile\" name=\"uploadfile\" style=\"width: 300px\" type=\"file\">\r\n");
 	ViewBuilder.Append("                       <a href=\"userxls.xls\">下载录入格式表</a>\r\n");
+	ViewBuilder.Append("                    </td>\r\n");
+	ViewBuilder.Append("                  </tr>\r\n");
+	ViewBuilder.Append("                  <tr>\r\n");
+	ViewBuilder.Append("                    <td class=\"td_class\">默认密码： </td>\r\n");
+	ViewBuilder.Append("                    <td>\r\n");
+	ViewBuilder.Append("                       <input type=\"text\" style=\"width: 300px\" id=\"password\" name=\"password\">&nbsp;密码为空时，将默认为123456\r\n");
+	ViewBuilder.Append("                    </td>\r\n");
+	ViewBuilder.Append("                  </tr>\r\n");
+	ViewBuilder.Append("                  <tr>\r\n");
+	ViewBuilder.Append("                    <td class=\"td_class\">创建部门： </td>\r\n");
+	ViewBuilder.Append("                    <td>\r\n");
+	ViewBuilder.Append("                        <input id=\"isdepart\" name=\"isdepart\" value=\"1\" checked=\"checked\" type=\"checkbox\">在没有部门时是否创建用户部门\r\n");
 	ViewBuilder.Append("                    </td>\r\n");
 	ViewBuilder.Append("                  </tr>\r\n");
 	ViewBuilder.Append("                  <tr>\r\n");
@@ -76,6 +87,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

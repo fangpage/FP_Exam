@@ -7,13 +7,12 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
 	ViewBuilder.Append("<head>\r\n");
 	ViewBuilder.Append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n");
-	ViewBuilder.Append("<title>系统类型排序</title>\r\n");
+	ViewBuilder.Append("<title>系统分类排序</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
 	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/admin.css\">\r\n");
 	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/datagrid.css\" rel=\"stylesheet\" type=\"text/css\">\r\n");
@@ -26,7 +25,7 @@ protected override void View()
 	ViewBuilder.Append("        $(\"#submitsave\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#formpost\").submit();\r\n");
 	ViewBuilder.Append("        })\r\n");
-	ViewBuilder.Append("        PageNav(\"系统类型管理," + echo(rawpath) + "typemanage.aspx|类型排序," + echo(rawurl) + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"系统分类管理," + echo(rawpath) + "typemanage.aspx|分类排序," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
@@ -42,7 +41,7 @@ protected override void View()
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/save.gif) 2px 6px no-repeat\"> <a id=\"submitsave\" href=\"#\">保存</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"typedisplay.aspx?parentid=" + echo(parentid) + "\">刷新</a> </li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/return.gif) 2px 6px no-repeat\"><a href=\"" + echo(reurl) + "\">返回</a> </li>\r\n");
-	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>类型排序</strong></li>\r\n");
+	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>分类排序</strong></li>\r\n");
 	ViewBuilder.Append("            </ul>\r\n");
 	ViewBuilder.Append("          </div>\r\n");
 	ViewBuilder.Append("        </div></td>\r\n");
@@ -52,8 +51,8 @@ protected override void View()
 	ViewBuilder.Append("         <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("          <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
-	ViewBuilder.Append("              <td width=\"50%\">类型名称 </td>\r\n");
-	ViewBuilder.Append("              <td width=\"50%\"> 排列顺序 </td>\r\n");
+	ViewBuilder.Append("              <td width=\"50%\">分类名称</td>\r\n");
+	ViewBuilder.Append("              <td width=\"50%\">排列顺序</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 
 	loop__id=0;
@@ -73,6 +72,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

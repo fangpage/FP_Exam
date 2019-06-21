@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -15,14 +14,14 @@ protected override void View()
 	ViewBuilder.Append("<meta content=\"text/html; charset=utf-8\" http-equiv=\"content-type\">\r\n");
 	ViewBuilder.Append("<title>上传附件管理</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
-	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/admin.css\">\r\n");
-	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/datagrid.css\" rel=\"stylesheet\" type=\"text/css\">\r\n");
-	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(plupath) + "jquery/jquery.js\"></");
+	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/admin.css\" type=\"text/css\" rel=\"stylesheet\">\r\n");
+	ViewBuilder.Append("<link href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/datagrid.css\" type=\"text/css\" rel=\"stylesheet\">\r\n");
+	ViewBuilder.Append("<script src=\"" + echo(plupath) + "jquery/jquery.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("<link rel=\"stylesheet\" href=\"" + echo(plupath) + "layer/skin/layer.css\" type=\"text/css\" id=\"skinlayercss\">\r\n");
+	ViewBuilder.Append("<link href=\"" + echo(plupath) + "layer/skin/layer.css\" type=\"text/css\" rel=\"stylesheet\" id=\"skinlayercss\">\r\n");
 	ViewBuilder.Append("<script src=\"" + echo(plupath) + "layer/layer.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/js/admin.js\"></");
+	ViewBuilder.Append("<script src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/js/admin.js\" type=\"text/javascript\"></");
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
@@ -41,7 +40,7 @@ protected override void View()
 	ViewBuilder.Append("                $(\"#frmpost\").submit();\r\n");
 	ViewBuilder.Append("            }\r\n");
 	ViewBuilder.Append("        })\r\n");
-	ViewBuilder.Append("        PageNav(\"上传附件管理,global/" + echo(pagename) + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"上传文件管理,global/" + echo(pagename) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
@@ -57,7 +56,7 @@ protected override void View()
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/download.gif) 2px 6px no-repeat\"><a id=\"btn_download\" href=\"#\">下载</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/search.png) 2px 6px no-repeat\"><a id=\"btn_search\" href=\"#\">搜索</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"attachmanage.aspx\">刷新</a></li>\r\n");
-	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>上传附件管理</strong></li>\r\n");
+	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>上传文件管理</strong></li>\r\n");
 	ViewBuilder.Append("            </ul>\r\n");
 	ViewBuilder.Append("          </div>\r\n");
 	ViewBuilder.Append("        </div>\r\n");
@@ -71,12 +70,13 @@ protected override void View()
 	ViewBuilder.Append("          <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
 	ViewBuilder.Append("              <td width=\"40\"><input id=\"checkall\" name=\"checkall\" type=\"checkbox\"></td>\r\n");
-	ViewBuilder.Append("        	  <td>附件名称</td>\r\n");
-	ViewBuilder.Append("        	  <td width=\"100\">大小</td>\r\n");
-	ViewBuilder.Append("        	  <td width=\"130\">修改时间</td>\r\n");
-	ViewBuilder.Append("        	  <td width=\"100\">上传人</td>\r\n");
+	ViewBuilder.Append("        	    <td>文件名称</td>\r\n");
+	ViewBuilder.Append("        	    <td width=\"100\">大小</td>\r\n");
+	ViewBuilder.Append("        	    <td width=\"130\">上传时间</td>\r\n");
+	ViewBuilder.Append("        	    <td width=\"100\">上传人</td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\">阅读数</td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\">下载数</td>\r\n");
+	ViewBuilder.Append("              <td width=\"60\">状态</td>\r\n");
 	ViewBuilder.Append("              <td width=\"160\">操作</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 
@@ -84,18 +84,29 @@ protected override void View()
 	foreach(AttachInfo item in attachlist)
 	{
 	loop__id++;
-	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
+	ViewBuilder.Append("<tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
 	ViewBuilder.Append("              <td><input id=\"chkid_" + echo(item.id) + "\" name=\"chkid\" value=\"" + echo(item.id) + "\" type=\"checkbox\"></td>\r\n");
 	ViewBuilder.Append("              <td valign=\"middle\" align=\"left\">\r\n");
-	ViewBuilder.Append("                  <img src=\"" + echo(item.icon) + "\" style=\"width:16px;height:16px;\" align=\"absmiddle\">\r\n");
-	ViewBuilder.Append("                  <a href=\"" + echo(plupath) + "attach/download.aspx?aid=" + echo(item.id) + "\">" + echo(item.name) + "</a>\r\n");
+	ViewBuilder.Append("                  <img src=\"" + echo(item.icon) + "\" style=\"width:16px;height:16px;\" alt=\"\" align=\"absmiddle\">\r\n");
+	ViewBuilder.Append("                  <a href=\"" + echo(plupath) + "attach/download.aspx?aid=" + echo(item.id) + "\">" + echo(item.name,filename,"<span style=\"background-color:#ffd800;\">"+filename+"</span>") + "</a>\r\n");
 	ViewBuilder.Append("                  <input id=\"file_" + echo(item.id) + "\" name=\"file_" + echo(item.id) + "\" value=\"" + echo(item.name) + "\" type=\"hidden\">\r\n");
 	ViewBuilder.Append("              </td>\r\n");
-	ViewBuilder.Append("              <td align=\"center\">" + echo(item.filesize_show) + " </td>\r\n");
-	ViewBuilder.Append("              <td align=\"center\">" + echo(item.updatetime) + "</td>\r\n");
-	ViewBuilder.Append("              <td align=\"center\">" + echo(item.realname) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.size) + " </td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.uploadtime) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.realname,author,"<span style=\"background-color:#ffd800;\">"+author+"</span>") + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.reads) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.downloads) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">\r\n");
+
+	if (item.postid>0)
+	{
+	ViewBuilder.Append("<span style=\"color:#0094ff\">已使用</span>\r\n");
+	}//end if
+	else
+	{
+	ViewBuilder.Append("<span style=\"color:#ff0000\">未使用</span>\r\n");
+	}//end if
+	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">\r\n");
 	ViewBuilder.Append("                  <a class=\"rename\" node-data=\"" + echo(item.id) + "\" href=\"#\">重命名</a>\r\n");
 	ViewBuilder.Append("                  <a class=\"delete\" node-data=\"" + echo(item.id) + "\" href=\"#\">删除</a>\r\n");
@@ -103,11 +114,11 @@ protected override void View()
 
 	if (plugininfo.guid!="")
 	{
-	ViewBuilder.Append("                  <a href=\"" + echo(plupath) + "" + echo(plugininfo.installpath) + "/index.aspx?aid=" + echo(item.id) + "\" target=\"_blank\">浏览</a>\r\n");
-	}
+	ViewBuilder.Append("<a href=\"" + echo(plupath) + "" + echo(plugininfo.installpath) + "/index.aspx?aid=" + echo(item.id) + "\" target=\"_blank\">浏览</a>\r\n");
+	}//end if
 	else
 	{
-	ViewBuilder.Append("                  <a href=\"" + echo(item.filename) + "\" target=\"_blank\">浏览</a>\r\n");
+	ViewBuilder.Append("<a href=\"" + echo(item.filename) + "\" target=\"_blank\">浏览</a>\r\n");
 	}//end if
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
@@ -193,15 +204,15 @@ protected override void View()
 	ViewBuilder.Append("                   data: { \"aid\": aid, \"filename\": filename },\r\n");
 	ViewBuilder.Append("                   dataType: \"json\",\r\n");
 	ViewBuilder.Append("                   success: function (data) {\r\n");
-	ViewBuilder.Append("                       if (data.msg != \"\") {\r\n");
-	ViewBuilder.Append("                           alert(data.msg);\r\n");
-	ViewBuilder.Append("                       }\r\n");
-	ViewBuilder.Append("                       else {\r\n");
+	ViewBuilder.Append("                       if (data.errcode == 0) {\r\n");
 	ViewBuilder.Append("                           layer.close(index);\r\n");
 	ViewBuilder.Append("                           layer.msg('附件重命名成功', 0, 1);\r\n");
 	ViewBuilder.Append("                           setTimeout(function () {\r\n");
 	ViewBuilder.Append("                               window.location.href = \"" + echo(rawurl) + "\";\r\n");
 	ViewBuilder.Append("                           }, 2000);\r\n");
+	ViewBuilder.Append("                       }\r\n");
+	ViewBuilder.Append("                       else {\r\n");
+	ViewBuilder.Append("                           alert(data.errmsg);\r\n");
 	ViewBuilder.Append("                       }\r\n");
 	ViewBuilder.Append("                   }\r\n");
 	ViewBuilder.Append("               });\r\n");
@@ -237,6 +248,17 @@ protected override void View()
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

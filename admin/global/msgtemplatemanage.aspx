@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -49,25 +48,9 @@ protected override void View()
 	ViewBuilder.Append("        <div class=\"tabtitle\">\r\n");
 	ViewBuilder.Append("          <ul id=\"mytab1\">\r\n");
 	ViewBuilder.Append("              <li class=\"normal\"><a href=\"emailconfigmanage.aspx\">邮箱服务器</a> </li>\r\n");
-
-	if (type==1)
-	{
-	ViewBuilder.Append("              <li class=\"active\"><a href=\"msgtemplatemanage.aspx?type=1\">邮件模板管理</a> </li>\r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("              <li class=\"normal\"><a href=\"msgtemplatemanage.aspx?type=1\">邮件模板管理</a> </li>\r\n");
-	}//end if
+	ViewBuilder.Append("              <li class=\""+(type==1?echo(" "+"active"):echo(" "+"normal"))+"\"><a href=\"msgtemplatemanage.aspx?type=1\">邮件模板管理</a> </li>\r\n");
 	ViewBuilder.Append("              <li class=\"normal\"><a href=\"smsconfigmanage.aspx\">短信服务器</a> </li>\r\n");
-
-	if (type==2)
-	{
-	ViewBuilder.Append("              <li class=\"active\"><a href=\"msgtemplatemanage.aspx?type=2\">短信模板管理</a></li>\r\n");
-	}
-	else
-	{
-	ViewBuilder.Append("              <li class=\"normal\"><a href=\"msgtemplatemanage.aspx?type=2\">短信模板管理</a></li>\r\n");
-	}//end if
+	ViewBuilder.Append("              <li class=\""+(type==2?echo(" "+"active"):echo(" "+"normal"))+"\"><a href=\"msgtemplatemanage.aspx?type=2\">短信模板管理</a></li>\r\n");
 	ViewBuilder.Append("          </ul>\r\n");
 	ViewBuilder.Append("        </div>\r\n");
 	ViewBuilder.Append("      </div>\r\n");
@@ -91,6 +74,7 @@ protected override void View()
 	ViewBuilder.Append("           <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("           <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
+	ViewBuilder.Append("                <td style=\"width:40px;\">序号</td>\r\n");
 	ViewBuilder.Append("                <td>\r\n");
 	ViewBuilder.Append("                  模板名称\r\n");
 	ViewBuilder.Append("                </td>\r\n");
@@ -110,6 +94,7 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("             <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
+	ViewBuilder.Append("                <td style=\"text-align:center;\">" + loop__id.ToString() + "</td>\r\n");
 	ViewBuilder.Append("                <td>\r\n");
 	ViewBuilder.Append("                    " + echo(item.name) + "\r\n");
 	ViewBuilder.Append("                </td>\r\n");
@@ -144,6 +129,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

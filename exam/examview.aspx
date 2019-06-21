@@ -7,10 +7,9 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
-	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
-	ViewBuilder.Append("<html>\r\n");
+	ViewBuilder.Append("<!DOCTYPE html>\r\n");
+	ViewBuilder.Append("<html lang=\"zh-CN\" class=\"default-layout\">\r\n");
 	ViewBuilder.Append("<head>\r\n");
 	ViewBuilder.Append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">\r\n");
 	ViewBuilder.Append("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge,chrome=1\">\r\n");
@@ -25,12 +24,6 @@ protected override void View()
 	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(plupath) + "layer/layer.js\"></");
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
-	ViewBuilder.Append("    $(document).ready(function () {\r\n");
-	ViewBuilder.Append("        if (! -[1, ] && !window.XMLHttpRequest) {\r\n");
-	ViewBuilder.Append("            $(\".IE6jiance\").show();\r\n");
-	ViewBuilder.Append("            $.dialog.alert('您当前使用的浏览器版本太低，建议升级到更高版本的浏览器！', function () { });\r\n");
-	ViewBuilder.Append("        }\r\n");
-	ViewBuilder.Append("    });\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
 	ViewBuilder.Append("        $(\"#startexam\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#frmpost\").submit();\r\n");
@@ -38,15 +31,7 @@ protected override void View()
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("	</");
 	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("    <!--[if IE 6]>\r\n");
-	ViewBuilder.Append("	<script src=\"" + echo(plupath) + "iepng/iepng.js\" type=\"text/javascript\"></");
-	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("	<script type=\"text/javascript\">\r\n");
-	ViewBuilder.Append("	   EvPNG.fix('div, ul, img, li, input'); \r\n");
-	ViewBuilder.Append("	</");
-	ViewBuilder.Append("script>\r\n");
-	ViewBuilder.Append("	<![endif]-->\r\n");
-	ViewBuilder.Append("    <style type=\"text/css\">\r\n");
+	ViewBuilder.Append("  <style type=\"text/css\">\r\n");
 	ViewBuilder.Append("    body {\r\n");
 	ViewBuilder.Append("	    PADDING: 0px;\r\n");
 	ViewBuilder.Append("	    MARGIN: 0px auto;\r\n");
@@ -96,15 +81,6 @@ protected override void View()
 	ViewBuilder.Append("    .ptksbtn {\r\n");
 	ViewBuilder.Append("	    width: 87px;\r\n");
 	ViewBuilder.Append("	    height: 81px;\r\n");
-	ViewBuilder.Append("	    background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/examtype3.png) no-repeat;\r\n");
-	ViewBuilder.Append("	    position: absolute;\r\n");
-	ViewBuilder.Append("	    left: -7px;\r\n");
-	ViewBuilder.Append("	    top: -7px\r\n");
-	ViewBuilder.Append("    }\r\n");
-	ViewBuilder.Append("    .ptksbtn2 {\r\n");
-	ViewBuilder.Append("	    width: 87px;\r\n");
-	ViewBuilder.Append("	    height: 81px;\r\n");
-	ViewBuilder.Append("	    background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/examtype4.png) no-repeat;\r\n");
 	ViewBuilder.Append("	    position: absolute;\r\n");
 	ViewBuilder.Append("	    left: -7px;\r\n");
 	ViewBuilder.Append("	    top: -7px\r\n");
@@ -157,10 +133,7 @@ protected override void View()
 	ViewBuilder.Append("</head>\r\n");
 	ViewBuilder.Append("<body style=\"background:url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/examjt.png) no-repeat 50% 0;color:#777\">\r\n");
 	ViewBuilder.Append("<form name=\"frmpost\" method=\"post\" action=\"\" id=\"frmpost\" onsubmit=\"layer.msg('系统正在组卷，请稍后...', 0, 1);\">\r\n");
-	ViewBuilder.Append("  <div class=\"userfacemain\">\r\n");
-	ViewBuilder.Append("    <div class=\"userface\"></div>\r\n");
-	ViewBuilder.Append("    <img src=\"" + echo(user.avatar) + "\" width=\"60\" height=\"60\">\r\n");
-	ViewBuilder.Append("  </div>\r\n");
+	ViewBuilder.Append("  <div class=\"userfacemain\"></div>\r\n");
 	ViewBuilder.Append("  <div id=\"container\">\r\n");
 	ViewBuilder.Append("    <div id=\"header\"></div>\r\n");
 	ViewBuilder.Append("    <div id=\"center-header\"></div>\r\n");
@@ -178,7 +151,7 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("          <table width=\"100%\" height=\"163\" align=\"center\" cellpadding=\"0\" cellspacing=\"1\">\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("              <td height=\"50\" colspan=\"2\" align=\"center\" style=\"background:#fffbe1\"><span style=\"font-size:17px;text-align: center;color:#444;font-weight:bold; font-family:'微软雅黑'\">" + echo(examinfo.name) + "</span></td>\r\n");
+	ViewBuilder.Append("              <td height=\"50\" colspan=\"2\" align=\"center\" style=\"background:#fffbe1\"><span style=\"font-size:17px;text-align: center;color:#444;font-weight:bold; font-family:'微软雅黑'\">" + echo(examinfo.title) + "</span></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("              <td height=\"30\" colspan=\"2\" align=\"center\" style=\"background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 50% 100%;\"><strong style=\"font-size:14px;color: #FF3300; font-weight: bold;\">\r\n");
@@ -202,10 +175,14 @@ protected override void View()
 	ViewBuilder.Append("              <td width=\"49%\" height=\"30\" align=\"left\" style=\"background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 0 100%; padding-left:50px;\">答题时间：" + echo(examinfo.examtime) + "分钟</td>\r\n");
 	ViewBuilder.Append("              <td width=\"51%\" align=\"left\" style=\"background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat -270px 100%; padding-left:20px;border-left:1px solid #f4ecd2\">试卷总分：" + echo(examinfo.total) + "分</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
-	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("              <td height=\"30\" align=\"left\" style=\" padding-left:50px;background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 0 100%;\">所需积分：<font color=\"#ff3300\">" + echo(examinfo.credits) + "</font></td>\r\n");
-	ViewBuilder.Append("              <td align=\"left\" style=\"padding-left:20px;background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat -270px 100%;border-left:1px solid #f4ecd2\">可用积分：" + echo(user.credits) + " </td>\r\n");
+
+	if (examinfo.credits>0)
+	{
+	ViewBuilder.Append("<tr>\r\n");
+	ViewBuilder.Append("              <td height=\"30\" align=\"left\" style=\" padding-left:50px;background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat 0 100%;\">考试费用：<font color=\"#ff3300\">" + echo(examinfo.credits) + "元/次</font></td>\r\n");
+	ViewBuilder.Append("              <td align=\"left\" style=\"padding-left:20px;background:#fff url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/trbg.png) no-repeat -270px 100%;border-left:1px solid #f4ecd2\">可用次数：" + echo(user.credits) + " ，<a href=\"exambuy.aspx?examid=" + echo(examinfo.id) + "\">购买次数</a></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
+	}//end if
 	ViewBuilder.Append("          </table>\r\n");
 	ViewBuilder.Append("        </div>\r\n");
 	ViewBuilder.Append("        <div class=\"clear\"></div>\r\n");
@@ -217,11 +194,20 @@ protected override void View()
 	ViewBuilder.Append("  <div style=\"text-align: center; line-height:30px;\">\r\n");
 	ViewBuilder.Append("    <img id=\"startexam\" src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/btn2.png\" style=\"cursor:pointer;\" border=\"0\">\r\n");
 	ViewBuilder.Append("  </div>\r\n");
-	ViewBuilder.Append("  <br>\r\n");
-	ViewBuilder.Append("  <div class=\"IE6jiance\" style=\"display:none\"> 检测到您的浏览器为较低版本IE6，为了保证考试质量，建议升级浏览器版本或更换其他高版本浏览器！ </div>\r\n");
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

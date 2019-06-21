@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -55,7 +54,8 @@ protected override void View()
 	ViewBuilder.Append("       </td>\r\n");
 	ViewBuilder.Append("    </tr>\r\n");
 	ViewBuilder.Append("    <tr>\r\n");
-	ViewBuilder.Append("      <td colspan=\"2\"><table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
+	ViewBuilder.Append("      <td colspan=\"2\">\r\n");
+	ViewBuilder.Append("       <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("          <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
 	ViewBuilder.Append("              <td width=\"40\"><input id=\"checkall\" name=\"checkall\" type=\"checkbox\"></td>\r\n");
@@ -63,7 +63,6 @@ protected override void View()
 	ViewBuilder.Append("              <td>姓名</td>\r\n");
 	ViewBuilder.Append("              <td>用户角色</td>\r\n");
 	ViewBuilder.Append("              <td>所属部门</td>\r\n");
-	ViewBuilder.Append("              <td>登录平台</td>\r\n");
 	ViewBuilder.Append("              <td width=\"100\">登录IP</td>\r\n");
 	ViewBuilder.Append("              <td width=\"130\">最近更新时间</td>\r\n");
 	ViewBuilder.Append("              <td width=\"130\">创建时间</td>\r\n");
@@ -79,14 +78,14 @@ protected override void View()
 	ViewBuilder.Append("              <td>" + echo(item.realname) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.rolename) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.departname) + "</td>\r\n");
-	ViewBuilder.Append("              <td>" + echo(item.platform) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.address) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.updatetime) + "</td>\r\n");
 	ViewBuilder.Append("              <td>" + echo(item.createtime) + "</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	}//end loop
 	ViewBuilder.Append("          </tbody>\r\n");
-	ViewBuilder.Append("        </table></td>\r\n");
+	ViewBuilder.Append("        </table>\r\n");
+	ViewBuilder.Append("      </td>\r\n");
 	ViewBuilder.Append("    </tr>\r\n");
 	ViewBuilder.Append("    <tr>\r\n");
 	ViewBuilder.Append("       <td align=\"left\">共有" + echo(pager.total) + "条记录，页次：" + echo(pager.pageindex) + "/" + echo(pager.pagecount) + "，" + echo(pager.pagesize) + "条每页</td>\r\n");
@@ -96,6 +95,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

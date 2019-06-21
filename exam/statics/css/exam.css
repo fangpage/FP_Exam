@@ -242,6 +242,8 @@ div.hbx2_f {
 .write {
 	padding-left:28px;
 	background-position:-132px -34px;
+    font-size: 16px;
+    font-weight: bold;
 }
 .ft1 {
 	font-size:20px;
@@ -294,8 +296,8 @@ div.ft5 p {
 	color:#333;
 }
 .pd1 {
-	padding-left:16px;
-	padding-right:16px;
+	padding-left:2px;
+	padding-right:2px;
 }
 .pd1m {
 	margin-left:16px;
@@ -303,7 +305,7 @@ div.ft5 p {
 }
 .tit1, .dl1 dt {
 	line-height:40px;
-	font-size:16px;
+	font-size:18px;
 	font-weight:bold;
 }
 .bx1 {
@@ -616,7 +618,7 @@ div.ft5 p {
 	left:14px;
 	top:7px;
 }
-.tab2 {
+/*.tab2 {
 	border-top:rgb(206,206,206) solid 1px;
 	border-left:rgb(206,206,206) solid 1px;
 	width:100%
@@ -633,7 +635,7 @@ div.ft5 p {
 	background:rgb(240,240,240);
 	text-align:center;
 	font-weight:bold;
-}
+}*/
 .td21 {
 	padding-left:10px;
 	padding-right:10px;
@@ -1436,7 +1438,7 @@ div.ft5 p {
 	padding-right:20px;
 	padding-bottom:30px;
 	border-bottom:1px solid #e4e4e4;
-	margin-bottom:20px
+	margin-bottom:5px
 }
 .wp4 .box .icon_count {
 	width:171px;

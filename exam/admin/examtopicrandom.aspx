@@ -8,7 +8,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -38,7 +37,7 @@ protected override void View()
 	ViewBuilder.Append("            }\r\n");
 	ViewBuilder.Append("        })\r\n");
 	string navurl = "exammanage.aspx";
-	ViewBuilder.Append("        PageNav(\"" + GetSortNav(sortinfo,navurl).ToString() + "|试题设置," + echo(rawpath) + "examtopicmanage.aspx?examid=" + echo(examinfo.id) + "|随机选题," + echo(rawurl) + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"" + echo(GetSortNav(sortinfo,navurl)) + "|试题设置," + echo(rawpath) + "examtopicmanage.aspx?examid=" + echo(examinfo.id) + "|随机选题," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
@@ -56,7 +55,7 @@ protected override void View()
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/question.gif) 2px 6px no-repeat\"><a id=\"btncreate\" href=\"javascript:void()\">生成固定题</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"" + echo(rawurl) + "\">刷新</a> </li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/return.gif) 2px 6px no-repeat\"><a href=\"examtopicmanage.aspx?examid=" + echo(examinfo.id) + "&paper=" + echo(paper) + "\">返回</a></li>\r\n");
-	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>随机选题：[" + echo(examinfo.name) + "" + GetPaper(paper).ToString() + "]</strong></li>\r\n");
+	ViewBuilder.Append("              <li style=\"float:right; width:auto\"><strong>随机选题：[" + echo(examinfo.name) + "" + echo(GetPaper(paper)) + "]</strong></li>\r\n");
 	ViewBuilder.Append("            </ul>\r\n");
 	ViewBuilder.Append("          </div>\r\n");
 	ViewBuilder.Append("        </div>\r\n");
@@ -78,7 +77,7 @@ protected override void View()
 	{
 	loop__id++;
 
-	if (ischecked(sorts.id,role.sorts)==false&&roleid!=1)
+	if (!FPArray.Contain(role.sorts,sorts.id)&&roleid!=1)
 	{
 	continue;
 	}//end if
@@ -97,13 +96,13 @@ protected override void View()
 	{
 	ViewBuilder.Append("              <img src=\"" + echo(adminpath) + "statics/images/folder.gif\" width=\"16\" height=\"16\">\r\n");
 	}//end if
-	ViewBuilder.Append("              " + echo(sorts.name) + "(" + GetQuestionCount(sorts.id).ToString() + ")</td>\r\n");
-	ViewBuilder.Append("              <td>" + GetCurCount(sorts.id,0).ToString() + "</td>\r\n");
+	ViewBuilder.Append("              " + echo(sorts.name) + "(" + echo(GetQuestionCount(sorts.id)) + ")</td>\r\n");
+	ViewBuilder.Append("              <td>" + echo(GetCurCount(sorts.id,0)) + "</td>\r\n");
 	ViewBuilder.Append("              <td>\r\n");
-	ViewBuilder.Append("                  <input id=\"randomcount_" + echo(sorts.id) + "_0\" name=\"randomcount_" + echo(sorts.id) + "_0\" value=\"" + GetRandomCount(sorts.id,0).ToString() + "\" type=\"text\">  \r\n");
+	ViewBuilder.Append("                  <input id=\"randomcount_" + echo(sorts.id) + "_0\" name=\"randomcount_" + echo(sorts.id) + "_0\" value=\"" + echo(GetRandomCount(sorts.id,0)) + "\" type=\"text\">  \r\n");
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
-	ViewBuilder.Append("            " + ShowChildSort(sorts.id,tree).ToString() + "\r\n");
+	ViewBuilder.Append("            " + echo(ShowChildSort(sorts.id,tree)) + "\r\n");
 
 	if (sorts.types!=""&&sorts.showtype==1)
 	{
@@ -113,10 +112,10 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("              <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
-	ViewBuilder.Append("              <td align=\"left\">│  ├<img src=\"" + echo(adminpath) + "statics/images/type.gif\" width=\"16\" height=\"16\">" + echo(item.name) + "(" + GetQuestionCount(sorts.id,item.id).ToString() + ")</td>\r\n");
-	ViewBuilder.Append("              <td>" + GetCurCount(sorts.id,item.id).ToString() + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"left\">│  ├<img src=\"" + echo(adminpath) + "statics/images/type.gif\" width=\"16\" height=\"16\">" + echo(item.name) + "(" + echo(GetQuestionCount(sorts.id,item.id)) + ")</td>\r\n");
+	ViewBuilder.Append("              <td>" + echo(GetCurCount(sorts.id,item.id)) + "</td>\r\n");
 	ViewBuilder.Append("              <td>\r\n");
-	ViewBuilder.Append("                  <input id=\"randomcount_" + echo(sorts.id) + "_" + echo(item.id) + "\" name=\"randomcount_" + echo(sorts.id) + "_" + echo(item.id) + "\" value=\"" + GetRandomCount(sorts.id,item.id).ToString() + "\" type=\"text\">  \r\n");
+	ViewBuilder.Append("                  <input id=\"randomcount_" + echo(sorts.id) + "_" + echo(item.id) + "\" name=\"randomcount_" + echo(sorts.id) + "_" + echo(item.id) + "\" value=\"" + echo(GetRandomCount(sorts.id,item.id)) + "\" type=\"text\">  \r\n");
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              </tr>\r\n");
 	}//end loop
@@ -149,6 +148,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

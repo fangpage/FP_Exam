@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -26,6 +25,9 @@ protected override void View()
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\" src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/js/admin.js\"></");
 	ViewBuilder.Append("script>\r\n");
+	ViewBuilder.Append("<link href=\"" + echo(plupath) + "layer/skin/layer.css\" type=\"text/css\" rel=\"stylesheet\" id=\"skinlayercss\">\r\n");
+	ViewBuilder.Append("<script src=\"" + echo(plupath) + "layer/layer.js\" type=\"text/javascript\"></");
+	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
 	ViewBuilder.Append("        KindEditor.create('#notes', {\r\n");
@@ -37,8 +39,43 @@ protected override void View()
 	ViewBuilder.Append("					'removeformat', '|', 'image', 'flash', 'media', '|', 'link', 'unlink'],\r\n");
 	ViewBuilder.Append("            afterBlur: function () { this.sync(); }\r\n");
 	ViewBuilder.Append("        });\r\n");
-	ViewBuilder.Append("        $(\"input[name=btncancle]\").click(function () {\r\n");
+	ViewBuilder.Append("        $(\"input[name=btn_back]\").click(function () {\r\n");
 	ViewBuilder.Append("            window.location.href = \"sitemanage.aspx\";\r\n");
+	ViewBuilder.Append("        });\r\n");
+	ViewBuilder.Append("        var index = layer.getFrameIndex(window.name);\r\n");
+	ViewBuilder.Append("        $(\"#btn_desktop\").click(function () {\r\n");
+	ViewBuilder.Append("            index = $.layer({\r\n");
+	ViewBuilder.Append("                type: 1,\r\n");
+	ViewBuilder.Append("                shade: [0],\r\n");
+	ViewBuilder.Append("                fix: false,\r\n");
+	ViewBuilder.Append("                title: '创建桌面快捷',\r\n");
+	ViewBuilder.Append("                maxmin: false,\r\n");
+	ViewBuilder.Append("                page: { dom: '#createdesktop' },\r\n");
+	ViewBuilder.Append("                area: ['300px', '180px']\r\n");
+	ViewBuilder.Append("            });\r\n");
+	ViewBuilder.Append("        })\r\n");
+	ViewBuilder.Append("        $('#btn_cancel').click(function () {\r\n");
+	ViewBuilder.Append("            layer.close(index);\r\n");
+	ViewBuilder.Append("        });\r\n");
+	ViewBuilder.Append("        $('#btn_ok').click(function () {\r\n");
+	ViewBuilder.Append("            var parentid = $(\"#parentid\").val();\r\n");
+	ViewBuilder.Append("            if (parentid == 0) {\r\n");
+	ViewBuilder.Append("                alert(\"请选择所属桌面。\");\r\n");
+	ViewBuilder.Append("                return;\r\n");
+	ViewBuilder.Append("            }\r\n");
+	ViewBuilder.Append("            if ($(\"#deskname\").val() == \"\") {\r\n");
+	ViewBuilder.Append("                alert(\"快捷名称不能为空。\");\r\n");
+	ViewBuilder.Append("                return;\r\n");
+	ViewBuilder.Append("            }\r\n");
+	ViewBuilder.Append("            $.post(\"desktopajax.aspx\", {type: 'sites', path: '" + echo(siteinfo.sitepath) + "', parentid: parentid,name: $(\"#deskname\").val()}, function (data) {\r\n");
+	ViewBuilder.Append("                if (data.msg == 'OK') {\r\n");
+	ViewBuilder.Append("                    alert(\"创建桌面快捷图标成功。\");\r\n");
+	ViewBuilder.Append("                    layer.close(index);\r\n");
+	ViewBuilder.Append("                }\r\n");
+	ViewBuilder.Append("                else {\r\n");
+	ViewBuilder.Append("                    alert(\"创建桌面快捷图标失败。\");\r\n");
+	ViewBuilder.Append("                }\r\n");
+	ViewBuilder.Append("            }, \"json\");\r\n");
 	ViewBuilder.Append("        });\r\n");
 	ViewBuilder.Append("        PageNav(\"系统站点管理," + echo(rawpath) + "sitemanage.aspx|添加编辑站点," + echo(rawurl) + "\");\r\n");
 	ViewBuilder.Append("    });\r\n");
@@ -118,7 +155,14 @@ protected override void View()
 	ViewBuilder.Append("        <tbody>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 站点名称： </td>\r\n");
-	ViewBuilder.Append("            <td><input id=\"name\" name=\"name\" type=\"text\" value=\"" + echo(siteinfo.name) + "\" style=\"height:21px;width:400px;\"></td>\r\n");
+	ViewBuilder.Append("            <td>\r\n");
+	ViewBuilder.Append("                <input id=\"name\" name=\"name\" type=\"text\" value=\"" + echo(siteinfo.name) + "\" style=\"height:21px;width:400px;\">\r\n");
+
+	if (siteinfo.sitepath!="")
+	{
+	ViewBuilder.Append("                <input type=\"button\" class=\"adminsubmit_long\" id=\"btn_desktop\" value=\"创建桌面快捷\">\r\n");
+	}//end if
+	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>  \r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 站点目录： </td>\r\n");
@@ -139,24 +183,24 @@ protected override void View()
 	ViewBuilder.Append("            <td><input id=\"icon\" name=\"icon\" type=\"text\" value=\"" + echo(siteinfo.icon) + "\" style=\"height:21px;width:400px;\"></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("            <td class=\"td_class\"> 入口地址： </td>\r\n");
+	ViewBuilder.Append("            <td class=\"td_class\"> 前台地址： </td>\r\n");
 	ViewBuilder.Append("            <td><input id=\"indexurl\" name=\"indexurl\" type=\"text\" value=\"" + echo(siteinfo.indexurl) + "\" style=\"height:21px;width:400px;\"></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
-	ViewBuilder.Append("            <td class=\"td_class\"> 管理地址： </td>\r\n");
+	ViewBuilder.Append("            <td class=\"td_class\"> 后台地址： </td>\r\n");
 	ViewBuilder.Append("            <td><input id=\"adminurl\" name=\"adminurl\" type=\"text\" value=\"" + echo(siteinfo.adminurl) + "\" style=\"height:21px;width:400px;\"></td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 站点标识： </td>\r\n");
-	ViewBuilder.Append("            <td><input id=\"markup\" name=\"markup\" type=\"text\" value=\"" + echo(siteinfo.markup) + "\" style=\"height:21px;width:400px;\"></td>\r\n");
+	ViewBuilder.Append("            <td><input id=\"markup\" name=\"markup\" type=\"text\" value=\"" + echo(siteinfo.markup) + "\" style=\"height:21px;width:400px;\">&nbsp;以英文、数字和下划线组成，首字不能为数字</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
-	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 控制器类： </td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
 	ViewBuilder.Append("                <input id=\"dll\" name=\"dll\" type=\"text\" value=\"" + echo(siteinfo.dll) + "\" style=\"height:21px;width:400px;\">&nbsp;运行格式：【控制器命名空间,所在类库】\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
 	ViewBuilder.Append("            <td class=\"td_class\"> 文件路径： </td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
 	ViewBuilder.Append("            <input id=\"urltype0\" name=\"urltype\" type=\"radio\" \r\n");
@@ -186,7 +230,7 @@ protected override void View()
 	ViewBuilder.Append("            <td class=\"td_class\"></td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
 	ViewBuilder.Append("            <input type=\"button\" onclick=\"Save(0)\" name=\"btnSave\" value=\"保存\" id=\"btnSave\" class=\"adminsubmit_short\">\r\n");
-	ViewBuilder.Append("            <input id=\"btncancle1\" class=\"adminsubmit_short\" name=\"btncancle\" value=\"返回\" type=\"button\">\r\n");
+	ViewBuilder.Append("            <input id=\"btn_back1\" class=\"adminsubmit_short\" name=\"btn_back\" value=\"返回\" type=\"button\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("        </tbody>\r\n");
@@ -252,7 +296,7 @@ protected override void View()
 	ViewBuilder.Append("            <td class=\"td_class\"></td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
 	ViewBuilder.Append("            <input type=\"button\" onclick=\"Save(1)\" name=\"btnSave\" value=\"保存\" id=\"btnSave1\" class=\"adminsubmit_short\">\r\n");
-	ViewBuilder.Append("            <input id=\"btncancle2\" class=\"adminsubmit_short\" name=\"btncancle\" value=\"返回\" type=\"button\">\r\n");
+	ViewBuilder.Append("            <input id=\"btn_back2\" class=\"adminsubmit_short\" name=\"btn_back\" value=\"返回\" type=\"button\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("        </tbody>\r\n");
@@ -313,7 +357,7 @@ protected override void View()
 	ViewBuilder.Append("            <td class=\"td_class\"></td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
 	ViewBuilder.Append("            <input type=\"button\" onclick=\"Save(2)\" name=\"btnSave\" value=\"保存\" id=\"btnSave2\" class=\"adminsubmit_short\">\r\n");
-	ViewBuilder.Append("            <input id=\"btncancle3\" class=\"adminsubmit_short\" name=\"btncancle\" value=\"返回\" type=\"button\">\r\n");
+	ViewBuilder.Append("            <input id=\"btn_back3\" class=\"adminsubmit_short\" name=\"btn_back\" value=\"返回\" type=\"button\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("      </tbody>\r\n");
@@ -349,7 +393,7 @@ protected override void View()
 	{
 	loop__id++;
 
-	if (ischecked(item.id,siteinfo.roles))
+	if (FPArray.Contain(siteinfo.roles,item.id))
 	{
 	ViewBuilder.Append("                        <td><input id=\"roles\" name=\"roles\" value=\"" + echo(item.id) + "\" type=\"checkbox\" checked=\"checked\">" + echo(item.name) + "</td>\r\n");
 	}
@@ -372,7 +416,7 @@ protected override void View()
 	ViewBuilder.Append("            <td class=\"td_class\"></td>\r\n");
 	ViewBuilder.Append("            <td>\r\n");
 	ViewBuilder.Append("            <input type=\"button\" onclick=\"Save(3)\" name=\"btnSave\" value=\"保存\" id=\"btnSave3\" class=\"adminsubmit_short\">\r\n");
-	ViewBuilder.Append("            <input id=\"btncancle4\" class=\"adminsubmit_short\" name=\"btncancle\" value=\"返回\" type=\"button\">\r\n");
+	ViewBuilder.Append("            <input id=\"btn_back4\" class=\"adminsubmit_short\" name=\"btn_back\" value=\"返回\" type=\"button\">\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	ViewBuilder.Append("      </tbody>\r\n");
@@ -380,8 +424,54 @@ protected override void View()
 	ViewBuilder.Append("    </div>\r\n");
 	ViewBuilder.Append("    </div>\r\n");
 	ViewBuilder.Append("</form>\r\n");
+	ViewBuilder.Append("<div id=\"createdesktop\" style=\"display:none\">\r\n");
+	ViewBuilder.Append("  <form id=\"frmcreate\" method=\"get\" name=\"frmcreate\" action=\"\">\r\n");
+	ViewBuilder.Append("  <table style=\"width:300px;height:100px;\" cellpadding=\"2\" cellspacing=\"1\" class=\"border\">\r\n");
+	ViewBuilder.Append("        <tbody>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:40px;\">所属桌面： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\">\r\n");
+	ViewBuilder.Append("                <select id=\"parentid\" style=\"width:150px;\" name=\"parentid\">\r\n");
+	ViewBuilder.Append("                <option value=\"0\">选择桌面</option>\r\n");
+
+	loop__id=0;
+	foreach(DesktopInfo item in desktoplist)
+	{
+	loop__id++;
+	ViewBuilder.Append("                    <option value=\"" + echo(item.id) + "\">" + echo(item.name) + "</option>\r\n");
+	}//end loop
+	ViewBuilder.Append("               </select>\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("            <td style=\"width:80px;text-align:right;height:40px;\">快捷名称： </td>\r\n");
+	ViewBuilder.Append("            <td align=\"left\">\r\n");
+	ViewBuilder.Append("              <input id=\"deskname\" name=\"deskname\" type=\"text\" value=\"" + echo(siteinfo.name) + "\" style=\"height:21px;width:150px;\">\r\n");
+	ViewBuilder.Append("            </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("            <tr>\r\n");
+	ViewBuilder.Append("                <td height=\"50\" colspan=\"2\" align=\"center\">\r\n");
+	ViewBuilder.Append("                <input type=\"button\" name=\"btn_ok\" value=\"确定\" id=\"btn_ok\" class=\"adminsubmit_short\">&nbsp;&nbsp;\r\n");
+	ViewBuilder.Append("                <input type=\"button\" name=\"btn_cancel\" value=\"取消\" id=\"btn_cancel\" class=\"adminsubmit_short\">\r\n");
+	ViewBuilder.Append("                </td>\r\n");
+	ViewBuilder.Append("            </tr>\r\n");
+	ViewBuilder.Append("        </tbody>\r\n");
+	ViewBuilder.Append("   </table>\r\n");
+	ViewBuilder.Append("   </form>\r\n");
+	ViewBuilder.Append(" </div>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

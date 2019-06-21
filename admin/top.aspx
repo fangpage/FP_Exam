@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -38,11 +37,11 @@ protected override void View()
 
 	if (siteinfo.homepage!="")
 	{
-	ViewBuilder.Append("                       <a href=\"" + echo(siteinfo.homepage) + "\" title=\"" + echo(siteinfo.sitetitle) + "\" target=\"_blank\"><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/logo.gif\" width=\"193\" height=\"64\" border=\"0\"></a>\r\n");
-	}
+	ViewBuilder.Append("<a href=\"" + echo(siteinfo.homepage) + "\" title=\"" + echo(siteinfo.sitetitle) + "\" target=\"_blank\"><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/logo.gif\" width=\"193\" height=\"64\" border=\"0\"></a>\r\n");
+	}//end if
 	else
 	{
-	ViewBuilder.Append("                       <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/logo.gif\" width=\"193\" height=\"64\" border=\"0\" title=\"" + echo(siteinfo.sitetitle) + "\">\r\n");
+	ViewBuilder.Append("<img src=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/logo.gif\" width=\"193\" height=\"64\" border=\"0\" title=\"" + echo(siteinfo.sitetitle) + "\">\r\n");
 	}//end if
 	ViewBuilder.Append("                    </td>\r\n");
 	ViewBuilder.Append("                    <td>\r\n");
@@ -104,11 +103,6 @@ protected override void View()
 	ViewBuilder.Append("        <em>|</em><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/exit.png\" width=\"16\" height=\"16\" style=\"vertical-align:middle\"><a href=\"logout.aspx\" title=\"退出系统管理\" onclick=\"return ConfirmLogout()\" target=\"_top\">退出</a> \r\n");
 	ViewBuilder.Append("        <em>|</em><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/users.gif\" width=\"16\" height=\"16\" style=\"vertical-align:middle\"><a href=\"user/userprofile.aspx\" target=\"mainframe\">个人资料</a> \r\n");
 	ViewBuilder.Append("        <em>|</em><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/quick.gif\" width=\"16\" height=\"16\" style=\"vertical-align:middle\"><a href=\"user/userpwd.aspx\" target=\"mainframe\">修改密码</a>\r\n");
-
-	if (isperm)
-	{
-	ViewBuilder.Append("        <em>|</em><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/wepsite.png\" width=\"16\" height=\"16\" style=\"vertical-align:middle\"><a href=\"global/sitemanage.aspx\" target=\"mainframe\">站点管理</a>\r\n");
-	}//end if
 	ViewBuilder.Append("        <em>|</em><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/bdesk.gif\" width=\"16\" height=\"16\" style=\"vertical-align:middle\"><a href=\"desktop.aspx\" target=\"mainframe\">后台桌面</a> \r\n");
 	ViewBuilder.Append("        <em>|</em><img src=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/images/website.png\" width=\"16\" height=\"16\" style=\"vertical-align:middle\">&nbsp;<a href=\"" + echo(webpath) + "index.aspx\" target=\"_blank\">前台首页</a>\r\n");
 
@@ -186,6 +180,17 @@ protected override void View()
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

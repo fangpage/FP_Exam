@@ -6,7 +6,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<html>\r\n");
 	ViewBuilder.Append("<head>\r\n");
@@ -18,16 +17,16 @@ protected override void View()
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("    <script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("        function switchSysBar() {\r\n");
-	ViewBuilder.Append("            if (parent.document.getElementById('attachucp').cols == \"198,9,*\") {\r\n");
-	ViewBuilder.Append("                document.getElementById('leftbar').style.display = \"none\";\r\n");
-	ViewBuilder.Append("                document.getElementById('rightbar').style.display = \"block\"\r\n");
+	ViewBuilder.Append("          if (parent.document.getElementById('attachucp').cols == \"198,9,*\") {\r\n");
+	ViewBuilder.Append("                $('#leftbar').hide();\r\n");
+	ViewBuilder.Append("                $('#rightbar').show();\r\n");
 	ViewBuilder.Append("                parent.document.getElementById('attachucp').cols = \"0,9,*\";\r\n");
 	ViewBuilder.Append("                $(\"#topleft\", window.parent.frames[\"topframe\"].document).hide();\r\n");
 	ViewBuilder.Append("            }\r\n");
 	ViewBuilder.Append("            else {\r\n");
 	ViewBuilder.Append("                parent.document.getElementById('attachucp').cols = \"198,9,*\";\r\n");
-	ViewBuilder.Append("                document.getElementById('leftbar').style.display = \"block\";\r\n");
-	ViewBuilder.Append("                document.getElementById('rightbar').style.display = \"none\"\r\n");
+	ViewBuilder.Append("                $('#leftbar').show();\r\n");
+	ViewBuilder.Append("                $('#rightbar').hide();\r\n");
 	ViewBuilder.Append("                $(\"#topleft\", window.parent.frames[\"topframe\"].document).show();\r\n");
 	ViewBuilder.Append("            }\r\n");
 	ViewBuilder.Append("        }\r\n");
@@ -36,7 +35,7 @@ protected override void View()
 	ViewBuilder.Append("</head>\r\n");
 	ViewBuilder.Append("<body oncontextmenu=\"return false\" ondragstart=\"return false\" marginwidth=\"0\" marginheight=\"0\" topmargin=\"0\" leftmargin=\"0\">\r\n");
 	ViewBuilder.Append("    <center>\r\n");
-	ViewBuilder.Append("        <table height=\"100%\" style=\"width:9px; background:url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/left_yy.gif) repeat-y;\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\r\n");
+	ViewBuilder.Append("        <table id=\"pp\" height=\"100%\" style=\"width:9px; background:url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/left_yy.gif) repeat-y;\" cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\r\n");
 	ViewBuilder.Append("            <tbody>\r\n");
 	ViewBuilder.Append("                <tr>\r\n");
 	ViewBuilder.Append("                    <td id=\"leftbar\" style=\"height:100%\">\r\n");
@@ -55,6 +54,17 @@ protected override void View()
 	ViewBuilder.Append("    </center>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

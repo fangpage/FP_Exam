@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -38,7 +37,7 @@ protected override void View()
 	ViewBuilder.Append("                $(\"#frmpost\").submit();\r\n");
 	ViewBuilder.Append("            }\r\n");
 	ViewBuilder.Append("        })\r\n");
-	ViewBuilder.Append("        PageNav(\"" + GetSortNav(sortinfo,pagename).ToString() + "\");\r\n");
+	ViewBuilder.Append("        PageNav(\"" + echo(GetSortNav(sortinfo,pagename)) + "\");\r\n");
 	ViewBuilder.Append("    })\r\n");
 	ViewBuilder.Append("</");
 	ViewBuilder.Append("script>\r\n");
@@ -52,8 +51,16 @@ protected override void View()
 	ViewBuilder.Append("      <div class=\"newslist\">\r\n");
 	ViewBuilder.Append("          <div class=\"newsicon\">\r\n");
 	ViewBuilder.Append("            <ul>\r\n");
+
+	if (isperm)
+	{
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/delete.gif) 2px 6px no-repeat\"><a id=\"submitdel\" href=\"#\">删除</a></li>\r\n");
-	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/create.gif) 2px 6px no-repeat\"><a href=\"examadd.aspx?sortid=" + echo(sortid) + "&typeid=" + echo(typeid) + "\">添加</a></li>\r\n");
+
+	if (sortid>0)
+	{
+	ViewBuilder.Append("<li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/create.gif) 2px 6px no-repeat\"><a href=\"examadd.aspx?sortid=" + echo(sortid) + "&typeid=" + echo(typeid) + "\">添加</a></li>\r\n");
+	}//end if
+	}//end if
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/tag.gif) 2px 6px no-repeat\"><a id=\"submitsum\" href=\"#\">重新统计</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/admin/images/report.png) 2px 6px no-repeat\"><a id=\"btnsearch\" href=\"examsearch.aspx?channelid=" + echo(channelid) + "&sortid=" + echo(sortid) + "&typeid=" + echo(typeid) + "\">搜索</a></li>\r\n");
 	ViewBuilder.Append("              <li style=\"background: url(" + echo(adminpath) + "statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"exammanage.aspx?channelid=" + echo(channelid) + "&sortid=" + echo(sortid) + "&typeid=" + echo(typeid) + "\">刷新</a></li>\r\n");
@@ -78,14 +85,14 @@ protected override void View()
 	ViewBuilder.Append("          <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
 	ViewBuilder.Append("              <td width=\"40\"><input id=\"checkall\" name=\"checkall\" type=\"checkbox\"></td>\r\n");
-	ViewBuilder.Append("        	  <td>考试名称</td>\r\n");
-	ViewBuilder.Append("        	  <td>所属科目</td>\r\n");
+	ViewBuilder.Append("        	    <td>考试名称</td>\r\n");
+	ViewBuilder.Append("        	    <td>所属科目</td>\r\n");
 	ViewBuilder.Append("              <td>答题时间</td>\r\n");
 	ViewBuilder.Append("              <td>考试期限</td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\">考试人数</td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\">总平均分</td>\r\n");
 	ViewBuilder.Append("              <td width=\"40\">状态</td>\r\n");
-	ViewBuilder.Append("              <td width=\"220\">考试操作</td>\r\n");
+	ViewBuilder.Append("              <td width=\"300\">考试操作</td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 
 	loop__id=0;
@@ -126,10 +133,15 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("              <td>\r\n");
-	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"examadd.aspx?id=" + echo(item.id) + "\">考试设置</a>\r\n");
-	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"examtopicmanage.aspx?examid=" + echo(item.id) + "\">试卷设置</a>\r\n");
-	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"exammonitor.aspx?examid=" + echo(item.id) + "\">考试监控</a>\r\n");
-	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"examresultmanage.aspx?examid=" + echo(item.id) + "\">成绩管理</a>\r\n");
+
+	if (isperm)
+	{
+	ViewBuilder.Append("              <a style=\"color: #1317fc\" href=\"examadd.aspx?id=" + echo(item.id) + "\">考试设置</a>|<a style=\"color: #1317fc\" href=\"examtopicmanage.aspx?examid=" + echo(item.id) + "\">试卷设置</a>|<a style=\"color: #1317fc\" href=\"examsign_manage.aspx?examid=" + echo(item.id) + "\">报名审核</a>|<a style=\"color: #1317fc\" href=\"exammonitor.aspx?examid=" + echo(item.id) + "\">考试监控</a>|<a style=\"color: #1317fc\" href=\"examresultmanage.aspx?examid=" + echo(item.id) + "\">成绩管理</a>\r\n");
+	}
+	else
+	{
+	ViewBuilder.Append("              <span style=\"color:#ac9d9d\">考试设置</span>|<span style=\"color: #ac9d9d\">试卷设置</span>|<span style=\"color:#ac9d9d\">报名审核</span>|<a style=\"color: #1317fc\" href=\"exammonitor.aspx?examid=" + echo(item.id) + "\">考试监控</a>|<a style=\"color: #1317fc\" href=\"examresultmanage.aspx?examid=" + echo(item.id) + "\">成绩管理</a>\r\n");
+	}//end if
 	ViewBuilder.Append("              </td>\r\n");
 	ViewBuilder.Append("            </tr>\r\n");
 	}//end loop
@@ -145,6 +157,17 @@ protected override void View()
 	ViewBuilder.Append("  </form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

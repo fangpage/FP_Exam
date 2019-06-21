@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
@@ -66,11 +65,13 @@ protected override void View()
 	ViewBuilder.Append("        <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("          <tbody>\r\n");
 	ViewBuilder.Append("            <tr class=\"thead\">\r\n");
+	ViewBuilder.Append("              <td width=\"40\">编号</td>\r\n");
 	ViewBuilder.Append("        	  <td style=\"text-align:left;\">桌面快捷名称</td>\r\n");
 	ViewBuilder.Append("              <td>桌面标识</td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\">所属分屏</td>\r\n");
-	ViewBuilder.Append("              <td>描述</td>\r\n");
 	ViewBuilder.Append("              <td>所属应用</td>\r\n");
+	ViewBuilder.Append("              <td>所属平台</td>\r\n");
+	ViewBuilder.Append("              <td>描述</td>\r\n");
 	ViewBuilder.Append("              <td width=\"60\">是否隐藏</td>\r\n");
 	ViewBuilder.Append("              <td width=\"80\">添加子桌面</td>\r\n");
 	ViewBuilder.Append("              <td width=\"40\">编辑</td>\r\n");
@@ -83,6 +84,7 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
+	ViewBuilder.Append("              <td style=\"text-align:center;\">" + echo(item.id) + "</td>\r\n");
 	ViewBuilder.Append("              <td style=\"text-align:left;height:36px;\">├\r\n");
 
 	if (item.icon!="")
@@ -91,13 +93,14 @@ protected override void View()
 	}
 	else
 	{
-	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "common/images/desktop.gif\" width=\"32\" height=\"32\" alt=\"" + echo(item.name) + "\" style=\"vertical-align:middle;\">\r\n");
+	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "common/images/desktop.png\" width=\"32\" height=\"32\" alt=\"" + echo(item.name) + "\" style=\"vertical-align:middle;\">\r\n");
 	}//end if
 	ViewBuilder.Append("              " + echo(item.name) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.markup) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.desk) + "</td>\r\n");
-	ViewBuilder.Append("              <td align=\"center\">" + echo(item.description) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">" + echo(item.SetupInfo.name) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.platform) + "</td>\r\n");
+	ViewBuilder.Append("              <td align=\"center\">" + echo(item.description) + "</td>\r\n");
 	ViewBuilder.Append("              <td align=\"center\">\r\n");
 
 	if (item.hidden==1)
@@ -126,6 +129,7 @@ protected override void View()
 	{
 	loop__id++;
 	ViewBuilder.Append("            <tr class=\"tlist\" onmouseover=\"curcolor=this.style.backgroundColor;this.style.backgroundColor='#cbe3f4'\" onmouseout=\"this.style.backgroundColor=curcolor\">\r\n");
+	ViewBuilder.Append("            <td style=\"text-align:center;\">" + echo(child.id) + "</td>\r\n");
 	ViewBuilder.Append("            <td align=\"left\">│&nbsp;&nbsp;├\r\n");
 
 	if (child.icon!="")
@@ -134,14 +138,15 @@ protected override void View()
 	}
 	else
 	{
-	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "common/images/desktop.gif\" width=\"32\" height=\"32\" alt=\"" + echo(child.name) + "\" style=\"vertical-align:middle;\">\r\n");
+	ViewBuilder.Append("              <img src=\"" + echo(webpath) + "common/images/desktop.png\" width=\"32\" height=\"32\" alt=\"" + echo(child.name) + "\" style=\"vertical-align:middle;\">\r\n");
 	}//end if
 	ViewBuilder.Append("              " + echo(child.name) + "\r\n");
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            <td align=\"center\">" + echo(child.markup) + "</td>\r\n");
 	ViewBuilder.Append("            <td align=\"center\">" + echo(child.desk) + "</td>\r\n");
-	ViewBuilder.Append("            <td align=\"center\">" + echo(child.description) + "</td>\r\n");
 	ViewBuilder.Append("            <td align=\"center\">" + echo(child.SetupInfo.name) + "</td>\r\n");
+	ViewBuilder.Append("            <td align=\"center\">" + echo(child.platform) + "</td>\r\n");
+	ViewBuilder.Append("            <td align=\"center\">" + echo(child.description) + "</td>\r\n");
 	ViewBuilder.Append("            <td align=\"center\">\r\n");
 
 	if (child.hidden==1)
@@ -168,6 +173,17 @@ protected override void View()
 	ViewBuilder.Append("</form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

@@ -7,7 +7,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"zh-CN\" lang=\"zh-CN\">\r\n");
@@ -100,7 +99,7 @@ protected override void View()
 	{
 	ViewBuilder.Append("      <div class=\"wp4\">\r\n");
 	ViewBuilder.Append("        <h1 class=\"qtTitle\">" + echo(examresult.examname) + "</h1>\r\n");
-	ViewBuilder.Append("        <div class=\"ta_c bx4\">恭喜您顺利完成本次考试！<span id=\"testScore\">您的得分为<span>" + echo(examresult.score) + "</span>分</span>\r\n");
+	ViewBuilder.Append("        <div class=\"ta_c bx4\">" + echo(user.realname) + "，恭喜您顺利完成本次考试！<span id=\"testScore\">您的得分为<span>" + echo(examresult.score) + "</span>分</span>\r\n");
 
 	if (expinfo.id>0)
 	{
@@ -115,7 +114,6 @@ protected override void View()
 	ViewBuilder.Append("        </div>\r\n");
 	ViewBuilder.Append("        <div id=\"tip\" class=\"ta_c mb20 ft12\">想知道自己的考试情况吗？点击下面的按钮查看详情</div>\r\n");
 	ViewBuilder.Append("          <div class=\"ta_c mb10\"> \r\n");
-	ViewBuilder.Append("          <a id=\"analisisLink\" href=\"examresult.aspx?resultid=" + echo(examresult.id) + "\" class=\"btnq3\">考试分析</a> \r\n");
 	ViewBuilder.Append("          <a id=\"answerLink\" href=\"examanswer.aspx?resultid=" + echo(examresult.id) + "\" class=\"btnq3 ml2\">答案解析</a>\r\n");
 	ViewBuilder.Append("          </div>\r\n");
 	ViewBuilder.Append("      </div>\r\n");
@@ -131,6 +129,17 @@ protected override void View()
 	ViewBuilder.Append("</div>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

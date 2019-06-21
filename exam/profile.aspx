@@ -6,7 +6,6 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html>\r\n");
 	ViewBuilder.Append("<html lang=\"zh-CN\" class=\"default-layout\">\r\n");
@@ -62,7 +61,7 @@ protected override void View()
 
 	if (isadmin)
 	{
-	ViewBuilder.Append("            <a href=\"" + echo(adminpath) + "index.aspx\" target=\"_blank\" class=\"user-nav user-menu-trigger\"><span class=\"sprite sprite-admin i-20\"></span>系统后台</a>\r\n");
+	ViewBuilder.Append("<a href=\"" + echo(adminpath) + "index.aspx\" target=\"_blank\" class=\"user-nav user-menu-trigger\"><span class=\"sprite sprite-admin i-20\"></span>系统后台</a>\r\n");
 	}//end if
 	ViewBuilder.Append("            <a href=\"logout.aspx\" class=\"user-nav user-menu-trigger\"><span class=\"sprite sprite-logout i-20\"></span>退出系统</a>\r\n");
 	ViewBuilder.Append("        </div>\r\n");
@@ -73,39 +72,21 @@ protected override void View()
 	ViewBuilder.Append("               <img src=\"" + echo(webpath) + "" + echo(sitepath) + "/logo/logo.png\" height=\"32\" width=\"220\" alt=\"" + echo(siteinfo.name) + "\">\r\n");
 	ViewBuilder.Append("            </div>\r\n");
 	ViewBuilder.Append("            <ul class=\"nav main-nav\">\r\n");
-	ViewBuilder.Append("                <li \r\n");
+	ViewBuilder.Append("                <li class=\""+(pagename=="index.aspx"?echo(" "+"active"):echo(""))+"\"><a href=\"index.aspx\">首页</a></li>\r\n");
+	ViewBuilder.Append("                <li class=\""+(pagename=="examreport.aspx"?echo("active"):echo(""))+"\"><a href=\"examreport.aspx\">能力评估报告</a></li>\r\n");
+	ViewBuilder.Append("                <li class=\""+(pagename=="examhistory.aspx"||pagename=="incorrect.aspx"||pagename=="examnote.aspx"||pagename=="favorite.aspx"||pagename=="testhistory.aspx"?echo("active"):echo(""))+"\"><a href=\"examhistory.aspx\">考试历史</a></li>\r\n");
 
-	if (pagename=="index.aspx")
+	if (pagename=="course_list.aspx"||pagename=="course_view.aspx"||pagename=="course_video.aspx")
 	{
-	ViewBuilder.Append(" class=\"active\" \r\n");
+	ViewBuilder.Append("<li class=\"active\"><a href=\"course_list.aspx?channelid=3\">在线课程</a></li>\r\n");
 	}//end if
-	ViewBuilder.Append("><a href=\"index.aspx\">首页</a></li>\r\n");
-	ViewBuilder.Append("                <li \r\n");
-
-	if (pagename=="examreport.aspx")
-	{
-	ViewBuilder.Append(" class=\"active\" \r\n");
-	}//end if
-	ViewBuilder.Append("><a href=\"examreport.aspx\">能力评估报告</a></li>\r\n");
-	ViewBuilder.Append("                <li \r\n");
-
-	if (pagename=="examhistory.aspx"||pagename=="incorrect.aspx"||pagename=="examnote.aspx"||pagename=="favorite.aspx")
-	{
-	ViewBuilder.Append(" class=\"active\" \r\n");
-	}//end if
-	ViewBuilder.Append("><a href=\"examhistory.aspx\">考试历史</a></li>\r\n");
-
-	if (pagename=="newslist.aspx"||pagename=="newsinfo.aspx")
-	{
-	ViewBuilder.Append("                <li class=\"active\"><a href=\"newslist.aspx?channelid=3\">在线课程</a></li>\r\n");
-	}
 	else if (pagename=="examlist-2.aspx")
 	{
-	ViewBuilder.Append("                <li class=\"active\"><a href=\"newslist.aspx?channelid=3\">模拟考试</a></li>\r\n");
-	}
+	ViewBuilder.Append("<li class=\"active\"><a href=\"examlist-2.aspx\">模拟考试</a></li>\r\n");
+	}//end if
 	else if (pagename=="examlist-4.aspx")
 	{
-	ViewBuilder.Append("                <li class=\"active\"><a href=\"newslist.aspx?channelid=3\">正式考试</a></li>\r\n");
+	ViewBuilder.Append("<li class=\"active\"><a href=\"examlist-4.aspx\">正式考试</a></li>\r\n");
 	}//end if
 	ViewBuilder.Append("            </ul>\r\n");
 	ViewBuilder.Append("        </div>\r\n");
@@ -139,27 +120,9 @@ protected override void View()
 	ViewBuilder.Append("                                <label for=\"repeat\">性别：</label>\r\n");
 	ViewBuilder.Append("                                <span>\r\n");
 	ViewBuilder.Append("                                  <select id=\"sex\" class=\"span2\" name=\"sex\">\r\n");
-	ViewBuilder.Append("                                    <option \r\n");
-
-	if (fulluserinfo.sex==0)
-	{
-	ViewBuilder.Append(" selected=\"selected\" \r\n");
-	}//end if
-	ViewBuilder.Append(" value=\"0\">女</option>\r\n");
-	ViewBuilder.Append("                                    <option \r\n");
-
-	if (fulluserinfo.sex==1)
-	{
-	ViewBuilder.Append(" selected=\"selected\" \r\n");
-	}//end if
-	ViewBuilder.Append(" value=\"1\">男</option>\r\n");
-	ViewBuilder.Append("                                    <option \r\n");
-
-	if (fulluserinfo.sex==-1)
-	{
-	ViewBuilder.Append(" selected=\"selected\" \r\n");
-	}//end if
-	ViewBuilder.Append(" value=\"-1\">保密</option>\r\n");
+	ViewBuilder.Append("                                    <option "+(fulluserinfo.sex=="男"?echo("selected"):echo(""))+" value=\"男\">男</option>\r\n");
+	ViewBuilder.Append("                                    <option "+(fulluserinfo.sex=="女"?echo("selected"):echo(""))+" value=\"女\">女</option>\r\n");
+	ViewBuilder.Append("                                    <option "+(fulluserinfo.sex==""?echo("selected"):echo(""))+" value=\"\">未知</option>\r\n");
 	ViewBuilder.Append("                                  </select>\r\n");
 	ViewBuilder.Append("                                </span><span class=\"item-message help-inline\"></span>\r\n");
 	ViewBuilder.Append("                            </div>\r\n");
@@ -196,7 +159,7 @@ protected override void View()
 
 	if (siteinfo.notes!="")
 	{
-	ViewBuilder.Append("            <p class=\"text-center\">" + echo(siteinfo.notes) + "</p>\r\n");
+	ViewBuilder.Append("<p class=\"text-center\">" + echo(siteinfo.notes) + "</p>\r\n");
 	}//end if
 	ViewBuilder.Append("        </div>\r\n");
 	ViewBuilder.Append("    </div>\r\n");
@@ -223,6 +186,17 @@ protected override void View()
 	}//end if
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>

@@ -169,8 +169,8 @@ body {
 }
 .TopicType h3 {
 	padding-left: 15px;
-	font-size: 15px;
-	line-height: 36px;
+	font-size: 13px;
+	line-height: 30px;
 	cursor: pointer;
 }
 .TopicType h3 button {
@@ -189,7 +189,7 @@ body {
 	background-color: #fff;
 	background-position: -167px -133px;
 	display: inline-block;
-	margin: 15px 25px auto auto;
+	margin: 12px 25px auto auto;
 *  margin: -20px 25px auto auto;
 	cursor: pointer;
 }
@@ -204,11 +204,11 @@ body {
 .TopicType li {
 	list-style-type: none;
 	display: inline-block;
-	width: 25px;
-	height: 25px;
+	width: 18px;
+	height: 18px;
 	border: 2px solid #a6cbf8;
-	line-height: 25px;
-	margin: auto 8px 13px auto;
+	line-height: 18px;
+	margin: auto 5px 5px auto;
 	font-size: 14px;
 	font-family: Arial;
 	color: #6078a0;
@@ -545,7 +545,7 @@ a:hover .anaddrecd {
 	height: 5px;
 	border: 1px solid #dedede;
 	cursor: n-resize;
-	background: url(/common/img/ub.png?976612389730) 0 -5px repeat-x;
+	background: url(../images/ub.png) 0 -5px repeat-x;
 	outline: 0;
 	overflow: hidden;
 	font-size: 5px
@@ -553,14 +553,14 @@ a:hover .anaddrecd {
 #dragBar span {
 	height: 5px;
 	width: 15px;
-	background: url(/common/img/ub.png?976612389730);
+	background: url(../images/ub.png);
 	display: block;
 	float: left
 }
 #dragBar em {
 	height: 5px;
 	width: 15px;
-	background: url(/common/img/ub.png?976612389730) 0 -10px;
+	background: url(../images/ub.png) 0 -10px;
 	display: block;
 	float: right
 }

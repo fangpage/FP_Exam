@@ -7,13 +7,12 @@
 <script runat="server">
 protected override void View()
 {
-	/*方配软件技术有限责任公司(WMS框架)，官方网站：http://www.fangpage.com  QQ:12677206*/
 	base.View();
 	ViewBuilder.Append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\r\n");
 	ViewBuilder.Append("<html xmlns=\"http://www.w3.org/1999/xhtml\">\r\n");
 	ViewBuilder.Append("<head>\r\n");
 	ViewBuilder.Append("<meta content=\"text/html; charset=utf-8\" http-equiv=\"content-type\">\r\n");
-	ViewBuilder.Append("<title>系统类型管理</title>\r\n");
+	ViewBuilder.Append("<title>系统分类管理</title>\r\n");
 	ViewBuilder.Append("	" + echo(meta) + "\r\n");
 	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/admin.css\">\r\n");
 	ViewBuilder.Append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + echo(webpath) + "" + echo(sitepath) + "/statics/css/datagrid.css\">\r\n");
@@ -23,7 +22,7 @@ protected override void View()
 	ViewBuilder.Append("script>\r\n");
 	ViewBuilder.Append("<script type=\"text/javascript\">\r\n");
 	ViewBuilder.Append("    $(function () {\r\n");
-	ViewBuilder.Append("        PageNav(\"系统类型管理," + echo(rawpath) + "typemanage.aspx\");\r\n");
+	ViewBuilder.Append("        PageNav(\"系统分类管理," + echo(rawpath) + "typemanage.aspx\");\r\n");
 	ViewBuilder.Append("        $(\"#btnsave\").click(function () {\r\n");
 	ViewBuilder.Append("            $(\"#action\").val(\"order\");\r\n");
 	ViewBuilder.Append("            $(\"#formpost\").submit();\r\n");
@@ -53,7 +52,7 @@ protected override void View()
 	ViewBuilder.Append("        <ul>\r\n");
 	ViewBuilder.Append("            <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/add.gif) 2px 6px no-repeat\"><a href=\"typeadd.aspx\">添加</a></li>\r\n");
 	ViewBuilder.Append("            <li style=\"background: url(" + echo(webpath) + "" + echo(sitepath) + "/statics/images/refresh.gif) 2px 6px no-repeat\"><a href=\"typemanage.aspx\">刷新</a></li>\r\n");
-	ViewBuilder.Append("            <li style=\"float:right; width:auto\"><strong>系统类型管理</strong></li>\r\n");
+	ViewBuilder.Append("            <li style=\"float:right; width:auto\"><strong>系统分类管理</strong></li>\r\n");
 	ViewBuilder.Append("        </ul>\r\n");
 	ViewBuilder.Append("      </div>\r\n");
 	ViewBuilder.Append("    </div>\r\n");
@@ -63,12 +62,12 @@ protected override void View()
 	ViewBuilder.Append("   <table class=\"datalist\" border=\"1\" rules=\"all\" cellspacing=\"0\">\r\n");
 	ViewBuilder.Append("        <tbody>\r\n");
 	ViewBuilder.Append("        <tr class=\"thead\">\r\n");
-	ViewBuilder.Append("            <td width=\"60\">类型ID</td>\r\n");
-	ViewBuilder.Append("            <td>类型名称</td>\r\n");
-	ViewBuilder.Append("            <td>类型标识</td>\r\n");
+	ViewBuilder.Append("            <td width=\"60\">分类ID</td>\r\n");
+	ViewBuilder.Append("            <td>分类名称</td>\r\n");
+	ViewBuilder.Append("            <td>分类标识</td>\r\n");
 	ViewBuilder.Append("            <td>选项类型</td>\r\n");
-	ViewBuilder.Append("            <td>类型描述</td>\r\n");
-	ViewBuilder.Append("            <td width=\"80\">添加子类型</td>\r\n");
+	ViewBuilder.Append("            <td>分类描述</td>\r\n");
+	ViewBuilder.Append("            <td width=\"80\">添加子分类</td>\r\n");
 	ViewBuilder.Append("            <td width=\"40\">编辑</td>\r\n");
 	ViewBuilder.Append("            <td width=\"40\">排序</td>\r\n");
 	ViewBuilder.Append("            <td width=\"40\">删除</td>\r\n");
@@ -113,7 +112,7 @@ protected override void View()
 
 	if (types.parentid==0)
 	{
-	ViewBuilder.Append("            <a href=\"typeadd.aspx?parentid=" + echo(types.id) + "\">添加子类型</a>\r\n");
+	ViewBuilder.Append("            <a href=\"typeadd.aspx?parentid=" + echo(types.id) + "\">添加子分类</a>\r\n");
 	}//end if
 	ViewBuilder.Append("            </td>\r\n");
 	ViewBuilder.Append("            <td><a style=\"color: #1317fc\" href=\"typeadd.aspx?id=" + echo(types.id) + "\">编辑</a> </td>\r\n");
@@ -148,6 +147,17 @@ protected override void View()
 	ViewBuilder.Append("    </form>\r\n");
 	ViewBuilder.Append("</body>\r\n");
 	ViewBuilder.Append("</html>\r\n");
+	if(iswrite==0)
+	{
 	Response.Write(ViewBuilder.ToString());
+	}
+	else if(iswrite==1)
+	{
+	Hashtable hash = new Hashtable();
+	hash["errcode"] = 0;
+	hash["errmsg"] ="";
+	hash["html"]=ViewBuilder.ToString();
+	FPResponse.WriteJson(hash);
+	}
 }
 </script>
